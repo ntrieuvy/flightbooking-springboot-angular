@@ -1,0 +1,67 @@
+<div class="flight-detail" *ngIf="flight">
+    <div class="flight-detail__header">
+        <h2 class="flight-detail__title">Chi tiết chuyến bay</h2>
+        <div class="flight-detail__route">
+            {{flight.departureCity}} ({{flight.departureAirport}}) → {{flight.arrivalCity}} ({{flight.arrivalAirport}})
+        </div>
+    </div>
+
+    <div class="flight-detail__main">
+        <div class="flight-detail__airline">
+            <img [src]="flight.airlineLogo" [alt]="flight.airline" class="flight-detail__logo">
+            <div class="flight-detail__airline-info">
+                <h3>{{flight.airline}}</h3>
+                <span class="flight-detail__flight-number">Số hiệu: {{flight.flightNumber}}</span>
+            </div>
+        </div>
+
+        <div class="flight-detail__timeline">
+            <div class="flight-detail__time-group">
+                <div class="flight-detail__time">{{flight.departureTime}}</div>
+                <div class="flight-detail__date">{{getCurrentDate()}}</div>
+                <div class="flight-detail__airport">{{flight.departureAirport}}</div>
+                <div class="flight-detail__city">{{flight.departureCity}}</div>
+            </div>
+
+            <div class="flight-detail__duration">
+                <div class="flight-detail__duration-line"></div>
+                <div class="flight-detail__duration-text">{{flight.duration}}</div>
+                <div class="flight-detail__stops" *ngIf="flight.stops > 0">
+                    {{flight.stops}} điểm dừng
+                </div>
+                <div class="flight-detail__stops" *ngIf="flight.stops === 0">
+                    Bay thẳng
+                </div>
+            </div>
+
+            <div class="flight-detail__time-group">
+                <div class="flight-detail__time">{{flight.arrivalTime}}</div>
+                <div class="flight-detail__date">{{getCurrentDate()}}</div>
+                <div class="flight-detail__airport">{{flight.arrivalAirport}}</div>
+                <div class="flight-detail__city">{{flight.arrivalCity}}</div>
+            </div>
+        </div>
+
+        <div class="flight-detail__price-section">
+            <div class="flight-detail__price">
+                <span class="flight-detail__price-label">Giá vé:</span>
+                <span class="flight-detail__price-value">{{flight.price | currency:'VND':'symbol':'1.0-0'}}</span>
+            </div>
+            <button class="flight-detail__book-btn">Đặt chuyến bay</button>
+        </div>
+
+        <div class="flight-detail__baggage">
+            <h3>Hành lý bao gồm</h3>
+            <div class="flight-detail__baggage-items">
+                <div class="flight-detail__baggage-item">
+                    <i class="fas fa-suitcase"></i>
+                    <span>Hành lý xách tay: 7kg</span>
+                </div>
+                <div class="flight-detail__baggage-item">
+                    <i class="fas fa-suitcase-rolling"></i>
+                    <span>Hành lý ký gửi: 20kg</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

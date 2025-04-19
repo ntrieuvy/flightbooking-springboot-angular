@@ -1,0 +1,47 @@
+<div class="topbar">
+  <div class="left-section">
+    <div class="topbar-social">
+      <a href=""><img src="assets/images/icon/google-icon.svg" alt="" width="20" height="20"></a>
+      <a href=""><img src="assets/images/icon/apple-icon.svg" alt="" width="20" height="20"></a>
+    </div>
+    <div class="topbar-contact">
+      <a href="mailto:{{ email }}"><i class="fa fa-envelope"></i> {{ email }}</a>
+    </div>
+  </div>
+
+  <div class="right-section">
+    <div class="regional-settings">
+      <app-currency-switcher [currencies]="currencies" [currentCurrency]="currentCurrency"
+        (currencyChange)="switchCurrency($event)">
+      </app-currency-switcher>
+
+      <app-language-switcher [languages]="languages" [currentLanguage]="currentLanguage"
+        (languageChange)="switchLanguage($event)">
+      </app-language-switcher>
+    </div>
+
+    <app-modal [visible]="isModalOpen" (close)="isModalOpen = false">
+      <app-auth *ngIf="isModalOpen" (close)="closeModal()"></app-auth>
+    </app-modal>
+
+    <div class="auth-buttons" *ngIf="!isAuthenticated">
+      <button (click)="isModalOpen = true">Login / Singup</button>
+    </div>
+
+    <div *ngIf="isAuthenticated" class="login-item dropdown">
+      <div class="is_login" (click)="toggleDropdown()">
+        <img *ngIf="avatarUrl" class="avatar" [src]="avatarUrl" [alt]="userName">
+        <span *ngIf="!avatarUrl" class="avatar-text">{{ userNameInitial }}</span>
+        Hi, {{ userName }}
+        <i class="fa fa-angle-down"></i>
+      </div>
+      <ul [class.dropdown-menu]="true" [class.show]="dropdownOpen" class="text-left">
+        <li *ngIf="isVendor"><a routerLink="/vendor/dashboard"><i class="icon ion-md-analytics"></i> Vendor
+            Dashboard</a></li>
+        <li><a routerLink="/user/profile"><i class="icon ion-md-construct"></i> My Profile</a></li>
+        <li *ngIf="isAdmin"><a routerLink="/admin"><i class="icon ion-ios-ribbon"></i> Admin Dashboard</a></li>
+        <li><a href="#" (click)="logout()"><i class="fa fa-sign-out"></i> Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

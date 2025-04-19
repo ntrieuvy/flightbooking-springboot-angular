@@ -1,0 +1,78 @@
+<div class="flight-search-container">
+    <form [formGroup]="flightForm" (ngSubmit)="onSubmit()" class="flight-search-form">
+        <div class="trip-type-selector">
+            <div *ngFor="let type of tripTypes" [class.active]="flightForm.get('tripType').value === type"
+                (click)="flightForm.get('tripType').setValue(type)">
+                {{type}}
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>From</label>
+                <input type="text" formControlName="from" placeholder="City or Airport">
+            </div>
+
+            <button type="button" class="swap-btn" (click)="swapLocations()">
+                <i class="fas fa-exchange-alt"></i>
+            </button>
+
+            <div class="form-group">
+                <label>To</label>
+                <input type="text" formControlName="to" placeholder="City or Airport">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Departure</label>
+                <input type="date" formControlName="departDate" [min]="minDate.toISOString().split('T')[0]"
+                    [max]="maxDate.toISOString().split('T')[0]">
+            </div>
+
+            <div class="form-group" *ngIf="flightForm.get('tripType').value !== 'One Way'">
+                <label>Return</label>
+                <input type="date" formControlName="returnDate"
+                    [min]="flightForm.get('departDate').value || minDate.toISOString().split('T')[0]"
+                    [max]="maxDate.toISOString().split('T')[0]">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Passengers</label>
+                <div class="passengers-selector">
+                    <div>
+                        <span>Adults</span>
+                        <select formControlName="adults">
+                            <option *ngFor="let num of passengersOptions" [value]="num">{{num}}</option>
+                        </select>
+                    </div>
+                    <div>
+                        <span>Children</span>
+                        <select formControlName="children">
+                            <option *ngFor="let num of passengersOptions" [value]="num">{{num}}</option>
+                        </select>
+                    </div>
+                    <div>
+                        <span>Infants</span>
+                        <select formControlName="infants">
+                            <option *ngFor="let num of passengersOptions" [value]="num">{{num}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Cabin Class</label>
+                <select formControlName="cabinClass">
+                    <option *ngFor="let cabin of cabinClasses" [value]="cabin">{{cabin}}</option>
+                </select>
+            </div>
+        </div>
+
+        <button type="submit" class="search-btn" [disabled]="!flightForm.valid">
+            Search Flights
+        </button>
+    </form>
+</div>

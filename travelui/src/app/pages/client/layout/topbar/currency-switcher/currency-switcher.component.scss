@@ -1,0 +1,66 @@
+.topbar-currency {
+  position: relative;
+  display: inline-block;
+  
+  select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: transparent;
+    color: white;
+    padding: 8px 32px 8px 12px;
+    height: 34px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+    
+    &:hover {
+      border-color: #aaa;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+    }
+    
+    &:focus {
+      border-color: #4285f4;
+      box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+    }
+  }
+  
+  &::after {
+    content: "▼";
+    font-size: 10px;
+    color: white;
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+  
+  option {
+    padding: 8px;
+    background: white;
+    color: #333;
+    
+    &:hover {
+      background-color: #f0f0f0;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .topbar-currency {
+    margin: 0 5px;
+    
+    select {
+      padding: 6px 28px 6px 10px;
+      font-size: 13px;
+    }
+    
+    &::after {
+      right: 8px;
+      font-size: 9px;
+    }
+  }
+}

@@ -1,0 +1,42 @@
+.page {
+    &__sidebar {
+        transition: transform 0.3s ease-in-out;
+        width: 250px;
+
+        &.collapsed {
+            transform: translateX(-100%);
+        }
+    }
+
+    &__main {
+        transition: margin-left 0.3s ease-in-out;
+        margin-left: 250px;
+
+        &.sidebar-collapsed {
+            margin-left: 0;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .page {
+        &__sidebar {
+            transform: translateX(-100%);
+            position: fixed;
+            z-index: 1000;
+            height: 100vh;
+
+            &.collapsed {
+                transform: translateX(0);
+            }
+        }
+
+        &__main {
+            margin-left: 0;
+
+            &.sidebar-collapsed {
+                margin-left: 0;
+            }
+        }
+    }
+}

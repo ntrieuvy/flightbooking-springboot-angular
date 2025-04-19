@@ -1,0 +1,116 @@
+<div class="flight-result">
+    <div class="flight-result__header">
+        <h2 class="flight-result__title">Flight Search Results</h2>
+        <div class="flight-result__summary">Found {{flights.length}} flights</div>
+
+        <div class="flight-result__selection-summary" *ngIf="selectedFlights.length > 0">
+            Selected: {{selectedFlights.length}} flight(s) - Total: {{getTotalPrice() |
+            currency:'VND':'symbol':'1.0-0'}}
+            <button class="flight-result__confirm-btn" (click)="confirmSelection()" [disabled]="(tripType === 'One Way' && selectedFlights.length !== 1) || 
+                               (tripType === 'Round Trip' && selectedFlights.length !== 2)">
+                Confirm Selection
+            </button>
+        </div>
+    </div>
+
+    <div class="flight-result__loading" *ngIf="loading">
+        <div class="flight-result__spinner"></div>
+        <p>Searching for flights...</p>
+    </div>
+
+    <div class="flight-result__error" *ngIf="error">
+        <div class="flight-result__error-icon">!</div>
+        <p>{{error}}</p>
+    </div>
+
+    <div class="flight-result__list" *ngIf="!loading && !error && flights.length > 0">
+        <div class="flight-result__item" *ngFor="let flight of flights" (click)="showFlightDetails(flight)">
+            <div class="flight-result__checkbox" (click)="$event.stopPropagation()">
+                <input type="checkbox" [checked]="isFlightSelected(flight)"
+                    (change)="toggleFlightSelection(flight, $event)" [disabled]="!isFlightSelected(flight) && 
+                                  ((tripType === 'One Way' && selectedFlights.length >= 1) || 
+                                   (tripType === 'Round Trip' && selectedFlights.length >= 2))">
+            </div>
+
+            <div class="flight-result__airline">
+                <img [src]="flight.airlineLogo" [alt]="flight.airline" class="flight-result__airline-logo">
+                <span class="flight-result__airline-name">{{flight.airline}}</span>
+                <span class="flight-result__flight-number">{{flight.flightNumber}}</span>
+            </div>
+
+            <div class="flight-result__details">
+                <div class="flight-result__time">
+                    <div class="flight-result__departure">
+                        <span class="flight-result__time-value">{{flight.departureTime}}</span>
+                        <span class="flight-result__airport">{{flight.departureAirport}}</span>
+                        <span class="flight-result__city">{{flight.departureCity}}</span>
+                    </div>
+
+                    <div class="flight-result__duration">
+                        <div class="flight-result__duration-line"></div>
+                        <span class="flight-result__duration-value">{{flight.duration}}</span>
+                        <div class="flight-result__stops" *ngIf="flight.stops > 0">
+                            {{flight.stops}} stop(s)
+                        </div>
+                        <div class="flight-result__stops" *ngIf="flight.stops === 0">
+                            Non-stop
+                        </div>
+                    </div>
+
+                    <div class="flight-result__arrival">
+                        <span class="flight-result__time-value">{{flight.arrivalTime}}</span>
+                        <span class="flight-result__airport">{{flight.arrivalAirport}}</span>
+                        <span class="flight-result__city">{{flight.arrivalCity}}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flight-result__price">
+                <span class="flight-result__price-value">{{flight.price | currency:'VND':'symbol':'1.0-0'}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="flight-result__empty" *ngIf="!loading && !error && flights.length === 0">
+        <p>No matching flights found. Please try again with different criteria.</p>
+    </div>
+</div>
+
+<app-modal [(visible)]="showDetailModal" (close)="showDetailModal = false">
+    <app-flight-detail [flight]="selectedFlight"></app-flight-detail>
+</app-modal>
+
+<app-modal [(visible)]="showBookingModal" (close)="showBookingModal = false">
+    <div class="booking-confirmation">
+        <h3>Booking Summary</h3>
+
+        <div class="booking-confirmation__flights">
+            <div class="flight-summary" *ngFor="let flight of selectedFlights; let i = index">
+                <h4>{{i === 0 ? 'Outbound Flight' : 'Return Flight'}}</h4>
+                <div class="flight-summary__details">
+                    <img [src]="flight.airlineLogo" [alt]="flight.airline">
+                    <div>
+                        <p><strong>{{flight.departureCity}} ({{flight.departureAirport}})</strong> to
+                            <strong>{{flight.arrivalCity}} ({{flight.arrivalAirport}})</strong>
+                        </p>
+                        <p>Flight: {{flight.flightNumber}} | {{flight.departureTime}} - {{flight.arrivalTime}}</p>
+                        <p>Duration: {{flight.duration}} | {{flight.stops === 0 ? 'Non-stop' : flight.stops + '
+                            stop(s)'}}</p>
+                    </div>
+                    <div class="flight-summary__price">
+                        {{flight.price | currency:'VND':'symbol':'1.0-0'}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="booking-confirmation__total">
+            <h4>Total Price</h4>
+            <p>{{getTotalPrice() | currency:'VND':'symbol':'1.0-0'}}</p>
+        </div>
+
+        <button class="booking-confirmation__button" (click)="completeBooking()">
+            Complete Booking
+        </button>
+    </div>
+</app-modal>

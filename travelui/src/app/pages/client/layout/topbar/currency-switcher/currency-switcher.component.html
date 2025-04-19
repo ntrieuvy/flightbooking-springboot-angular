@@ -1,0 +1,7 @@
+<li class="topbar-currency dropdown">
+  <select [value]="currentCurrency?.code" (change)="onChange($event)">
+    <option *ngFor="let currency of currencies" [value]="currency.code">
+      {{ currency.code }}
+    </option>
+  </select>
+</li>

@@ -1,0 +1,7 @@
+<li class="topbar-language dropdown">
+  <select [value]="currentLanguage?.locale" (change)="onChange($event)">
+    <option *ngFor="let lang of languages" [value]="lang.locale">
+      {{ lang.name }}
+    </option>
+  </select>
+</li>

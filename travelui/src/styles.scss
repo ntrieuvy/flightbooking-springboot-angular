@@ -1,0 +1,96 @@
+@import "mixsins.scss";
+
+:root {
+    --color-white: #ffffff;
+    --color-black: #1a1a1a;
+
+    --color-primary-100: #e6f4ff;
+    --color-primary-300: #91caff;
+    --color-primary-500: #1677ff;
+    --color-primary-700: #4379f2;
+
+    --color-secondary-100: #f6ffed;
+    --color-secondary-300: #6dfacd;
+    --color-secondary-500: #00daf0;
+    --color-secondary-700: #00b0ff;
+
+    --color-error-100: #fff1f0;
+    --color-error-500: #ff4d4f;
+    --color-error-700: #e83d5c;
+
+    --color-warning-100: #fffbe6;
+    --color-warning-500: #faad14;
+    --color-warning-700: #d48806;
+
+    --color-success-100: #6dfacd;
+    --color-success-500: #23c197;
+    --color-success-700: #008a64;
+
+    --color-gray-100: #f5f5f5;
+    --color-gray-300: #d9d9d9;
+    --color-gray-500: #a9aabc;
+    --color-gray-700: #444655;
+
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+
+    --spacing-unit: 0.25rem;
+    --max-container-width: 1440px;
+    --border-radius: 0.375rem;
+
+    --font-sans: 'Inter', system-ui, -apple-system;
+    --font-serif: 'Lora', Georgia, serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+}

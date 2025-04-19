@@ -1,0 +1,83 @@
+$tab-primary: #1a2b48;
+$tab-accent: #4299e1;
+$tab-border: #e2e8f0;
+$tab-text: #2d3748;
+$tab-radius: 8px;
+$tab-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+.tab-table {
+    border: 1px solid $tab-border;
+    border-radius: $tab-radius;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.tab-header-container {
+    display: flex;
+    background: #f7fafc;
+    border-bottom: 1px solid $tab-border;
+    padding: 0.5rem 1rem;
+    gap: 1.5rem;
+}
+
+.tab-header {
+    position: relative;
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    color: $tab-text;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: $tab-transition;
+    border-radius: $tab-radius $tab-radius 0 0;
+
+    &:hover:not(.active):not(.disabled) {
+        background: rgba($tab-accent, 0.05);
+        color: darken($tab-accent, 10%);
+    }
+
+    &.active {
+        color: $tab-primary;
+        background: white;
+        box-shadow: 0 -2px 0 $tab-primary inset;
+
+        .tab-icon {
+            color: $tab-primary;
+        }
+    }
+
+    &.disabled {
+        color: #cbd5e0;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+
+    .tab-icon {
+        font-size: 1.1em;
+        color: #718096;
+        transition: $tab-transition;
+    }
+}
+
+.tab-content {
+    padding: 2rem;
+    background: white;
+    min-height: 200px;
+
+    .tab-pane {
+        animation: fadeIn 0.3s ease;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

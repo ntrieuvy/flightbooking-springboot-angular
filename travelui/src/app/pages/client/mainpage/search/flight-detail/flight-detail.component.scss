@@ -1,0 +1,238 @@
+.flight-detail {
+    padding: 20px;
+    max-width: 800px;
+    width: 100%;
+    color: #333;
+
+    &__header {
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    &__title {
+        font-size: 24px;
+        margin-bottom: 10px;
+        color: #3f51b5;
+    }
+
+    &__route {
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    &__main {
+        background: #fff;
+        border-radius: 8px;
+        padding: 25px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    &__airline {
+        display: flex;
+        align-items: center;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #eee;
+    }
+
+    &__logo {
+        width: 80px;
+        height: 40px;
+        object-fit: contain;
+        margin-right: 20px;
+    }
+
+    &__airline-info {
+        h3 {
+            margin: 0 0 5px 0;
+            font-size: 18px;
+        }
+    }
+
+    &__flight-number {
+        font-size: 14px;
+        color: #666;
+    }
+
+    &__timeline {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+
+    &__time-group {
+        text-align: center;
+        flex: 1;
+    }
+
+    &__time {
+        font-size: 28px;
+        font-weight: 500;
+        margin-bottom: 5px;
+    }
+
+    &__date {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 10px;
+    }
+
+    &__airport {
+        font-size: 18px;
+        font-weight: 500;
+        margin-bottom: 5px;
+    }
+
+    &__city {
+        font-size: 14px;
+        color: #666;
+    }
+
+    &__duration {
+        flex: 2;
+        position: relative;
+        padding: 0 20px;
+        text-align: center;
+    }
+
+    &__duration-line {
+        height: 1px;
+        background: #ddd;
+        position: relative;
+
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #3f51b5;
+            top: -4.5px;
+        }
+
+        &::before {
+            left: -5px;
+        }
+
+        &::after {
+            right: -5px;
+        }
+    }
+
+    &__duration-text {
+        margin: 10px 0;
+        font-size: 14px;
+    }
+
+    &__stops {
+        background: #f5f5f5;
+        color: #666;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        display: inline-block;
+    }
+
+    &__price-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 1px solid #eee;
+    }
+
+    &__price {
+        display: flex;
+        align-items: center;
+    }
+
+    &__price-label {
+        margin-right: 10px;
+        font-size: 16px;
+    }
+
+    &__price-value {
+        font-size: 24px;
+        font-weight: bold;
+        color: #3f51b5;
+    }
+
+    &__book-btn {
+        background: #3f51b5;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 4px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+            background: #3f51b5;
+            transform: translateY(-2px);
+        }
+    }
+
+    &__baggage {
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 1px solid #eee;
+
+        h3 {
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+    }
+
+    &__baggage-items {
+        display: flex;
+        gap: 20px;
+    }
+
+    &__baggage-item {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+
+        i {
+            margin-right: 8px;
+            color: #3f51b5;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .flight-detail {
+        padding: 15px;
+
+        &__timeline {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        &__duration {
+            width: 100%;
+            padding: 15px 0;
+            margin: 15px 0;
+        }
+
+        &__duration-line {
+            width: 100%;
+        }
+
+        &__baggage-items {
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        &__price-section {
+            flex-direction: column;
+            gap: 15px;
+            align-items: flex-start;
+        }
+    }
+}

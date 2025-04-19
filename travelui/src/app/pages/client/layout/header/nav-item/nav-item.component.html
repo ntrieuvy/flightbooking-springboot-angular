@@ -1,0 +1,14 @@
+<div class="nav-item" role="none">
+    <a class="nav-item__link" [routerLink]="[item.slug, 'booking']" role="menuitem" aria-haspopup="true"
+        [attr.aria-expanded]="item.children?.length ? 'false' : null">
+        {{ item.label }}
+    </a>
+
+    <ul *ngIf="item.children?.length" class="nav-item__dropdown" role="menu" aria-hidden="true">
+        <li class="nav-item__dropdown-item" *ngFor="let child of item.children" role="none">
+            <a class="nav-item__dropdown-link" [routerLink]="[child.slug, 'booking']" role="menuitem">
+                {{ child.label }}
+            </a>
+        </li>
+    </ul>
+</div>

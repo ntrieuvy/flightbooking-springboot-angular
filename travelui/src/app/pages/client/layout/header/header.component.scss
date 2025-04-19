@@ -1,0 +1,44 @@
+$header-bg: #ffffff !default;
+$nav-link-color: hsl(0, 0%, 20%) !default;
+$dropdown-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !default;
+$transition-timing: 0.3s !default;
+
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-nav {
+    background: $header-bg;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    @include flex-center;
+    gap: 2rem;
+
+    &__logo {
+        &-image {
+            width: 100px;
+            height: auto;
+            border-radius: 2px;
+            object-fit: cover;
+            transition: transform $transition-timing ease;
+
+            &:hover {
+                transform: scale(1.05);
+            }
+        }
+    }
+
+    &__list {
+        @include flex-center;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        gap: 2.5rem;
+    }
+
+    &__item {
+        position: relative;
+    }
+}

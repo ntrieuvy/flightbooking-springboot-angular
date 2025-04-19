@@ -1,0 +1,30 @@
+.search-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    gap: 20px;
+}
+
+.search-form {
+    border-radius: 8px;
+}
+
+.search-result {
+    border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+    .search-container {
+        grid-template-columns: 1fr;
+    }
+
+    .search-form {
+        width: 100%;
+    }
+
+    .search-result {
+        width: 100%;
+    }
+}

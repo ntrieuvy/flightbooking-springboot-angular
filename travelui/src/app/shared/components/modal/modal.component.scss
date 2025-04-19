@@ -1,0 +1,73 @@
+$modal-backdrop-bg: rgba(0, 0, 0, 0.5);
+$modal-content-bg: white;
+$modal-border-radius: 8px;
+$modal-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+$modal-transition: all 0.2s ease;
+$close-btn-size: 1.5rem;
+$close-btn-color: #666;
+$close-btn-hover: #333;
+$z-index-modal: 1000;
+
+.modal {
+  &-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $modal-backdrop-bg;
+    z-index: $z-index-modal;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 1rem;
+    overflow-y: auto;
+    opacity: 0;
+    visibility: hidden;
+    transition: $modal-transition;
+
+    &.show {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  &-content {
+    position: relative;
+    background: $modal-content-bg;
+    border-radius: $modal-border-radius;
+    box-shadow: $modal-shadow;
+    margin: auto;
+    width: auto;
+    max-width: 95%;
+    transform: translateY(-20px);
+    transition: $modal-transition;
+    
+    .show & {
+      transform: translateY(0);
+    }
+  }
+
+  &-close-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: $close-btn-size;
+    height: $close-btn-size;
+    font-size: 1.25rem;
+    line-height: 1;
+    color: $close-btn-color;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+
+    &:hover {
+      color: $close-btn-hover;
+    }
+  }
+}

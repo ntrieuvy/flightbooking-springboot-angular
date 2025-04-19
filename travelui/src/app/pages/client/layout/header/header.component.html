@@ -1,0 +1,11 @@
+<nav class="header-nav" role="navigation" aria-label="Main navigation">
+    <div class="header-nav__logo">
+        <img class="header-nav__logo-image" [src]="logoUrl" [alt]="logoAlt" loading="lazy" />
+    </div>
+
+    <ul class="header-nav__list">
+        <li class="header-nav__item" *ngFor="let item of navItems" role="none">
+            <app-nav-item [item]="item"></app-nav-item>
+        </li>
+    </ul>
+</nav>

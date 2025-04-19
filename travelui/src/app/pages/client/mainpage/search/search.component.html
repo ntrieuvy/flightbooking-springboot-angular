@@ -1,0 +1,10 @@
+<div class="search-container">
+    <div class="search-form">
+        <app-flight-search (search)="onFlightSearch($event)"></app-flight-search>
+    </div>
+    <div class="search-result">
+        <app-flight-search-result [flights]="searchResults" [loading]="loading" [error]="error"
+            [tripType]="searchForm?.tripType" [searchForm]="searchForm">
+        </app-flight-search-result>
+    </div>
+</div>

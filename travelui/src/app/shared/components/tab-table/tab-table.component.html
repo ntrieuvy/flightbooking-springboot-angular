@@ -1,0 +1,25 @@
+<div class="tab-table" role="tablist">
+    <div class="tab-header-container">
+        <div *ngFor="let tab of tabs; trackBy: trackById" class="tab-header" [class.active]="activeTabId === tab.id"
+            [class.disabled]="tab.disabled" role="tab" [attr.aria-selected]="activeTabId === tab.id"
+            [attr.aria-disabled]="tab.disabled" (click)="!tab.disabled && selectTab(tab.id)"
+            (keydown.enter)="!tab.disabled && selectTab(tab.id)" tabindex="0">
+            <i *ngIf="tab.icon" class="tab-icon {{ tab.icon }}"></i>
+            {{ tab.title }}
+        </div>
+    </div>
+
+    <div class="tab-content" role="tabpanel" [attr.aria-labelledby]="activeTabId">
+        <ng-container *ngFor="let tab of tabs">
+            <div *ngIf="activeTabId === tab.id" class="tab-pane">
+                <ng-container *ngIf="isString(tab.content); else dynamicContent">
+                    {{ tab.content }}
+                </ng-container>
+
+                <ng-template #dynamicContent>
+                    <ng-container *ngComponentOutlet="tab.content"></ng-container>
+                </ng-template>
+            </div>
+        </ng-container>
+    </div>
+</div>
