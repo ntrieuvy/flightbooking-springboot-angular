@@ -4,33 +4,51 @@ services:
     container_name: oracle-db
     ports:
       - "1522:1521"
-      - "5501:5500"
     environment:
       - ORACLE_PWD=theintern
       - ORACLE_CHARACTERSET=AL32UTF8
     volumes:
       - oracle-data:/opt/oracle/oradata
-    restart: always
+    restart: unless-stopped
+    networks:
+      - backend
 
   redis:
     image: redis:6.0.7
     container_name: redis
-    restart: always
+    restart: unless-stopped
     ports:
       - 6379:6379
     volumes:
       - redis_volume_data:/data
+    networks:
+      - backend
 
   redis_insight:
     image: redislabs/redisinsight:1.14.0
     container_name: redis_insight
-    restart: always
+    restart: unless-stopped
     ports:
       - 8001:8001
     volumes:
       - redis_insight_volume_data:/db
+    networks:
+      - backend
+
+  mail-dev:
+    container_name: mail-dev
+    image: maildev/maildev
+    ports:
+      - 1080:1080
+      - 1025:1025
+    networks:
+      - backend
 
 volumes:
   oracle-data:
   redis_volume_data:
   redis_insight_volume_data:
+
+networks:
+  backend:
+    driver: bridge

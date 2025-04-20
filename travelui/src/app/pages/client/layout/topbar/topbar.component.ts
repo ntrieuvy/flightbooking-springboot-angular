@@ -22,8 +22,8 @@ export class TopbarComponent implements OnInit {
   containerClass = 'container';
   enableRegistration = true;
   isAuthenticated = true;
-  isVendor = false;
-  isAdmin = false;
+  isVendor = true;
+  isAdmin = true;
   avatarUrl = '';
   userName = 'John Doe';
   userNameInitial = 'J';
