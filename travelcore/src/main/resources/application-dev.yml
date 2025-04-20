@@ -1,0 +1,36 @@
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@//localhost:1522/FREEPDB1
+    username: travelteamsolutions
+    password: 1
+    driver-class-name: oracle.jdbc.OracleDriver
+
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+
+  mail:
+    host: localhost
+    port: 1025
+    username: nqtrang
+    password: nqtrang
+    properties:
+      mail:
+        smtp:
+          trust: "*"
+        auth: true
+        starttls:
+          enable: true
+        connectiontimeout: 5000
+        timeout: 3000
+        writetimeout: 5000
+
+application:
+  security:
+    jwt:
+      secret-key: QWxhZGRpbjpvcGVuIHNlc2FtZSBzYW1wbGUgdGV4dA==
+      expiration: 8640000
+
+server:
+  port: 8088
