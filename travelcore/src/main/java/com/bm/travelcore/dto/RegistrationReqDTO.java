@@ -1,6 +1,6 @@
 package com.bm.travelcore.dto;
 
-import com.bm.travelcore.constant.IdentifyType;
+import com.bm.travelcore.model.enums.IdentifyType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

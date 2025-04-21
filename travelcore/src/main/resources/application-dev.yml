@@ -6,7 +6,7 @@ spring:
     driver-class-name: oracle.jdbc.OracleDriver
 
   jpa:
-    show-sql: false
+    show-sql: true
     hibernate:
       ddl-auto: update
 
@@ -31,6 +31,10 @@ application:
     jwt:
       secret-key: QWxhZGRpbjpvcGVuIHNlc2FtZSBzYW1wbGUgdGV4dA==
       expiration: 8640000
+
+  mailing:
+    frontend:
+      activation_url: http://localhost:4200
 
 server:
   port: 8088

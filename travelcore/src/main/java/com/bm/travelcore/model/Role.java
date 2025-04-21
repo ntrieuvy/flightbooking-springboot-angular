@@ -16,14 +16,17 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "role")
+@Table(name = "T_ROLE")
 @EntityListeners(AuditingEntityListener.class)
 public class Role {
-    @Id
-    @GeneratedValue
-    private String id;
 
-    @Column(unique = true, nullable = false)
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "role_seq_gen")
+    @SequenceGenerator(name = "role_seq_gen", sequenceName = "role_seq", allocationSize = 1)
+    @Column(name = "id")
+    private Long id;
+
+    @Column(name = "name", unique = true, nullable = false)
     private String name;
 
     @ManyToMany(mappedBy = "roles")
@@ -31,10 +34,10 @@ public class Role {
     private List<User> users;
 
     @CreatedDate
-    @Column(nullable = false, updatable = false)
+    @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
     @LastModifiedDate
-    @Column(insertable = false)
+    @Column(name = "updated_at", insertable = false)
     private LocalDateTime updatedAt;
 }

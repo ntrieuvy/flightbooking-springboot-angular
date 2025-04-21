@@ -1,4 +1,4 @@
-package com.bm.travelcore.constant;
+package com.bm.travelcore.model.enums;
 
 public enum IdentifyType {
     EMAIL,

@@ -1,6 +1,6 @@
 package com.bm.travelcore.dto;
 
-import com.bm.travelcore.constant.IdentifyType;
+import com.bm.travelcore.model.enums.IdentifyType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
