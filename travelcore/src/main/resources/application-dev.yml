@@ -29,10 +29,11 @@ spring:
 application:
   security:
     jwt:
-      secret-key: QWxhZGRpbjpvcGVuIHNlc2FtZSBzYW1wbGUgdGV4dA==
+      secret-key: QWxhZGRpbjpvcGVuIHNlc2FtZSBzGVuIHNlc2FtZSBzYW1wbQWxhZGRpbjpvGUgdGV4dA==
       expiration: 8640000
 
   mailing:
+    not_reply_email: donotreply@teamsolutions.com
     frontend:
       activation_url: http://localhost:4200
 

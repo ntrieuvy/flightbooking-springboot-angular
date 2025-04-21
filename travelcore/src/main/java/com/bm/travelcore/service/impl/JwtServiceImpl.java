@@ -1,5 +1,6 @@
 package com.bm.travelcore.service.impl;
 
+import com.bm.travelcore.constant.AppConstant;
 import com.bm.travelcore.model.Token;
 import com.bm.travelcore.service.JwtService;
 import io.jsonwebtoken.Claims;
@@ -20,18 +21,19 @@ import java.util.function.Function;
 public class JwtServiceImpl implements JwtService {
 
     @Value("${application.security.jwt.expiration}")
-    private long jwtExpiration;
+    private long JWT_EXPIRATION;
 
     @Value("${application.security.jwt.secret-key}")
-    private String secretKey;
+    private String SECRET_KEY;
 
     @Override
     public String generateToken(UserDetails userDetails) {
         return generateToken(new HashMap<>(), userDetails);
     }
 
-    private String generateToken(Map<String, Object> claims, UserDetails userDetails) {
-        return buildToken(claims, userDetails, jwtExpiration);
+    @Override
+    public String generateToken(Map<String, Object> claims, UserDetails userDetails) {
+        return buildToken(claims, userDetails, JWT_EXPIRATION);
     }
 
     private String buildToken(Map<String, Object> claims, UserDetails userDetails, long jwtExpiration) {
@@ -84,7 +86,7 @@ public class JwtServiceImpl implements JwtService {
     }
 
     private Key getSignInKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(secretKey);
+        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 }

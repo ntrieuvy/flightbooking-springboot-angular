@@ -1,5 +1,6 @@
 package com.bm.travelcore.service.impl;
 
+import com.bm.travelcore.constant.AppConstant;
 import com.bm.travelcore.model.enums.EmailTemplateName;
 import com.bm.travelcore.service.MailService;
 import jakarta.mail.MessagingException;
@@ -7,6 +8,7 @@ import jakarta.mail.internet.MimeMessage;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
@@ -25,6 +27,9 @@ public class MailServiceImpl implements MailService {
     private final JavaMailSender mailSender;
     private final SpringTemplateEngine templateEngine;
 
+    @Value("${application.mailing.not_reply_email}")
+    private String NOT_REPLY_EMAIL;
+
     @Override
     public void sendMail(String from, String to, String subject, String text) {}
 
@@ -40,7 +45,7 @@ public class MailServiceImpl implements MailService {
     ) throws MessagingException {
         String templateName;
         if (emailTemplate == null) {
-            templateName = "comfirm-email";
+            templateName = AppConstant.TEMPLATE_CONFIRM_ACCOUNT;
         } else {
             templateName = emailTemplate.getName();
         }
@@ -52,15 +57,15 @@ public class MailServiceImpl implements MailService {
                 StandardCharsets.UTF_8.name()
         );
         Map<String, Object> properties = new HashMap<>();
-        properties.put("username", username);
-        properties.put("confirmationUrl", comfirmationUrl);
-        properties.put("activationCode", activationCode);
+        properties.put(AppConstant.TEMPLATE_PROP_USERNAME, username);
+        properties.put(AppConstant.TEMPLATE_PROP_CONFIRMATION_URL, comfirmationUrl);
+        properties.put(AppConstant.TEMPLATE_PROP_ACTIVATION_CODE, activationCode);
 
         Context context = new Context();
 
         context.setVariables(properties);
 
-        mimeMessageHelper.setFrom("contact@travelteamsolutions.com");
+        mimeMessageHelper.setFrom(NOT_REPLY_EMAIL);
         mimeMessageHelper.setTo(to);
         mimeMessageHelper.setSubject(subject);
 
@@ -68,8 +73,5 @@ public class MailServiceImpl implements MailService {
         mimeMessageHelper.setText(template, true);
 
         mailSender.send(mimeMessage);
-
     }
-
-
 }
