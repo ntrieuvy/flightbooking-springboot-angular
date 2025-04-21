@@ -1,21 +1,22 @@
 package com.bm.travelcore.service.impl;
 
 import com.bm.travelcore.constant.AppConstant;
+import com.bm.travelcore.constant.ExceptionMessages;
+import com.bm.travelcore.config.RedisKeyConfig;
 import com.bm.travelcore.dto.AuthenticationReqDTO;
 import com.bm.travelcore.dto.AuthenticationResDTO;
 import com.bm.travelcore.model.enums.IdentifyType;
 import com.bm.travelcore.model.enums.Roles;
 import com.bm.travelcore.dto.RegistrationReqDTO;
 import com.bm.travelcore.model.Role;
-import com.bm.travelcore.model.Token;
 import com.bm.travelcore.model.User;
 import com.bm.travelcore.model.enums.EmailTemplateName;
 import com.bm.travelcore.repository.RoleRepository;
-import com.bm.travelcore.repository.TokenRepository;
 import com.bm.travelcore.repository.UserRepository;
 import com.bm.travelcore.service.AuthenticationService;
 import com.bm.travelcore.service.JwtService;
 import com.bm.travelcore.service.MailService;
+import com.bm.travelcore.service.RedisService;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,7 +28,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.security.SecureRandom;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -39,8 +39,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
-    private final TokenRepository tokenRepository;
     private final AuthenticationManager authenticationManager;
+    private final RedisService redisService;
+
 
     private final MailService mailService;
     private final JwtService jwtService;
@@ -52,7 +53,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public void register(RegistrationReqDTO reqDTO) throws MessagingException {
 
         Role userRole = roleRepository.findByName(String.valueOf(Roles.ROLE_USER))
-                .orElseThrow(() -> new IllegalArgumentException("ROLE USER WAS NOT INITIALIZED"));
+                .orElseThrow(() -> new IllegalArgumentException(ExceptionMessages.ROLE_USER_WAS_NOT_INITIALIZED));
 
         IdentifyType userType = reqDTO.getIdentifyType();
 
@@ -61,7 +62,16 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 : userRepository.findByPhoneNumber(reqDTO.getIdentifier());
 
         if (existingUser.isPresent()) {
-            throw new IllegalArgumentException("User with this " + userType.name().toLowerCase() + " already exists.");
+            User user = existingUser.get();
+            if (Boolean.FALSE.equals(user.isEnabled())) {
+                if (userType == IdentifyType.EMAIL) {
+                    sendValidationEmail(user);
+                } else {
+                    sendValidationPhone(user);
+                }
+            }
+
+            throw new IllegalArgumentException(String.format(ExceptionMessages.USER_ALREADY_EXISTS, userType.name().toLowerCase()));
         }
 
         User user = User
@@ -103,33 +113,36 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     @Transactional
     public void activateAccount(String token) throws MessagingException {
-        Token savedToken = tokenRepository.findByToken(token)
-                .orElseThrow(() -> new RuntimeException("Invalid token"));
+        String key = RedisKeyConfig.getActivationTokenKey(token);
+        String userId = redisService.get(key);
 
-        if (LocalDateTime.now().isAfter(savedToken.getExpiresAt())) {
-            sendValidationEmail(savedToken.getUser());
-            throw new RuntimeException("Activation token has expired. A new token has been sent to same email address.");
+        if (userId == null) {
+            throw new RuntimeException(ExceptionMessages.USER_ALREADY_ACTIVE_OR_TOKEN_INVALID);
         }
 
-        var user = userRepository.findById(savedToken.getUser().getId())
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        User user = userRepository.findById(Long.parseLong(userId))
+                .orElseThrow(() -> new UsernameNotFoundException(String.format(ExceptionMessages.USER_NOT_FOUND, "id", userId)));
 
         user.setEnabled(Boolean.TRUE);
         userRepository.save(user);
-        savedToken.setValidatedAt(LocalDateTime.now());
-        tokenRepository.save(savedToken);
+
+        redisService.delete(key);
     }
 
     private void sendValidationEmail(User user) throws MessagingException {
         String newToken = generateAndSaveActivationToken(user);
-        mailService.sendValidateMail(
-                user.getEmail(),
-                user.getFullName(),
-                EmailTemplateName.ACTIVATE_ACCOUNT,
-                ACTIVATION_URL,
-                newToken,
-                AppConstant.SUBJECT_MAIL
-        );
+        if (newToken == null) {
+            throw new IllegalArgumentException(ExceptionMessages.ACTIVATION_EMAIL_SENT_WAIT_5_MINUTES);
+        } else {
+            mailService.sendValidateMail(
+                    user.getEmail(),
+                    user.getFullName(),
+                    EmailTemplateName.ACTIVATE_ACCOUNT,
+                    ACTIVATION_URL,
+                    newToken,
+                    AppConstant.SUBJECT_MAIL
+            );
+        }
     }
 
     private void sendValidationPhone(User user) {
@@ -137,16 +150,30 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     private String generateAndSaveActivationToken(User user) {
-        String generatedToken = generateActivationCode(AppConstant.ACTIVATION_CODE_LENGTH);
-        Token token = Token.builder()
-                .token(generatedToken)
-                .createdAt(LocalDateTime.now())
-                .expiresAt(LocalDateTime.now().plusMinutes(AppConstant.TOKEN_EXPIRED_TIME))
-                .user(user)
-                .build();
+        String userId = user.getId().toString();
+        String userActivationKey = RedisKeyConfig.getUserActivationKey(userId);
 
-        tokenRepository.save(token);
-        return generatedToken;
+        String existingToken = redisService.get(userActivationKey);
+
+        if (existingToken != null) {
+            String tokenKey = RedisKeyConfig.getActivationTokenKey(existingToken);
+            long ttl = redisService.getTtl(tokenKey);
+            int minResendInterval = RedisKeyConfig.TOKEN_EXPIRED_TIME - RedisKeyConfig.TIME_RESENT_TOKEN;
+
+            if (ttl > minResendInterval) {
+                return null;
+            }
+
+            redisService.save(tokenKey, userId, RedisKeyConfig.TOKEN_EXPIRED_TIME);
+            redisService.save(userActivationKey, existingToken, RedisKeyConfig.TOKEN_EXPIRED_TIME);
+            return existingToken;
+        } else {
+            String generatedToken = generateActivationCode(AppConstant.ACTIVATION_CODE_LENGTH);
+            String tokenKey = RedisKeyConfig.getActivationTokenKey(generatedToken);
+            redisService.save(tokenKey, userId, RedisKeyConfig.TOKEN_EXPIRED_TIME);
+            redisService.save(userActivationKey, generatedToken, RedisKeyConfig.TOKEN_EXPIRED_TIME);
+            return generatedToken;
+        }
     }
 
     private String generateActivationCode(int length) {

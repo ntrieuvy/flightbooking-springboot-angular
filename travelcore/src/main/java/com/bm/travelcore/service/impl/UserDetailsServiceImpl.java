@@ -1,5 +1,6 @@
 package com.bm.travelcore.service.impl;
 
+import com.bm.travelcore.constant.ExceptionMessages;
 import com.bm.travelcore.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,8 +20,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String identifier) throws UsernameNotFoundException {
         return identifier.contains("@")
                 ? userRepository.findByEmail(identifier)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + identifier))
+                .orElseThrow(() -> new UsernameNotFoundException(
+                        String.format(ExceptionMessages.USER_NOT_FOUND_WITH_EMAIL, identifier)))
                 : userRepository.findByPhoneNumber(identifier)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with phone number: " + identifier));
+                .orElseThrow(() -> new UsernameNotFoundException(
+                        String.format(ExceptionMessages.USER_NOT_FOUND_WITH_PHONE, identifier)));
     }
 }
