@@ -6,7 +6,7 @@ spring:
     driver-class-name: oracle.jdbc.OracleDriver
 
   jpa:
-    show-sql: true
+    show-sql: false
     hibernate:
       ddl-auto: update
 
@@ -25,6 +25,14 @@ spring:
         connectiontimeout: 5000
         timeout: 3000
         writetimeout: 5000
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 356926343838-d1ek2d8ek4pukn2mg7rfvv6buv7u0b72.apps.googleusercontent.com
+            client-secret: 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
 
   data:
     redis:
@@ -49,11 +57,23 @@ application:
   mailing:
     not_reply_email: donotreply@teamsolutions.com
     frontend:
-      activation_url: http://localhost:4200
+      activation_url: http://localhost:8080/api/v1/auth/activate-account
 
   redis:
     token:
       expiration: 86400
 
+  provider:
+    sms:
+      default: twilio
+      outgoing_number: +12525504206
+      twilio:
+        name: twilio
+        auth_token: 61e3cb5b860cf768134591e355f49431
+        account_sid: AC2abc6671bea8d335d19f674920aa794c
+
+  frontend:
+    oauth-redirect-url: "http://localhost:4200/oauth-redirect"
+
 server:
-  port: 8088
+  port: 8080

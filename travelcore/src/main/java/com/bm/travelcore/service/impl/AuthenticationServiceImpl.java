@@ -1,5 +1,6 @@
 package com.bm.travelcore.service.impl;
 
+import com.bm.travelcore.config.ApplicationProperties;
 import com.bm.travelcore.constant.AppConstant;
 import com.bm.travelcore.constant.ExceptionMessages;
 import com.bm.travelcore.config.RedisKeyConfig;
@@ -13,10 +14,7 @@ import com.bm.travelcore.model.User;
 import com.bm.travelcore.model.enums.EmailTemplateName;
 import com.bm.travelcore.repository.RoleRepository;
 import com.bm.travelcore.repository.UserRepository;
-import com.bm.travelcore.service.AuthenticationService;
-import com.bm.travelcore.service.JwtService;
-import com.bm.travelcore.service.MailService;
-import com.bm.travelcore.service.RedisService;
+import com.bm.travelcore.service.*;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -41,13 +39,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final UserRepository userRepository;
     private final AuthenticationManager authenticationManager;
     private final RedisService redisService;
-
+    private final ApplicationProperties properties;
 
     private final MailService mailService;
     private final JwtService jwtService;
-
-    @Value("${application.mailing.frontend.activation_url}")
-    private String ACTIVATION_URL;
+    private final SmsService smsService;
 
     @Override
     public void register(RegistrationReqDTO reqDTO) throws MessagingException {
@@ -69,6 +65,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 } else {
                     sendValidationPhone(user);
                 }
+                return;
             }
 
             throw new IllegalArgumentException(String.format(ExceptionMessages.USER_ALREADY_EXISTS, userType.name().toLowerCase()));
@@ -112,12 +109,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     @Transactional
-    public void activateAccount(String token) throws MessagingException {
-        String key = RedisKeyConfig.getActivationTokenKey(token);
+    public void activateAccount(String otp) throws MessagingException {
+        String key = RedisKeyConfig.getActivationOtpKey(otp);
         String userId = redisService.get(key);
 
         if (userId == null) {
-            throw new RuntimeException(ExceptionMessages.USER_ALREADY_ACTIVE_OR_TOKEN_INVALID);
+            throw new RuntimeException(ExceptionMessages.USER_ALREADY_ACTIVE_OR_OTP_INVALID);
         }
 
         User user = userRepository.findById(Long.parseLong(userId))
@@ -130,7 +127,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     private void sendValidationEmail(User user) throws MessagingException {
-        String newToken = generateAndSaveActivationToken(user);
+        String newToken = generateAndSaveActivationOtp(user);
         if (newToken == null) {
             throw new IllegalArgumentException(ExceptionMessages.ACTIVATION_EMAIL_SENT_WAIT_5_MINUTES);
         } else {
@@ -138,7 +135,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                     user.getEmail(),
                     user.getFullName(),
                     EmailTemplateName.ACTIVATE_ACCOUNT,
-                    ACTIVATION_URL,
+                    properties.getActivationUrl() + "?otp=" + newToken,
                     newToken,
                     AppConstant.SUBJECT_MAIL
             );
@@ -146,33 +143,38 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     private void sendValidationPhone(User user) {
-
+        String otp = generateAndSaveActivationOtp(user);
+        if (otp == null) {
+            throw new IllegalArgumentException(ExceptionMessages.ACTIVATION_EMAIL_SENT_WAIT_5_MINUTES);
+        } else {
+            smsService.sendSms(user.getPhoneNumber(), otp);
+        }
     }
 
-    private String generateAndSaveActivationToken(User user) {
+    private String generateAndSaveActivationOtp(User user) {
         String userId = user.getId().toString();
         String userActivationKey = RedisKeyConfig.getUserActivationKey(userId);
 
-        String existingToken = redisService.get(userActivationKey);
+        String existingOtp = redisService.get(userActivationKey);
 
-        if (existingToken != null) {
-            String tokenKey = RedisKeyConfig.getActivationTokenKey(existingToken);
-            long ttl = redisService.getTtl(tokenKey);
-            int minResendInterval = RedisKeyConfig.TOKEN_EXPIRED_TIME - RedisKeyConfig.TIME_RESENT_TOKEN;
+        if (existingOtp != null) {
+            String otp = RedisKeyConfig.getActivationOtpKey(existingOtp);
+            long ttl = redisService.getTtl(otp);
+            int minResendInterval = RedisKeyConfig.OTP_EXPIRED_TIME - RedisKeyConfig.OTP_TIME_RESENT;
 
             if (ttl > minResendInterval) {
                 return null;
             }
 
-            redisService.save(tokenKey, userId, RedisKeyConfig.TOKEN_EXPIRED_TIME);
-            redisService.save(userActivationKey, existingToken, RedisKeyConfig.TOKEN_EXPIRED_TIME);
-            return existingToken;
+            redisService.save(otp, userId, RedisKeyConfig.OTP_EXPIRED_TIME);
+            redisService.save(userActivationKey, existingOtp, RedisKeyConfig.OTP_EXPIRED_TIME);
+            return existingOtp;
         } else {
-            String generatedToken = generateActivationCode(AppConstant.ACTIVATION_CODE_LENGTH);
-            String tokenKey = RedisKeyConfig.getActivationTokenKey(generatedToken);
-            redisService.save(tokenKey, userId, RedisKeyConfig.TOKEN_EXPIRED_TIME);
-            redisService.save(userActivationKey, generatedToken, RedisKeyConfig.TOKEN_EXPIRED_TIME);
-            return generatedToken;
+            String generatedOtp = generateActivationCode(AppConstant.ACTIVATION_CODE_LENGTH);
+            String otp = RedisKeyConfig.getActivationOtpKey(generatedOtp);
+            redisService.save(otp, userId, RedisKeyConfig.OTP_EXPIRED_TIME);
+            redisService.save(userActivationKey, generatedOtp, RedisKeyConfig.OTP_EXPIRED_TIME);
+            return generatedOtp;
         }
     }
 

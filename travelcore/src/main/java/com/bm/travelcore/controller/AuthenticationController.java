@@ -4,6 +4,7 @@ import com.bm.travelcore.dto.AuthenticationReqDTO;
 import com.bm.travelcore.dto.AuthenticationResDTO;
 import com.bm.travelcore.dto.RegistrationReqDTO;
 import com.bm.travelcore.service.AuthenticationService;
+import com.bm.travelcore.service.SmsService;
 import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
+    private final SmsService smsService;
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.ACCEPTED)
@@ -36,8 +38,8 @@ public class AuthenticationController {
 
     @GetMapping("/activate-account")
     public void comfirm(
-            @RequestParam String token
+            @RequestParam String otp
     ) throws MessagingException {
-        authenticationService.activateAccount(token);
+        authenticationService.activateAccount(otp);
     }
 }

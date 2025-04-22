@@ -1,5 +1,6 @@
 package com.bm.travelcore.service.impl;
 
+import com.bm.travelcore.config.ApplicationProperties;
 import com.bm.travelcore.constant.AppConstant;
 import com.bm.travelcore.model.Token;
 import com.bm.travelcore.service.JwtService;
@@ -8,6 +9,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,13 +20,10 @@ import java.util.*;
 import java.util.function.Function;
 
 @Service
+@AllArgsConstructor
 public class JwtServiceImpl implements JwtService {
 
-    @Value("${application.security.jwt.expiration}")
-    private long JWT_EXPIRATION;
-
-    @Value("${application.security.jwt.secret-key}")
-    private String SECRET_KEY;
+    private final ApplicationProperties properties;
 
     @Override
     public String generateToken(UserDetails userDetails) {
@@ -33,7 +32,7 @@ public class JwtServiceImpl implements JwtService {
 
     @Override
     public String generateToken(Map<String, Object> claims, UserDetails userDetails) {
-        return buildToken(claims, userDetails, JWT_EXPIRATION);
+        return buildToken(claims, userDetails, properties.getJwtExpiration());
     }
 
     private String buildToken(Map<String, Object> claims, UserDetails userDetails, long jwtExpiration) {
@@ -86,7 +85,7 @@ public class JwtServiceImpl implements JwtService {
     }
 
     private Key getSignInKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
+        byte[] keyBytes = Decoders.BASE64.decode(properties.getSecretKey());
         return Keys.hmacShaKeyFor(keyBytes);
     }
 }

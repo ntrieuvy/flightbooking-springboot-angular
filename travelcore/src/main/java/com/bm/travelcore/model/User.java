@@ -1,5 +1,6 @@
 package com.bm.travelcore.model;
 
+import com.bm.travelcore.model.enums.LoginProvider;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -49,6 +50,9 @@ public class User implements UserDetails, Principal {
 
     @Column(name = "password")
     private String password;
+
+    @Column(name = "login_provider")
+    private LoginProvider loginProvider = LoginProvider.LOCAL;
 
     @Column(name = "account_locked")
     private boolean accountLocked;

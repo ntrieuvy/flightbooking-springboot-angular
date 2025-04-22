@@ -11,5 +11,5 @@ public interface AuthenticationService {
 
     AuthenticationResDTO authenticate(@Valid AuthenticationReqDTO authenticationReqDTO);
 
-    void activateAccount(String token) throws MessagingException;
+    void activateAccount(String otp) throws MessagingException;
 }
