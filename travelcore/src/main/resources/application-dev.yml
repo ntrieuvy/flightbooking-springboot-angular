@@ -73,6 +73,7 @@ application:
         account_sid: AC2abc6671bea8d335d19f674920aa794c
 
   frontend:
+    url: "http://localhost:4200"
     oauth-redirect-url: "http://localhost:4200/oauth-redirect"
 
 server:

@@ -36,4 +36,7 @@ public class ApplicationProperties {
 
     @Value("${application.frontend.oauth-redirect-url}")
     private String oauthRedirectUrl;
+
+    @Value("${application.frontend.url}")
+    private String frontendUrl;
 }
