@@ -12,6 +12,7 @@ public enum BusinessErrorCodes {
     ACCOUNT_LOCKED(302, "User account is locked", FORBIDDEN),
     ACCOUNT_DISABLE(303, "User account is disabled", FORBIDDEN),
     BAD_CREDENTIALS(304, "Login and / or password is incorrect", FORBIDDEN),
+    NOT_FOUND(305, "Resource not found", HttpStatus.NOT_FOUND),
     ;
     @Getter
     private final int code;

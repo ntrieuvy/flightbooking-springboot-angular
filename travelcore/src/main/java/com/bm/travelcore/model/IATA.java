@@ -10,7 +10,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "\"IATA\"")
+@Table(name = "IATA")
 @EntityListeners(AuditingEntityListener.class)
 public class IATA {
 

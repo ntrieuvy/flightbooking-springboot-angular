@@ -3,6 +3,8 @@ package com.bm.travelcore.service.impl;
 import com.bm.travelcore.config.ApplicationProperties;
 import com.bm.travelcore.service.JwtService;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -41,14 +43,14 @@ public class JwtServiceImpl implements JwtService {
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + jwtExpiration))
                 .claim("authorities", authorities)
-                .signWith(getSignInKey())
+                .signWith(getSigningKey())
                 .compact();
     }
 
     @Override
     public Boolean validateToken(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
-        return username.equals(userDetails.getUsername()) && isTokenExprired(token);
+        return username.equals(userDetails.getUsername()) && !isTokenExprired(token);
     }
 
     @Override
@@ -72,15 +74,21 @@ public class JwtServiceImpl implements JwtService {
     }
 
     private Claims extractAllClaims(String token) {
-        return Jwts
-                .parserBuilder()
-                .setSigningKey(getSignInKey())
-                .build()
-                .parseClaimsJwt(token)
-                .getBody();
+        try {
+            return Jwts
+                    .parserBuilder()
+                    .setSigningKey(getSigningKey())
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+        } catch (ExpiredJwtException e) {
+            throw new RuntimeException("Token expired", e);
+        } catch (JwtException | IllegalArgumentException e) {
+            throw new RuntimeException("Invalid token", e);
+        }
     }
 
-    private Key getSignInKey() {
+    private Key getSigningKey() {
         byte[] keyBytes = Decoders.BASE64.decode(properties.getSecretKey());
         return Keys.hmacShaKeyFor(keyBytes);
     }

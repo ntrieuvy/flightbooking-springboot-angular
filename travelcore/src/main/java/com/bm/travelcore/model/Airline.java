@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "\"AIRLINE\"")
+@Table(name = "AIRLINE")
 public class Airline {
 
     @Id

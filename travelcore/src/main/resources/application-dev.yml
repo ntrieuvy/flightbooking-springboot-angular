@@ -77,4 +77,4 @@ application:
     oauth-redirect-url: "http://localhost:4200/oauth-redirect"
 
 server:
-  port: 8080
+  port: 9090

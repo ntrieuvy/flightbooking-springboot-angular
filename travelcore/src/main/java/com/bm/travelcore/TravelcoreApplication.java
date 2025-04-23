@@ -20,16 +20,4 @@ public class TravelcoreApplication {
     public static void main(String[] args) {
         SpringApplication.run(TravelcoreApplication.class, args);
     }
-
-//    @Bean
-//    public CommandLineRunner commandLineRunner(RoleRepository roleRepository) {
-//        return args -> {
-//            if (roleRepository.findByName(String.valueOf(Roles.ROLE_USER)).isEmpty()) {
-//                roleRepository.save(
-//                        Role.builder().name("ROLE_USER").build()
-//                );
-//            }
-//        };
-//    }
-
 }

@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "\"AIRLINE_AIRPORT_GROUP_CONFIG\"")
+@Table(name = "AIRLINE_AIRPORT_GROUP_CONFIG")
 @EntityListeners(AuditingEntityListener.class)
 public class AirlineAirportGroupConfig {
 

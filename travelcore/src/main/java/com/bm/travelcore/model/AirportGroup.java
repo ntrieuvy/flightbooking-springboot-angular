@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "\"AIRPORT_GROUP\"")
+@Table(name = "AIRPORT_GROUP")
 @EntityListeners(AuditingEntityListener.class)
 public class AirportGroup {
 

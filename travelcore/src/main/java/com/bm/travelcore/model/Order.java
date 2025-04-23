@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "\"ORDER\"")
+@Table(name = "T_ORDER")
 @EntityListeners(AuditingEntityListener.class)
 public class Order {
 

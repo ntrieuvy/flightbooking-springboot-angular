@@ -9,4 +9,7 @@ public class ExceptionMessages {
     public static final String ACTIVATION_EMAIL_SENT_WAIT_5_MINUTES = "An activation email has been sent to your inbox. If you do not receive it, please wait 5 minutes before requesting another one.";
     public static final String USER_NOT_FOUND_WITH_EMAIL = "User not found with email: %s";
     public static final String USER_NOT_FOUND_WITH_PHONE = "User not found with phone number: %s";
+
+    public static final String AGENCY_NOT_FOUND_WITH_CODE = "Agency not found with code: %s";
+    public static final String AGENCY_NOT_FOUND = "Agency not found";
 }

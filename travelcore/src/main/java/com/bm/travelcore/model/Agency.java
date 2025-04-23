@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "\"AGENCY\"")
+@Table(name = "AGENCY")
 @EntityListeners(AuditingEntityListener.class)
 public class Agency {
 
@@ -25,7 +25,7 @@ public class Agency {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "code", nullable = false)
+    @Column(name = "code", nullable = false, unique = true)
     private String code;
 
     @Column(name = "name", nullable = false)

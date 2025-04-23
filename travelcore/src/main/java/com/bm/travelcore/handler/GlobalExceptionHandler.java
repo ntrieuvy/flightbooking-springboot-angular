@@ -96,4 +96,18 @@ public class GlobalExceptionHandler {
                                 .build()
                 );
     }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<ExceptionResDTO> handleException(NotFoundException exp) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(
+                        ExceptionResDTO.builder()
+                                .businessErrorCode(BusinessErrorCodes.NOT_FOUND.getCode())
+                                .businessErrorDescription(BusinessErrorCodes.NOT_FOUND.getDescription())
+                                .error(exp.getMessage())
+                                .build()
+                );
+    }
+
 }

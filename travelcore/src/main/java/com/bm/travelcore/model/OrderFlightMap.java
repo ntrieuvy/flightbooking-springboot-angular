@@ -10,7 +10,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "\"ORDER_FLIGHT_MAP\"")
+@Table(name = "ORDER_FLIGHT_MAP")
 @EntityListeners(AuditingEntityListener.class)
 public class OrderFlightMap {
 

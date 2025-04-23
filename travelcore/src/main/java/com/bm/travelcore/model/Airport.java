@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "\"AIRPORT\"")
+@Table(name = "AIRPORT")
 @EntityListeners(AuditingEntityListener.class)
 public class Airport {
 
