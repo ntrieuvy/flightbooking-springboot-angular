@@ -1,16 +1,12 @@
 package com.bm.travelcore.service.impl;
 
 import com.bm.travelcore.config.ApplicationProperties;
-import com.bm.travelcore.constant.AppConstant;
-import com.bm.travelcore.model.Token;
 import com.bm.travelcore.service.JwtService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;

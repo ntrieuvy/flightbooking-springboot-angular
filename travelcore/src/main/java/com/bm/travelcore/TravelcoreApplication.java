@@ -21,15 +21,15 @@ public class TravelcoreApplication {
         SpringApplication.run(TravelcoreApplication.class, args);
     }
 
-    @Bean
-    public CommandLineRunner commandLineRunner(RoleRepository roleRepository) {
-        return args -> {
-            if (roleRepository.findByName(String.valueOf(Roles.ROLE_USER)).isEmpty()) {
-                roleRepository.save(
-                        Role.builder().name("ROLE_USER").build()
-                );
-            }
-        };
-    }
+//    @Bean
+//    public CommandLineRunner commandLineRunner(RoleRepository roleRepository) {
+//        return args -> {
+//            if (roleRepository.findByName(String.valueOf(Roles.ROLE_USER)).isEmpty()) {
+//                roleRepository.save(
+//                        Role.builder().name("ROLE_USER").build()
+//                );
+//            }
+//        };
+//    }
 
 }

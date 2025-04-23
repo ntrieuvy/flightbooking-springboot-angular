@@ -2,13 +2,11 @@ package com.bm.travelcore.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import net.minidev.json.annotate.JsonIgnore;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Setter
@@ -16,25 +14,28 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "\"ROLE\"")
+@Table(name = "\"AIRPORT\"")
 @EntityListeners(AuditingEntityListener.class)
-public class Role {
+public class Airport {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "role_seq_gen")
-    @SequenceGenerator(name = "role_seq_gen", sequenceName = "role_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "airport_seq_gen")
+    @SequenceGenerator(name = "airport_seq_gen", sequenceName = "airport_seq", allocationSize = 1)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name", unique = true, nullable = false)
+    @Column(name = "code", nullable = false)
+    private String code;
+
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @ManyToMany(mappedBy = "roles")
-    @JsonIgnore
-    private List<User> users;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "group_id", nullable = false)
+    private AirportGroup airportGroup;
 
     @CreatedDate
-    @Column(name = "created_at", nullable = false, updatable = false)
+    @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
     @LastModifiedDate

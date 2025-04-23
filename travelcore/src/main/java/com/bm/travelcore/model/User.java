@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "T_USER")
+@Table(name = "\"USER\"")
 @EntityListeners(AuditingEntityListener.class)
 public class User implements UserDetails, Principal {
 
@@ -52,6 +52,7 @@ public class User implements UserDetails, Principal {
     private String password;
 
     @Column(name = "login_provider")
+    @Builder.Default
     private LoginProvider loginProvider = LoginProvider.LOCAL;
 
     @Column(name = "account_locked")
@@ -70,6 +71,30 @@ public class User implements UserDetails, Principal {
     @LastModifiedDate
     @Column(name = "updated_at", insertable = false)
     private LocalDateTime updatedAt;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<AirlineAirportGroupConfig> airlineAirportGroupConfigs;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Baggage> baggageList;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Commission> commissions;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Customer> customers;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Collaborator> collaborators;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Flight> flights;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Order> orders;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Ticket> tickets;
 
     @Override
     public String getName() {
