@@ -1,30 +1,254 @@
 .search-container {
-    max-width: 1300px;
-    margin: 0 auto;
+    // display: flex;
+    // gap: 24px;
     padding: 20px;
-    display: grid;
-    grid-template-columns: 1fr 5fr;
-    gap: 20px;
-}
+    max-width: 1400px;
+    margin: 0 auto;
 
-.search-form {
-    border-radius: 8px;
-}
-
-.search-result {
-    border-radius: 8px;
-}
-
-@media (max-width: 768px) {
-    .search-container {
-        grid-template-columns: 1fr;
+    &__sidebar {
+        flex: 0 0 300px;
     }
 
-    .search-form {
-        width: 100%;
+    &__main-content {
+        flex: 1;
+    }
+}
+
+.state-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    text-align: center;
+
+    &__icon {
+        font-size: 48px !important;
+        height: 48px !important;
+        width: 48px !important;
+        margin-bottom: 16px;
+
+        &--error {
+            color: #f44336;
+        }
+    }
+}
+
+.flight-results {
+    &__title {
+        margin-bottom: 24px;
+        color: #3f51b5;
+    }
+}
+
+.journey-tabs {
+    margin-bottom: 24px;
+
+    .mat-tab-label {
+        min-width: 120px !important;
+        padding: 0 16px !important;
+    }
+}
+
+.journey-info {
+    margin-bottom: 16px;
+
+    &__date {
+        color: #666;
+        font-size: 14px;
+        margin: 8px 0;
+    }
+}
+
+.flight-option {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    transition: box-shadow 0.3s;
+
+    &:hover {
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
 
-    .search-result {
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #eee;
+    }
+}
+
+.airline-info {
+    display: flex;
+    align-items: center;
+
+    &__logo {
+        width: 32px;
+        height: 32px;
+        margin-right: 12px;
+    }
+
+    &__name {
+        font-weight: 500;
+    }
+}
+
+.flight-remark {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+
+    &--promo {
+        background-color: #e3f2fd;
+        color: #1976d2;
+    }
+
+    &--bestprice {
+        background-color: #e8f5e9;
+        color: #388e3c;
+    }
+
+    &--normal {
+        background-color: #f5f5f5;
+        color: #616161;
+    }
+}
+
+.flight-option__details {
+    display: flex;
+    gap: 24px;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
+}
+
+.flight-segments {
+    flex: 1;
+
+    &__segment {
+        margin-bottom: 16px;
+        padding-bottom: 16px;
+        border-bottom: 1px dashed #e0e0e0;
+
+        &:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+    }
+}
+
+.flight-times {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+
+    &__time {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-width: 80px;
+
+        strong {
+            font-size: 18px;
+        }
+
+        .airport-code {
+            font-size: 12px;
+            color: #666;
+        }
+    }
+}
+
+.duration {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 10px;
+
+    &__line {
         width: 100%;
+        height: 1px;
+        background-color: #bdbdbd;
+        position: relative;
+        margin: 8px 0;
+
+        &::before {
+            content: '✈';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #3f51b5;
+        }
+    }
+
+    &__text {
+        font-size: 12px;
+        color: #666;
+    }
+}
+
+.flight-info {
+    display: flex;
+    gap: 16px;
+    font-size: 13px;
+    color: #666;
+    flex-wrap: wrap;
+
+    span {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+}
+
+.fare-options {
+    flex: 0 0 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    .fare-select {
+        width: 100%;
+    }
+}
+
+.price-info {
+    background-color: #f5f5f5;
+    padding: 16px;
+    border-radius: 8px;
+    text-align: center;
+
+    &__total {
+        font-size: 24px;
+        font-weight: 500;
+        color: #3f51b5;
+        margin-bottom: 12px;
+    }
+
+    &__button {
+        width: 100%;
+        margin-top: 12px;
+    }
+}
+
+.baggage-info {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    font-size: 13px;
+    margin-bottom: 12px;
+
+    &__icon {
+        font-size: 16px !important;
+        height: 16px !important;
+        width: 16px !important;
     }
 }

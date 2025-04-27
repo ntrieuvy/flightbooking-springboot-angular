@@ -1,10 +1,165 @@
 <div class="search-container">
-    <div class="search-form">
-        <app-flight-search (search)="onFlightSearch($event)"></app-flight-search>
+    <div class="search-container__top">
+        <app-flight-search (searchSubmitted)="handleSearch($event)"></app-flight-search>
     </div>
-    <div class="search-result">
-        <app-flight-search-result [flights]="searchResults" [loading]="loading" [error]="error"
-            [tripType]="searchForm?.tripType" [searchForm]="searchForm">
-        </app-flight-search-result>
+    
+    <div class="search-container__main-content">
+        <!-- State Messages -->
+        <ng-container [ngSwitch]="true">
+            <!-- Loading State -->
+            <mat-card *ngSwitchCase="loading" class="state-message">
+                <mat-card-content>
+                    <mat-spinner diameter="40"></mat-spinner>
+                    <p class="state-message__text">Searching for flights...</p>
+                </mat-card-content>
+            </mat-card>
+
+            <!-- Error State -->
+            <mat-card *ngSwitchCase="error" class="state-message state-message--error">
+                <mat-card-content>
+                    <mat-icon class="state-message__icon">error_outline</mat-icon>
+                    <p class="state-message__text">{{ error }}</p>
+                </mat-card-content>
+            </mat-card>
+
+            <!-- Results -->
+            <ng-container *ngSwitchCase="flightResults?.data?.ListGroup?.length > 0">
+                <!-- Filter Section -->
+                <mat-card class="filter-bar">
+                    <mat-card-content>
+                        <div class="filter-controls">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Sort by</mat-label>
+                                <mat-select [(value)]="sortBy" (selectionChange)="applyFilters()">
+                                    <mat-option value="price">Price (Low to High)</mat-option>
+                                    <mat-option value="duration">Duration (Short to Long)</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline">
+                                <mat-label>Airlines</mat-label>
+                                <mat-select multiple [(value)]="selectedAirlines" (selectionChange)="applyFilters()">
+                                    <mat-option *ngFor="let airline of airlines" [value]="airline">
+                                        {{ airline }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+
+                <!-- Results Content -->
+                <mat-card class="flight-results">
+                    <mat-card-header>
+                        <mat-card-title>Available Flights</mat-card-title>
+                    </mat-card-header>
+
+                    <mat-tab-group (selectedTabChange)="onTabChange($event)">
+                        <mat-tab *ngFor="let group of filteredGroups; let i = index" 
+                                 [label]="group.StartPoint + ' → ' + group.EndPoint">
+                            <mat-card-content>
+                                <div class="journey-info">
+                                    <p>Departure: {{ group.DepartDate | dateFormat }}</p>
+                                </div>
+
+                                <mat-list>
+                                    <mat-list-item *ngFor="let option of group.ListAirOption" class="flight-option">
+                                        <div class="flight-option__content">
+                                            <!-- Airline Header -->
+                                            <div class="flight-header">
+                                                <div class="airline-info">
+                                                    <img [src]="'assets/airline-logos/' + option.Airline + '.png'"
+                                                         [alt]="option.Airline + ' logo'"
+                                                         class="airline-logo">
+                                                    <span>{{ option.Airline | airlineName }}</span>
+                                                </div>
+                                                <mat-chip [color]="getRemarkColor(option.Remark)" selected>
+                                                    {{ option.Remark }}
+                                                </mat-chip>
+                                            </div>
+
+                                            <!-- Flight Details -->
+                                            <div class="flight-details">
+                                                <div *ngFor="let flightOption of option.ListFlightOption" 
+                                                     class="flight-segments">
+                                                    <div *ngFor="let flight of flightOption.ListFlight" 
+                                                         class="segment-card">
+                                                        <div class="time-info">
+                                                            <div class="time-group">
+                                                                <strong>{{ flight.StartDate | timeFormat }}</strong>
+                                                                <span>{{ flight.StartPoint }}</span>
+                                                            </div>
+                                                            <div class="duration-info">
+                                                                <mat-icon>schedule</mat-icon>
+                                                                {{ flight.Duration | durationFormat }}
+                                                            </div>
+                                                            <div class="time-group">
+                                                                <strong>{{ flight.EndDate | timeFormat }}</strong>
+                                                                <span>{{ flight.EndPoint }}</span>
+                                                            </div>
+                                                        </div>
+                                                        <mat-divider></mat-divider>
+                                                        <div class="flight-meta">
+                                                            <span>Flight: {{ flight.FlightNumber }}</span>
+                                                            <span>Terminal: {{ flight.ListSegment[0].StartTerminal }} → 
+                                                                   {{ flight.ListSegment[0].EndTerminal }}</span>
+                                                            <span>Aircraft: {{ flight.ListSegment[0].Equipment }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Fare Selection -->
+                                            <div class="fare-selection">
+                                                <mat-form-field appearance="fill">
+                                                    <mat-label>Select Fare</mat-label>
+                                                    <mat-select (selectionChange)="onFareSelect($event, option)">
+                                                        <mat-option *ngFor="let fare of option.ListFareOption" 
+                                                                   [value]="fare">
+                                                            {{ fare.CabinName }} - 
+                                                            {{ fare.TotalFare | currency:fare.Currency }}
+                                                        </mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+
+                                                <div *ngIf="option.selectedFare" class="fare-details">
+                                                    <div class="price-section">
+                                                        <span class="price">
+                                                            {{ option.selectedFare.TotalFare | currency:option.selectedFare.Currency }}
+                                                        </span>
+                                                        <div class="baggage-info">
+                                                            <mat-chip>
+                                                                <mat-icon>work_outline</mat-icon>
+                                                                {{ option.selectedFare.ListFarePax[0].ListFareInfo[0].HandBaggage }}
+                                                            </mat-chip>
+                                                            <mat-chip>
+                                                                <mat-icon>business_center</mat-icon>
+                                                                {{ option.selectedFare.ListFarePax[0].ListFareInfo[0].FreeBaggage }}
+                                                            </mat-chip>
+                                                        </div>
+                                                    </div>
+                                                    <button mat-flat-button color="primary" 
+                                                            (click)="bookFlight(option)">
+                                                        Book Now
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </mat-list-item>
+                                </mat-list>
+                            </mat-card-content>
+                        </mat-tab>
+                    </mat-tab-group>
+                </mat-card>
+            </ng-container>
+
+            <!-- No Results -->
+            <mat-card *ngSwitchDefault class="state-message">
+                <mat-card-content>
+                    <mat-icon>flight</mat-icon>
+                    <p class="state-message__text">No flights found matching your criteria</p>
+                </mat-card-content>
+            </mat-card>
+        </ng-container>
     </div>
 </div>

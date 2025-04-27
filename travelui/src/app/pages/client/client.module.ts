@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 import { ClientRoutingModule } from './client-routing.module';
 import { HeaderComponent } from './layout/header/header.component';
@@ -17,8 +18,6 @@ import { SearchComponent } from './mainpage/search/search.component';
 import { BookingComponent } from './booking/booking.component';
 import { ProfileComponent } from './profile/profile.component';
 import { FlightSearchComponent } from './mainpage/search/flight-search/flight-search.component';
-import { FlightSearchResultComponent } from './mainpage/search/flight-search-result/flight-search-result.component';
-import { FlightDetailComponent } from './mainpage/search/flight-detail/flight-detail.component';
 // import { FlightCheckoutComponent } from './booking/flight-checkout/flight-checkout.component';
 
 
@@ -37,8 +36,6 @@ import { FlightDetailComponent } from './mainpage/search/flight-detail/flight-de
     BookingComponent,
     ProfileComponent,
     FlightSearchComponent,
-    FlightSearchResultComponent,
-    FlightDetailComponent,
     // FlightCheckoutComponent
   ],
   imports: [
@@ -47,6 +44,8 @@ import { FlightDetailComponent } from './mainpage/search/flight-detail/flight-de
     FormsModule,
     SharedModule,
     ReactiveFormsModule,
-  ]
+    HttpClientModule
+  ],
+  providers: [DatePipe]
 })
 export class ClientModule { }

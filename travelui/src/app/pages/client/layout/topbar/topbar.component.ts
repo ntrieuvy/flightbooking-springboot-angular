@@ -1,14 +1,16 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { Currency } from '../../../../core/models/interface/currency';
 import { Language } from '../../../../core/models/interface/language';
+import { AuthService } from '../../../../core/services/auth.service';
+import { Subscription } from 'rxjs';
+import { Role } from 'src/app/core/models/enum/role.enum';
 
 @Component({
   selector: 'app-topbar',
   templateUrl: './topbar.component.html',
   styleUrls: ['./topbar.component.scss']
 })
-export class TopbarComponent implements OnInit {
-
+export class TopbarComponent implements OnInit, OnDestroy {
   @Output() openAuthModel = new EventEmitter<void>();
 
   dropdownOpen = false;
@@ -21,13 +23,16 @@ export class TopbarComponent implements OnInit {
   enableHeaderSticky = true;
   containerClass = 'container';
   enableRegistration = true;
-  isAuthenticated = true;
-  isVendor = true;
-  isAdmin = true;
+  
+  isAuthenticated = false;
+  isVendor = false;
+  isAdmin = false;
   avatarUrl = '';
-  userName = 'John Doe';
-  userNameInitial = 'J';
-  email = "trangnq@teamsolutions.vn";
+  userName = '';
+  userNameInitial = '';
+  email = '';
+
+  private authSubscription!: Subscription;
 
   currencies: Currency[] = [
     { code: 'USD', name: 'US Dollar' },
@@ -45,21 +50,55 @@ export class TopbarComponent implements OnInit {
 
   isModalOpen: boolean = false;
 
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.updateAuthState();
+    
+    this.authSubscription = this.authService.authStatus$.subscribe(
+      (isAuthenticated: boolean) => {
+        this.isAuthenticated = isAuthenticated;
+        this.updateAuthState();
+      }
+    );
+  }
+
+  ngOnDestroy(): void {
+    if (this.authSubscription) {
+      this.authSubscription.unsubscribe();
+    }
+  }
+
+  private updateAuthState(): void {
+    if (this.isAuthenticated) {
+      const currentUser = this.authService.getCurrentUser();
+      if (currentUser) {
+        this.userName = currentUser.fullName || '';
+        this.email = currentUser.email || '';
+        this.userNameInitial = this.userName.charAt(0).toUpperCase();
+      }
+      
+      this.isVendor = this.authService.hasRole(Role.VENDOR);
+      this.isAdmin = this.authService.hasRole(Role.ADMIN);
+
+    } else {
+      this.userName = '';
+      this.email = '';
+      this.userNameInitial = '';
+      this.isVendor = false;
+      this.isAdmin = false;
+    }
+  }
 
   switchCurrency(currency: Currency): void {
     if (currency) {
       this.currentCurrency = currency;
-      console.log('Switched currency:', currency);
     }
   }
 
   switchLanguage(language: Language): void {
     if (language) {
       this.currentLanguage = language;
-      console.log('Switched language:', language);
     }
   }
 
@@ -72,8 +111,8 @@ export class TopbarComponent implements OnInit {
   }
 
   logout(): void {
-    console.log('User logged out');
-    this.isAuthenticated = false;
+    this.authService.logout();
+    this.dropdownOpen = false;
   }
 
   openModal() {
@@ -85,6 +124,6 @@ export class TopbarComponent implements OnInit {
   }
 
   login() {
-    console.log('Login with email or phone');
+
   }
 }

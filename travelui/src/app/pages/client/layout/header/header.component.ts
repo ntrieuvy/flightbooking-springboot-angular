@@ -11,6 +11,7 @@ export class HeaderComponent {
   logoUrl: string = 'assets/images/logo.png';
   logoAlt: string = 'Logo';
   // navItems: NavItem[] = [];
+  isMenuOpen: boolean = false;
 
   navItems: NavItem[] = [
     { label: 'FLIGHT TICKETS' , slug: 'flight-tickets' },
@@ -26,5 +27,9 @@ export class HeaderComponent {
     },
     { label: 'CONTACT', slug: 'contact' },
   ];
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  } 
 
 }

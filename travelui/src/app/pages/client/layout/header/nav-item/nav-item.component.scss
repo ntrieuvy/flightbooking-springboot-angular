@@ -1,95 +1,113 @@
-$nav-link-color: #333333 !default;
-$transition-timing: 0.3s !default;
-$dropdown-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !default;
-$header-bg: #ffffff !default;
-
-@mixin absolute-position($top: auto, $right: auto, $bottom: auto, $left: auto) {
-    position: absolute;
-    top: $top;
-    right: $right;
-    bottom: $bottom;
-    left: $left;
-}
+$nav-link-color: #333333;
+$primary-color: #007bff;
+$dropdown-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+$transition-timing: 0.3s;
+$mobile-breakpoint: 768px;
 
 .nav-item {
+  position: relative;
+
+  &__link {
+    color: $nav-link-color;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    display: block;
+    transition: all $transition-timing ease;
     position: relative;
 
+    &::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: $primary-color;
+      transition: all 0.3s ease;
+    }
+
+    &:hover {
+      color: $primary-color;
+
+      &::after {
+        width: calc(100% - 2rem);
+        left: 1rem;
+      }
+    }
+  }
+
+  &__dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    min-width: 200px;
+    padding: 0.5rem 0;
+    box-shadow: $dropdown-shadow;
+    border-radius: 4px;
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all $transition-timing ease;
+
+    &-item:hover {
+      background-color: rgba(0,0,0,0.05);
+    }
+
+    &-link {
+      padding: 0.75rem 1.5rem;
+      color: darken($nav-link-color, 10%);
+      text-decoration: none;
+      display: block;
+      transition: all 0.2s ease;
+
+      &:hover {
+        color: $primary-color;
+        background-color: rgba(0, 123, 255, 0.1);
+      }
+    }
+  }
+
+  &:hover &__dropdown {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: $mobile-breakpoint) {
+    width: 100%;
+
     &__link {
-        color: $nav-link-color;
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 1.1rem;
-        padding: 0.5rem 0;
-        display: block;
-        cursor: pointer;
-        transition: color $transition-timing ease;
-        position: relative;
+      width: 100%;
+      padding: 1rem;
+      text-align: center;
 
-        &::after {
-            content: '';
-            @include absolute-position(auto, 0, -0.5rem, 0);
-            height: 2px;
-            background-color: currentColor;
-            transform: scaleX(0);
-            transition: transform $transition-timing ease;
-        }
-
-        &:hover,
-        &:focus-visible {
-            color: #007bff;
-            outline: none;
-
-            &::after {
-                transform: scaleX(1);
-            }
-
-            +.nav-item__dropdown {
-                visibility: visible;
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+      &::after {
+        display: none;
+      }
     }
 
     &__dropdown {
-        @include absolute-position(100%, auto, auto, 0);
-        background: $header-bg;
-        min-width: 200px;
-        padding: 0.5rem 0;
-        margin: 0;
-        list-style: none;
-        box-shadow: $dropdown-shadow;
-        border-radius: 4px;
-        z-index: 1000;
-        visibility: hidden;
-        opacity: 0;
-        transform: translateY(10px);
-        transition: all $transition-timing ease;
+      position: static;
+      width: 100%;
+      box-shadow: none;
+      background: rgba(0,0,0,0.03);
+      display: none;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.3s ease;
 
-        &:hover {
-            visibility: visible;
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        &-item {
-            &:hover {
-                background-color: rgba(0, 0, 0, 0.05);
-            }
-        }
-
-        &-link {
-            padding: 0.75rem 1.5rem;
-            display: block;
-            color: darken($nav-link-color, 10%);
-            text-decoration: none;
-            transition: all 0.2s ease;
-
-            &:hover,
-            &:focus {
-                color: #007bff;
-                background-color: rgba(0, 123, 255, 0.1);
-            }
-        }
+      &-link {
+        padding: 0.75rem;
+        text-align: center;
+      }
     }
+
+    &:focus-within &__dropdown {
+      display: block;
+      max-height: 500px;
+    }
+  }
 }

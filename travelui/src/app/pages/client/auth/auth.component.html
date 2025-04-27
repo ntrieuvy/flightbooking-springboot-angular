@@ -1,65 +1,106 @@
 <div class="auth-container">
-  <form class="auth-form">
-    <div class="auth-form__header">
-      <h2>Login / Register</h2>
-    </div>
-
-    <div class="auth-form__group">
-      <label for="email">Email</label>
-      <input
-        type="email"
-        id="email"
-        name="email"
-        placeholder="yourname@email.com"
-      />
-    </div>
-
-    <div class="auth-form__group">
-      <label>Mobile Phone Number</label>
-      <div class="auth-form__phone-group">
-        <select class="auth-form__country-select" name="countryCode">
-          <option value="+84" data-icon="🇻🇳">VN +84</option>
-          <option value="+1" data-icon="🇺🇸">US +1</option>
-          <option value="+44" data-icon="🇬🇧">UK +44</option>
-          <option value="+81" data-icon="🇯🇵">JP +81</option>
-          <option value="+86" data-icon="🇨🇳">CN +86</option>
-          <option value="+82" data-icon="🇰🇷">KR +82</option>
-        </select>
-        <input
-          type="tel"
-          class="auth-form__phone-input"
-          placeholder="+84328676629"
-        />
+  <div class="auth-card">
+    <form *ngIf="!showOtpField" class="auth-form" [formGroup]="authForm" (ngSubmit)="onSubmit()">
+      <div class="auth-header">
+        <h2>{{ isExistingUser ? 'Welcome Back' : 'Login / Register' }}</h2>
+        <p>{{ isExistingUser ? 'Sign in to continue' : 'Get started with your account' }}</p>
       </div>
+
+      <div class="form-group">
+        <label for="identifier">Email or Phone</label>
+        <input id="identifier" type="text" formControlName="identifier" placeholder="your@email.com or +1234567890"
+          [class.invalid]="authForm.get('identifier')?.invalid && authForm.get('identifier')?.touched">
+        <div class="error-message" *ngIf="authForm.get('identifier')?.invalid && authForm.get('identifier')?.touched">
+          <span *ngIf="authForm.get('identifier')?.hasError('required')">This field is required</span>
+          <span *ngIf="authForm.get('identifier')?.hasError('invalidIdentifier')">Please enter a valid email or
+            phone</span>
+        </div>
+      </div>
+
+      <div *ngIf="showPasswordFields" class="password-section">
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input id="password" type="password" formControlName="password" placeholder="••••••••"
+            [class.invalid]="authForm.get('password')?.invalid && authForm.get('password')?.touched">
+          <div class="error-message" *ngIf="authForm.get('password')?.invalid && authForm.get('password')?.touched">
+            Password is required
+          </div>
+        </div>
+
+        <div *ngIf="!isExistingUser" class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input id="confirmPassword" type="password" formControlName="confirmPassword" placeholder="••••••••"
+            [class.invalid]="authForm.get('confirmPassword')?.invalid && authForm.get('confirmPassword')?.touched">
+          <div class="error-message"
+            *ngIf="authForm.get('confirmPassword')?.errors && authForm.get('confirmPassword')?.touched">
+            <span *ngIf="authForm.get('confirmPassword')?.hasError('required')">Please confirm your password</span>
+            <span *ngIf="authForm.hasError('passwordMismatch')">Passwords don't match</span>
+          </div>
+        </div>
+
+        <div *ngIf="!isExistingUser" class="name-fields">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input id="firstName" type="text" formControlName="firstName" placeholder="John"
+              [class.invalid]="authForm.get('firstName')?.invalid && authForm.get('firstName')?.touched">
+            <div class="error-message" *ngIf="authForm.get('firstName')?.invalid && authForm.get('firstName')?.touched">
+              First name is required
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input id="lastName" type="text" formControlName="lastName" placeholder="Doe"
+              [class.invalid]="authForm.get('lastName')?.invalid && authForm.get('lastName')?.touched">
+            <div class="error-message" *ngIf="authForm.get('lastName')?.invalid && authForm.get('lastName')?.touched">
+              Last name is required
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="errorMessage" class="global-error">
+        {{ errorMessage }}
+      </div>
+
+      <button type="submit" class="btn-primary" [disabled]="authForm.invalid || isLoading">
+        <span *ngIf="!isLoading">{{ isExistingUser ? 'Sign In' : 'Continue' }}</span>
+        <span *ngIf="isLoading" class="spinner"></span>
+      </button>
+
+      <div class="auth-footer">
+        <p>By continuing, you agree to our <a href="#">Terms</a> and <a href="#">Privacy Policy</a></p>
+      </div>
+    </form>
+
+    <div *ngIf="showOtpField" class="otp-verification">
+      <div class="auth-header">
+        <h2>Verify Your Account</h2>
+        <p>We've sent a 6-digit code to {{ pendingVerificationData?.identifier }}</p>
+      </div>
+
+      <form [formGroup]="otpForm" (ngSubmit)="onOtpSubmit()">
+        <div class="form-group">
+          <label for="otp">Verification Code</label>
+          <input id="otp" type="text" formControlName="otp" placeholder="Enter 6-digit code" maxlength="6"
+            inputmode="numeric" [class.invalid]="otpForm.get('otp')?.invalid && otpForm.get('otp')?.touched">
+          <div class="error-message" *ngIf="otpForm.get('otp')?.invalid && otpForm.get('otp')?.touched">
+            <span *ngIf="otpForm.get('otp')?.hasError('required')">OTP is required</span>
+            <span *ngIf="otpForm.get('otp')?.hasError('minlength') || otpForm.get('otp')?.hasError('maxlength')">
+              Code must be 6 digits
+            </span>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary" [disabled]="otpForm.invalid || isLoading">
+          <span *ngIf="!isLoading">Verify</span>
+          <span *ngIf="isLoading" class="spinner"></span>
+        </button>
+
+        <div class="otp-resend">
+          <p>Didn't receive code? <a href="#" (click)="resendOtp()">Resend</a></p>
+        </div>
+      </form>
     </div>
-
-    <div class="auth-form__actions">
-      <button type="submit" class="auth-btn auth-btn--primary">Continue</button>
-    </div>
-
-    <div class="auth-divider">
-      <span>or</span>
-    </div>
-
-    <button type="button" class="auth-btn auth-btn--social auth-btn--apple">
-      <span>Apple</span>
-      <img src="assets/images/icon/apple-icon.svg" alt="Apple" />
-    </button>
-
-    <button type="button" class="auth-btn auth-btn--social auth-btn--google">
-      <span>Google</span>
-      <img src="assets/images/icon/google-icon.svg" alt="Google" />
-    </button>
-
-    <button type="button" class="auth-btn auth-btn--social auth-btn--facebook">
-      <span>Facebook</span>
-      <img src="assets/images/icon/facebook-icon.svg" alt="Facebook" />
-    </button>
-
-    <p class="auth-terms">
-      By continuing, you agree to our
-      <a href="#">Terms and Conditions</a> and acknowledge that you have read our
-      <a href="#">Data Protection Policy</a>.
-    </p>
-  </form>
+  </div>
 </div>

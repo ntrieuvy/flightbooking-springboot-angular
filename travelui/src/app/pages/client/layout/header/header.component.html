@@ -1,9 +1,16 @@
-<nav class="header-nav" role="navigation" aria-label="Main navigation">
+<nav class="header-nav" role="navigation" aria-label="Main navigation" [ngStyle]="isMenuOpen ? {'position': 'fixed', 'z-index': '1001'} : {}">
     <div class="header-nav__logo">
         <a href=""><img class="header-nav__logo-image" [src]="logoUrl" [alt]="logoAlt" loading="lazy" /></a>
     </div>
 
-    <ul class="header-nav__list">
+    <button class="header-nav__menu-btn" (click)="toggleMenu()" aria-label="Toggle navigation menu"
+        [attr.aria-expanded]="isMenuOpen">
+        <span class="menu-btn__line"></span>
+        <span class="menu-btn__line"></span>
+        <span class="menu-btn__line"></span>
+    </button>
+
+    <ul class="header-nav__list" [class.is-active]="isMenuOpen">
         <li class="header-nav__item" *ngFor="let item of navItems" role="none">
             <app-nav-item [item]="item"></app-nav-item>
         </li>

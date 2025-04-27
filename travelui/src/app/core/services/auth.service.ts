@@ -1,29 +1,124 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { User } from '../models/interface/user';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
+import { ApiService } from './api.service';
+import { HttpParams } from '@angular/common/http';
+import { RegistrationReqDTO } from '../models/interface/registration-req.dto';
+import { AuthenticationReqDTO } from '../models/interface/authentication-req.dto';
+import { AuthenticationResDTO } from '../models/interface/authentication-res.dto';
+import { JwtHelperService } from './jwt-helper.service';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class AuthService {
-  private currentUser: User | null = null;
+    private readonly endpoint = '/auth';
+    private readonly AUTH_TOKEN_KEY = 'authToken';
 
-  constructor(private http: HttpClient) {}
+    private authStatusSubject = new BehaviorSubject<boolean>(this.checkAuthStatus());
+    public authStatus$ = this.authStatusSubject.asObservable();
 
-  getCurrentUser(): Observable<User | null> {
-    if (this.currentUser) {
-      return of(this.currentUser);
+    constructor(
+        private apiService: ApiService,
+        private jwtHelper: JwtHelperService
+    ) { }
+
+    checkUserExists(identifier: string): Observable<boolean> {
+        const params = new HttpParams().set('identifier', identifier);
+        return this.apiService.get<boolean>(`${this.endpoint}/check-user-exists`, params).pipe(
+            catchError(error => {
+                console.error('API Error:', error);
+                return throwError(() => new Error('Failed to check user existence'));
+            })
+        );
     }
-    return this.http.get<User>('/api/user').pipe(
-      tap(user => this.currentUser = user)
-    );
-  }
 
-  logout(): Observable<any> {
-    return this.http.post('/api/logout', {}).pipe(
-      tap(() => this.currentUser = null)
-    );
-  }
+    register(userData: RegistrationReqDTO): Observable<AuthenticationResDTO> {
+        const data = {
+            ...userData,
+            identifyType: this.determineIdentifyType(userData.identifier)
+        };
+        return this.apiService.post<AuthenticationResDTO>(`${this.endpoint}/register`, data);
+    }
+
+    login(credentials: AuthenticationReqDTO): Observable<AuthenticationResDTO> {
+        return this.apiService.post<AuthenticationResDTO>(`${this.endpoint}/authenticate`, credentials)
+            .pipe(
+                tap(response => this.handleLoginSuccess(response))
+            );
+    }
+
+    activateAccount(otp: string, sessionId?: string): Observable<AuthenticationResDTO> {
+        let params = new HttpParams().set('otp', otp);
+        if (sessionId) {
+            params = params.set('sessionId', sessionId);
+        }
+        return this.apiService.get<AuthenticationResDTO>(`${this.endpoint}/activate-account`, params)
+            .pipe(
+                tap(response => this.handleLoginSuccess(response))
+            );
+    }
+
+    resendOtp(identifier: string): Observable<void> {
+        const params = new HttpParams().set('identifier', identifier);
+        return this.apiService.get<void>(`${this.endpoint}/resend-otp`, params);
+    }
+
+    loginWithGoogle(token: string): Observable<AuthenticationResDTO> {
+        return this.apiService.post<AuthenticationResDTO>(`${this.endpoint}/google-auth`, { token })
+            .pipe(
+                tap(response => this.handleLoginSuccess(response))
+            );
+    }
+
+    private handleLoginSuccess(response: AuthenticationResDTO): void {
+        if (response.token) {
+            this.setAuthToken(response.token);
+        }
+    }
+
+    setAuthToken(token: string): void {
+        localStorage.setItem(this.AUTH_TOKEN_KEY, token);
+        this.authStatusSubject.next(true);
+    }
+
+    logout(): void {
+        localStorage.removeItem(this.AUTH_TOKEN_KEY);
+        this.jwtHelper.clearCache();
+        this.authStatusSubject.next(false);
+    }
+
+    isAuthenticated(): boolean {
+        const token = this.getToken();
+        return token ? !this.jwtHelper.isTokenExpired(token) : false;
+    }
+
+    getCurrentUser(): { fullName: string; email: string } | null {
+        const token = this.getToken();
+        if (!token) return null;
+
+        const payload = this.jwtHelper.decodeToken(token);
+        return payload ? {
+            fullName: payload.fullName,
+            email: payload.sub
+        } : null;
+    }
+
+    hasRole(role: string): boolean {
+        const token = this.getToken();
+        return token ? this.jwtHelper.hasAuthority(token, role) : false;
+    }
+
+    getToken(): string | null {
+        return localStorage.getItem(this.AUTH_TOKEN_KEY);
+    }
+
+    private checkAuthStatus(): boolean {
+        return this.isAuthenticated();
+    }
+
+    determineIdentifyType(identifier: string): 'EMAIL' | 'PHONE' {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(identifier) ? 'EMAIL' : 'PHONE';
+    }
 }

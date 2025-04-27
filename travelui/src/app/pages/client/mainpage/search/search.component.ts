@@ -1,118 +1,70 @@
-import { Component, OnInit } from '@angular/core';
-import { FlightSearchResultComponent } from './flight-search-result/flight-search-result.component';
-import { Flight } from 'src/app/core/models/interface/flight';
+import { Component } from '@angular/core';
+import { FlightService } from 'src/app/core/services/flight.service';
+import { FlightsResDTO } from 'src/app/core/models/interface/flights-res.dto';
+import { FlightReqDTO } from 'src/app/core/models/interface/flights-req.dto';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss']
+  styleUrls: ['./search.component.scss'],
+  providers: [DatePipe]
 })
-export class SearchComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-  searchResults: Flight[] = [];
+export class SearchComponent {
   loading = false;
   error: string | null = null;
-  searchForm: any = null;
+  flightResults: FlightsResDTO;
 
-  onFlightSearch(searchParams: any): void {
+  constructor(
+    private flightService: FlightService,
+    private datePipe: DatePipe
+  ) { }
+
+  handleSearch(event: { formData: any; requestData: FlightReqDTO }) {
     this.loading = true;
     this.error = null;
-    this.searchForm = searchParams;
 
-    setTimeout(() => {
-      try {
-        this.searchResults = this.getFilteredFlights(searchParams);
+    this.flightService.searchFlights(event.requestData).subscribe({
+      next: (res: FlightsResDTO) => {
+        this.flightResults = res;
         this.loading = false;
-      } catch (err) {
-        this.error = 'Đã xảy ra lỗi khi tìm kiếm chuyến bay. Vui lòng thử lại.';
+      },
+      error: (err) => {
+        this.error = err.message || 'Failed to search flights';
         this.loading = false;
       }
-    }, 1500);
+    });
   }
 
-  private getFilteredFlights(params: any): Flight[] {
-    return [
-      {
-        id: 'FL001',
-        airline: 'Vietnam Airlines',
-        airlineLogo: 'https://upload.wikimedia.org/wikipedia/vi/b/bc/Vietnam_Airlines_logo.svg',
-        flightNumber: 'VN 123',
-        departureTime: '08:00',
-        arrivalTime: '10:30',
-        duration: '2h 30m',
-        price: 2500000,
-        stops: 0,
-        departureAirport: 'HAN',
-        arrivalAirport: 'SGN',
-        departureCity: 'Hà Nội',
-        arrivalCity: 'Hồ Chí Minh'
-      },
-      {
-        id: 'FL002',
-        airline: 'Bamboo Airways',
-        airlineLogo: 'https://upload.wikimedia.org/wikipedia/commons/7/78/Bamboo_Airways_Logo.svg',
-        flightNumber: 'QH 456',
-        departureTime: '12:15',
-        arrivalTime: '14:45',
-        duration: '2h 30m',
-        price: 2200000,
-        stops: 0,
-        departureAirport: 'HAN',
-        arrivalAirport: 'SGN',
-        departureCity: 'Hà Nội',
-        arrivalCity: 'Hồ Chí Minh'
-      },
-      {
-        id: 'FL003',
-        airline: 'Vietjet Air',
-        airlineLogo: 'assets/images/vietjet-logo.png',
-        flightNumber: 'VJ 789',
-        departureTime: '15:30',
-        arrivalTime: '18:15',
-        duration: '2h 45m',
-        price: 1800000,
-        stops: 0,
-        departureAirport: 'HAN',
-        arrivalAirport: 'SGN',
-        departureCity: 'Hà Nội',
-        arrivalCity: 'Hồ Chí Minh'
-      },
-      {
-        id: 'FL004',
-        airline: 'Vietnam Airlines',
-        airlineLogo: 'https://upload.wikimedia.org/wikipedia/vi/b/bc/Vietnam_Airlines_logo.svg',
-        flightNumber: 'VN 246',
-        departureTime: '19:00',
-        arrivalTime: '21:30',
-        duration: '2h 30m',
-        price: 2700000,
-        stops: 0,
-        departureAirport: 'HAN',
-        arrivalAirport: 'SGN',
-        departureCity: 'Hà Nội',
-        arrivalCity: 'Hồ Chí Minh'
-      },
-      {
-        id: 'FL005',
-        airline: 'Bamboo Airways',
-        airlineLogo: 'https://upload.wikimedia.org/wikipedia/commons/7/78/Bamboo_Airways_Logo.svg',
-        flightNumber: 'QH 135',
-        departureTime: '06:45',
-        arrivalTime: '10:15',
-        duration: '3h 30m',
-        price: 2100000,
-        stops: 1,
-        departureAirport: 'HAN',
-        arrivalAirport: 'SGN',
-        departureCity: 'Hà Nội',
-        arrivalCity: 'Hồ Chí Minh'
-      }
-    ];
+  formatDate(dateString: string): string {
+    if (!dateString) return '';
+    // Assuming format is DDMMYYYY
+    const day = dateString.substring(0, 2);
+    const month = dateString.substring(2, 4);
+    const year = dateString.substring(4, 8);
+    return `${day}/${month}/${year}`;
   }
 
+  formatTime(dateTimeString: string): string {
+    if (!dateTimeString) return '';
+    return this.datePipe.transform(dateTimeString, 'HH:mm') || '';
+  }
+
+  formatDuration(minutes: number): string {
+    if (!minutes) return '';
+    const hours = Math.floor(minutes / 60);
+    const mins = minutes % 60;
+    return `${hours}h ${mins}m`;
+  }
+
+  getAirlineName(code: string): string {
+    const airlines: { [key: string]: string } = {
+      'VN': 'Vietnam Airlines',
+      'VJ': 'VietJet Air',
+      'QH': 'Bamboo Airways',
+      'BL': 'Pacific Airlines'
+    };
+    return airlines[code] || code;
+  }
+  
 }
