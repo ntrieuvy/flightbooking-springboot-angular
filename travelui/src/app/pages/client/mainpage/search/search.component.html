@@ -1,165 +1,265 @@
-<div class="search-container">
-    <div class="search-container__top">
-        <app-flight-search (searchSubmitted)="handleSearch($event)"></app-flight-search>
-    </div>
-    
-    <div class="search-container__main-content">
-        <!-- State Messages -->
-        <ng-container [ngSwitch]="true">
-            <!-- Loading State -->
-            <mat-card *ngSwitchCase="loading" class="state-message">
-                <mat-card-content>
-                    <mat-spinner diameter="40"></mat-spinner>
-                    <p class="state-message__text">Searching for flights...</p>
-                </mat-card-content>
-            </mat-card>
+<div class="search-container__top">
+    <app-flight-search (searchSubmitted)="handleSearch($event)"></app-flight-search>
+</div>
 
-            <!-- Error State -->
-            <mat-card *ngSwitchCase="error" class="state-message state-message--error">
-                <mat-card-content>
-                    <mat-icon class="state-message__icon">error_outline</mat-icon>
-                    <p class="state-message__text">{{ error }}</p>
-                </mat-card-content>
-            </mat-card>
+<div class="search-container">
+    <div class="search-container__main-content">
+        <!-- Filters Sidebar -->
+        <aside class="filters-sidebar">
+            <div class="filter-section">
+                <h3 class="section-title">Sort by</h3>
+                <div class="radio-group">
+                    <label class="radio-item">
+                        <input type="radio" name="sort" value="price" [(ngModel)]="sortBy" (change)="applyFilters()">
+                        <span class="radio-checkmark"></span>
+                        Price (Low to High)
+                    </label>
+                    <label class="radio-item">
+                        <input type="radio" name="sort" value="duration" [(ngModel)]="sortBy" (change)="applyFilters()">
+                        <span class="radio-checkmark"></span>
+                        Duration (Short to Long)
+                    </label>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h3 class="section-title">Airlines</h3>
+                <div class="checkbox-group">
+                    <label class="checkbox-item" *ngFor="let airline of airlines">
+                        <input type="checkbox" [checked]="selectedAirlines.includes(airline)"
+                            (change)="toggleAirlineSelection(airline, $event)">
+                        <span class="checkbox-mark"></span>
+                        {{ airline }}
+                    </label>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h3 class="section-title">Price Range</h3>
+                <div class="price-range">
+                    <div class="range-inputs">
+                        <input type="number" placeholder="Min" [(ngModel)]="minPrice" (change)="applyFilters()">
+                        <input type="number" placeholder="Max" [(ngModel)]="maxPrice" (change)="applyFilters()">
+                    </div>
+                    <div class="price-display">
+                        {{ minPrice || 0 | currency:'VND' }} - {{ maxPrice | currency:'VND' }}
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="results-main">
+            <!-- Loading/Error States -->
+            <div *ngIf="loading" class="loading-state">
+                <div class="spinner"></div>
+                <p>Searching for flights...</p>
+            </div>
+
+            <div *ngIf="error" class="error-state">
+                ⚠️ {{ error }}
+            </div>
 
             <!-- Results -->
-            <ng-container *ngSwitchCase="flightResults?.data?.ListGroup?.length > 0">
-                <!-- Filter Section -->
-                <mat-card class="filter-bar">
-                    <mat-card-content>
-                        <div class="filter-controls">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Sort by</mat-label>
-                                <mat-select [(value)]="sortBy" (selectionChange)="applyFilters()">
-                                    <mat-option value="price">Price (Low to High)</mat-option>
-                                    <mat-option value="duration">Duration (Short to Long)</mat-option>
-                                </mat-select>
-                            </mat-form-field>
+            <div *ngIf="flightResults?.data?.ListGroup?.length > 0" class="flight-results">
+                <!-- Tabs Navigation -->
+                <nav class="results-tabs">
+                    <button *ngFor="let group of filteredGroups; let i = index" [class.active]="activeTabIndex === i"
+                        (click)="activeTabIndex = i">
+                        {{ group.StartPoint }} → {{ group.EndPoint }}
+                    </button>
+                </nav>
 
-                            <mat-form-field appearance="outline">
-                                <mat-label>Airlines</mat-label>
-                                <mat-select multiple [(value)]="selectedAirlines" (selectionChange)="applyFilters()">
-                                    <mat-option *ngFor="let airline of airlines" [value]="airline">
-                                        {{ airline }}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
+                <!-- Flight List -->
+                <div class="flight-list">
+                    <div *ngFor="let option of filteredGroups[activeTabIndex]?.ListAirOption" class="flight-item">
+                        <!-- Airline Info -->
+                        <div class="airline-section">
+
+                            <img [src]="'https://plugin.datacom.vn/Resources/Images/Airline/' + option.Airline + '.gif'"
+                                class="airline-logo">
+                            <div class="airline-details">
+                                <h4>{{ getAirlineName(option.Airline) }}</h4>
+                                <div class="remaining-seats">{{ option.selectedFare.Availability }}</div>
+                            </div>
                         </div>
-                    </mat-card-content>
-                </mat-card>
 
-                <!-- Results Content -->
-                <mat-card class="flight-results">
-                    <mat-card-header>
-                        <mat-card-title>Available Flights</mat-card-title>
-                    </mat-card-header>
+                        <!-- Flight Details -->
+                        <div class="flight-details">
+                            <div class="time-block">
+                                <div class="departure">
+                                    <strong>{{ formatTime(option.ListFlightOption[0].ListFlight[0].StartDate)
+                                        }}</strong>
+                                    <span>{{ option.ListFlightOption[0].ListFlight[0].StartPoint }}</span>
+                                </div>
+                                <div class="duration">
+                                    <span class="icon">⏱</span>
+                                    {{ formatDuration(option.ListFlightOption[0].ListFlight[0].Duration) }}
+                                </div>
+                                <div class="arrival">
+                                    <strong>{{ formatTime(option.ListFlightOption[0].ListFlight[0].EndDate) }}</strong>
+                                    <span>{{ option.ListFlightOption[0].ListFlight[0].EndPoint }}</span>
+                                </div>
+                            </div>
+                            <div class="flight-meta">
+                                <span>✈️ Flight {{ option.ListFlightOption[0].ListFlight[0].FlightNumber }}</span>
+                                <span>🛄 {{ option.ListFareOption[0].ListFarePax[0].ListFareInfo[0].FreeBaggage
+                                    }}</span>
+                            </div>
+                        </div>
 
-                    <mat-tab-group (selectedTabChange)="onTabChange($event)">
-                        <mat-tab *ngFor="let group of filteredGroups; let i = index" 
-                                 [label]="group.StartPoint + ' → ' + group.EndPoint">
-                            <mat-card-content>
-                                <div class="journey-info">
-                                    <p>Departure: {{ group.DepartDate | dateFormat }}</p>
+                        <!-- Fare Selection & Booking -->
+                        <div class="booking-section">
+                            <select class="fare-select" (change)="onFareSelect($event, option)">
+                                <option *ngFor="let fare of option.ListFareOption" [value]="fare.CabinName">
+                                    {{ fare.CabinName }}
+                                </option>
+                            </select>
+
+                            <div class="price-box">
+                                <div class="price">
+                                    {{ option.selectedFare.TotalFare |
+                                    currency:option.selectedFare.Currency:'symbol':'1.0-0' }}
+                                    <div class="badge">
+                                        <span [ngClass]="getRemarkClass(option.Remark)">
+                                            {{ option.Remark }}
+                                        </span>
+                                        <span class="option-details" (click)="openFlightDetailModal(option)">Details</span>
+                                    </div>
+                                </div>
+                                <button class="book-button" (click)="bookFlight(option)">
+                                    Book Now →
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <app-flight-detail-modal [showDetailModal]="showDetailModal" [selectedOption]="selectedFlight" (closeModal)="closeDetailModal()">
+                </app-flight-detail-modal>
+
+
+
+                <!-- <div class="modal" *ngIf="showDetailModal">
+                    <div class="modal-content">
+                        <span class="close" (click)="closeDetailModal()">&times;</span>
+                        <h2>Flight Details</h2>
+
+                        <div class="flight-summary">
+                            <div class="airline-info">
+                                <div class="airline-logo">{{selectedOption?.Airline}}</div>
+                                <div class="flight-number">Flight:
+                                    {{selectedOption?.ListFlightOption[0]?.ListFlight[0]?.FlightNumber}}</div>
+                            </div>
+
+                            <div class="route-info">
+                                <div class="departure">
+                                    <div class="time">
+                                        {{formatTime(selectedOption?.ListFlightOption[0]?.ListFlight[0]?.StartDate)}}
+                                    </div>
+                                    <div class="airport">
+                                        {{selectedOption?.ListFlightOption[0]?.ListFlight[0]?.StartPoint}}</div>
+                                    <div class="terminal">Terminal:
+                                        {{selectedOption?.ListFlightOption[0]?.ListFlight[0]?.ListSegment[0]?.StartTerminal}}
+                                    </div>
                                 </div>
 
-                                <mat-list>
-                                    <mat-list-item *ngFor="let option of group.ListAirOption" class="flight-option">
-                                        <div class="flight-option__content">
-                                            <!-- Airline Header -->
-                                            <div class="flight-header">
-                                                <div class="airline-info">
-                                                    <img [src]="'assets/airline-logos/' + option.Airline + '.png'"
-                                                         [alt]="option.Airline + ' logo'"
-                                                         class="airline-logo">
-                                                    <span>{{ option.Airline | airlineName }}</span>
-                                                </div>
-                                                <mat-chip [color]="getRemarkColor(option.Remark)" selected>
-                                                    {{ option.Remark }}
-                                                </mat-chip>
-                                            </div>
+                                <div class="duration">
+                                    <div class="duration-text">
+                                        {{formatDuration(selectedOption?.ListFlightOption[0]?.ListFlight[0]?.Duration)}}
+                                    </div>
+                                    <div class="divider-line"></div>
+                                    <div class="flight-type">{{selectedOption?.Remark}}</div>
+                                </div>
 
-                                            <!-- Flight Details -->
-                                            <div class="flight-details">
-                                                <div *ngFor="let flightOption of option.ListFlightOption" 
-                                                     class="flight-segments">
-                                                    <div *ngFor="let flight of flightOption.ListFlight" 
-                                                         class="segment-card">
-                                                        <div class="time-info">
-                                                            <div class="time-group">
-                                                                <strong>{{ flight.StartDate | timeFormat }}</strong>
-                                                                <span>{{ flight.StartPoint }}</span>
-                                                            </div>
-                                                            <div class="duration-info">
-                                                                <mat-icon>schedule</mat-icon>
-                                                                {{ flight.Duration | durationFormat }}
-                                                            </div>
-                                                            <div class="time-group">
-                                                                <strong>{{ flight.EndDate | timeFormat }}</strong>
-                                                                <span>{{ flight.EndPoint }}</span>
-                                                            </div>
-                                                        </div>
-                                                        <mat-divider></mat-divider>
-                                                        <div class="flight-meta">
-                                                            <span>Flight: {{ flight.FlightNumber }}</span>
-                                                            <span>Terminal: {{ flight.ListSegment[0].StartTerminal }} → 
-                                                                   {{ flight.ListSegment[0].EndTerminal }}</span>
-                                                            <span>Aircraft: {{ flight.ListSegment[0].Equipment }}</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                <div class="arrival">
+                                    <div class="time">
+                                        {{formatTime(selectedOption?.ListFlightOption[0]?.ListFlight[0]?.EndDate)}}
+                                    </div>
+                                    <div class="airport">
+                                        {{selectedOption?.ListFlightOption[0]?.ListFlight[0]?.EndPoint}}</div>
+                                    <div class="terminal">Terminal:
+                                        {{selectedOption?.ListFlightOption[0]?.ListFlight[0]?.ListSegment[0]?.EndTerminal}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                                            <!-- Fare Selection -->
-                                            <div class="fare-selection">
-                                                <mat-form-field appearance="fill">
-                                                    <mat-label>Select Fare</mat-label>
-                                                    <mat-select (selectionChange)="onFareSelect($event, option)">
-                                                        <mat-option *ngFor="let fare of option.ListFareOption" 
-                                                                   [value]="fare">
-                                                            {{ fare.CabinName }} - 
-                                                            {{ fare.TotalFare | currency:fare.Currency }}
-                                                        </mat-option>
-                                                    </mat-select>
-                                                </mat-form-field>
+                        <div class="details-section">
+                            <h3>Flight Information</h3>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <span class="label">Aircraft:</span>
+                                    <span
+                                        class="value">{{selectedOption?.ListFlightOption[0]?.ListFlight[0]?.ListSegment[0]?.Equipment}}</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="label">Cabin Class:</span>
+                                    <span class="value">{{selectedOption?.selectedFare?.CabinName}}</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="label">Fare Class:</span>
+                                    <span class="value">{{selectedOption?.selectedFare?.FareClass}}</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="label">Baggage Allowance:</span>
+                                    <span
+                                        class="value">{{selectedOption?.selectedFare?.ListFarePax[0]?.ListFareInfo[0]?.HandBaggage}}
+                                        hand +
+                                        {{selectedOption?.selectedFare?.ListFarePax[0]?.ListFareInfo[0]?.FreeBaggage}}
+                                        checked</span>
+                                </div>
+                            </div>
+                        </div>
 
-                                                <div *ngIf="option.selectedFare" class="fare-details">
-                                                    <div class="price-section">
-                                                        <span class="price">
-                                                            {{ option.selectedFare.TotalFare | currency:option.selectedFare.Currency }}
-                                                        </span>
-                                                        <div class="baggage-info">
-                                                            <mat-chip>
-                                                                <mat-icon>work_outline</mat-icon>
-                                                                {{ option.selectedFare.ListFarePax[0].ListFareInfo[0].HandBaggage }}
-                                                            </mat-chip>
-                                                            <mat-chip>
-                                                                <mat-icon>business_center</mat-icon>
-                                                                {{ option.selectedFare.ListFarePax[0].ListFareInfo[0].FreeBaggage }}
-                                                            </mat-chip>
-                                                        </div>
-                                                    </div>
-                                                    <button mat-flat-button color="primary" 
-                                                            (click)="bookFlight(option)">
-                                                        Book Now
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </mat-list-item>
-                                </mat-list>
-                            </mat-card-content>
-                        </mat-tab>
-                    </mat-tab-group>
-                </mat-card>
-            </ng-container>
+                        <div class="details-section">
+                            <h3>Fare Breakdown</h3>
+                            <div class="fare-breakdown">
+                                <div class="fare-row">
+                                    <span class="fare-label">Base Fare:</span>
+                                    <span class="fare-value">{{selectedOption?.selectedFare?.BaseFare |
+                                        currency:selectedOption?.selectedFare?.Currency:'symbol':'1.0-0'}}</span>
+                                </div>
+                                <div class="fare-row"
+                                    *ngFor="let item of selectedOption?.selectedFare?.ListFarePax[0]?.ListFareItem">
+                                    <span class="fare-label">{{item.Name}}:</span>
+                                    <span class="fare-value">{{item.Amount |
+                                        currency:selectedOption?.selectedFare?.Currency:'symbol':'1.0-0'}}</span>
+                                </div>
+                                <div class="fare-row total">
+                                    <span class="fare-label">Total Fare:</span>
+                                    <span class="fare-value">{{selectedOption?.selectedFare?.TotalFare |
+                                        currency:selectedOption?.selectedFare?.Currency:'symbol':'1.0-0'}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="details-section">
+                            <h3>Additional Information</h3>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <span class="label">Refundable:</span>
+                                    <span class="value">{{selectedOption?.selectedFare?.Refundable ? 'Yes' :
+                                        'No'}}</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="label">Availability:</span>
+                                    <span class="value">{{selectedOption?.selectedFare?.Availability}} seats</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="label">Expiry Date:</span>
+                                    <span class="value">{{formatDate(selectedOption?.selectedFare?.ExpiryDate)}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
 
             <!-- No Results -->
-            <mat-card *ngSwitchDefault class="state-message">
-                <mat-card-content>
-                    <mat-icon>flight</mat-icon>
-                    <p class="state-message__text">No flights found matching your criteria</p>
-                </mat-card-content>
-            </mat-card>
-        </ng-container>
+            <div *ngIf="!loading && !error && flightResults?.data?.ListGroup?.length === 0" class="no-results">
+                ✈️ No flights found matching your criteria
+            </div>
+        </main>
     </div>
 </div>

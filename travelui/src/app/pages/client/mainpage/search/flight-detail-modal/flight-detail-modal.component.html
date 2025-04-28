@@ -1,0 +1,108 @@
+<div class="modal" *ngIf="showDetailModal">
+    <div class="modal-content">
+        <span class="close" (click)="onClose()">&times;</span>
+        <h2>Flight Details</h2>
+
+        <div class="flight-summary">
+            <div class="airline-info">
+                <div class="airline-logo">{{selectedOption?.Airline}}</div>
+                <div class="flight-number">Flight: {{selectedOption?.ListFlightOption[0]?.ListFlight[0]?.FlightNumber}}</div>
+            </div>
+
+            <div class="route-info">
+                <div class="departure">
+                    <div class="time">
+                        {{formatTime(selectedOption?.ListFlightOption[0]?.ListFlight[0]?.StartDate)}}
+                    </div>
+                    <div class="airport">
+                        {{selectedOption?.ListFlightOption[0]?.ListFlight[0]?.StartPoint}}</div>
+                    <div class="terminal">Terminal: {{selectedOption?.ListFlightOption[0]?.ListFlight[0]?.ListSegment[0]?.StartTerminal}}
+                    </div>
+                </div>
+
+                <div class="duration">
+                    <div class="duration-text">
+                        {{formatDuration(selectedOption?.ListFlightOption[0]?.ListFlight[0]?.Duration)}}
+                    </div>
+                    <div class="divider-line"></div>
+                    <div class="flight-type">{{selectedOption?.Remark}}</div>
+                </div>
+
+                <div class="arrival">
+                    <div class="time">
+                        {{formatTime(selectedOption?.ListFlightOption[0]?.ListFlight[0]?.EndDate)}}
+                    </div>
+                    <div class="airport">
+                        {{selectedOption?.ListFlightOption[0]?.ListFlight[0]?.EndPoint}}</div>
+                    <div class="terminal">Terminal: {{selectedOption?.ListFlightOption[0]?.ListFlight[0]?.ListSegment[0]?.EndTerminal}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="details-section">
+            <h3>Flight Information</h3>
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="label">Aircraft:</span>
+                    <span class="value">{{selectedOption?.ListFlightOption[0]?.ListFlight[0]?.ListSegment[0]?.Equipment}}</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Cabin Class:</span>
+                    <span class="value">{{selectedOption?.selectedFare?.CabinName}}</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Fare Class:</span>
+                    <span class="value">{{selectedOption?.selectedFare?.FareClass}}</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Baggage Allowance:</span>
+                    <span class="value">{{selectedOption?.selectedFare?.ListFarePax[0]?.ListFareInfo[0]?.HandBaggage}}
+                        hand +
+                        {{selectedOption?.selectedFare?.ListFarePax[0]?.ListFareInfo[0]?.FreeBaggage}}
+                        checked</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="details-section">
+            <h3>Fare Breakdown</h3>
+            <div class="fare-breakdown">
+                <div class="fare-row">
+                    <span class="fare-label">Base Fare:</span>
+                    <span class="fare-value">{{selectedOption?.selectedFare?.BaseFare |
+                        currency:selectedOption?.selectedFare?.Currency:'symbol':'1.0-0'}}</span>
+                </div>
+                <div class="fare-row" *ngFor="let item of selectedOption?.selectedFare?.ListFarePax[0]?.ListFareItem">
+                    <span class="fare-label">{{item.Name}}:</span>
+                    <span class="fare-value">{{item.Amount |
+                        currency:selectedOption?.selectedFare?.Currency:'symbol':'1.0-0'}}</span>
+                </div>
+                <div class="fare-row total">
+                    <span class="fare-label">Total Fare:</span>
+                    <span class="fare-value">{{selectedOption?.selectedFare?.TotalFare |
+                        currency:selectedOption?.selectedFare?.Currency:'symbol':'1.0-0'}}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="details-section">
+            <h3>Additional Information</h3>
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="label">Refundable:</span>
+                    <span class="value">{{selectedOption?.selectedFare?.Refundable ? 'Yes' :
+                        'No'}}</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Availability:</span>
+                    <span class="value">{{selectedOption?.selectedFare?.Availability}} seats</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">Expiry Date:</span>
+                    <span class="value">{{formatDate(selectedOption?.selectedFare?.ExpiryDate)}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -18,6 +18,7 @@ import { SearchComponent } from './mainpage/search/search.component';
 import { BookingComponent } from './booking/booking.component';
 import { ProfileComponent } from './profile/profile.component';
 import { FlightSearchComponent } from './mainpage/search/flight-search/flight-search.component';
+import { FlightDetailModalComponent } from './mainpage/search/flight-detail-modal/flight-detail-modal.component';
 // import { FlightCheckoutComponent } from './booking/flight-checkout/flight-checkout.component';
 
 
@@ -36,6 +37,7 @@ import { FlightSearchComponent } from './mainpage/search/flight-search/flight-se
     BookingComponent,
     ProfileComponent,
     FlightSearchComponent,
+    FlightDetailModalComponent,
     // FlightCheckoutComponent
   ],
   imports: [
