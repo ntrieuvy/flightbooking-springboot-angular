@@ -5,8 +5,7 @@ import com.bm.travelcore.model.User;
 import java.util.Optional;
 
 public interface UserService {
-    Optional<User> findByEmail(String email);
-    Optional<User> findByPhoneNumber(String phoneNumber);
+    User getCurrentAccount();
 
-    User registerOAuth2User(String email, String name, String google);
+    User getSysAccount();
 }

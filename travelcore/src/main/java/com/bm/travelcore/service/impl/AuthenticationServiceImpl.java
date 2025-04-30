@@ -20,6 +20,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -44,6 +46,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final MailService mailService;
     private final JwtService jwtService;
     private final SmsService smsService;
+
+    private final UserDetailsService userDetailsService;
 
     @Override
     public void register(RegistrationReqDTO reqDTO) throws MessagingException {
@@ -103,13 +107,16 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         var claims = new HashMap<String, Object>();
         var user = (User) auth.getPrincipal();
         claims.put("fullName", user.getFullName());
+        claims.put("firstName", user.getFirstname());
+        claims.put("lastName", user.getLastname());
+        claims.put("phoneNumber", user.getPhoneNumber());
         var jwtToken = jwtService.generateToken(claims, user);
         return AuthenticationResDTO.builder().token(jwtToken).build();
     }
 
     @Override
     @Transactional
-    public void activateAccount(String otp) throws MessagingException {
+    public AuthenticationResDTO activateAccount(String otp) throws MessagingException {
         String key = RedisKeyConfig.getActivationOtpKey(otp);
         String userId = redisService.get(key);
 
@@ -123,7 +130,43 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         user.setEnabled(Boolean.TRUE);
         userRepository.save(user);
 
+        var claims = new HashMap<String, Object>();
+        claims.put("fullName", user.getFullName());
+        claims.put("firstName", user.getFirstname());
+        claims.put("lastName", user.getLastname());
+        claims.put("phoneNumber", user.getPhoneNumber());
+        var jwtToken = jwtService.generateToken(claims, user);
+
         redisService.delete(key);
+
+        return AuthenticationResDTO.builder().token(jwtToken).build();
+    }
+
+    @Override
+    public boolean isUserExists(String identifier) {
+        try {
+            userDetailsService.loadUserByUsername(identifier);
+            return true;
+        } catch (UsernameNotFoundException ex) {
+            return false;
+        }
+    }
+
+    @Override
+    public void resendOtp(String identifier) throws MessagingException {
+        if (identifier.contains("@")) {
+            User user = userRepository.findByEmail(identifier)
+                    .orElseThrow(() -> new UsernameNotFoundException(
+                            String.format(ExceptionMessages.USER_NOT_FOUND_WITH_EMAIL, identifier)));
+
+            sendValidationEmail(user);
+        } else {
+            User user = userRepository.findByPhoneNumber(identifier)
+                    .orElseThrow(() -> new UsernameNotFoundException(
+                            String.format(ExceptionMessages.USER_NOT_FOUND_WITH_PHONE, identifier)));
+
+            sendValidationPhone(user);
+        }
     }
 
     private void sendValidationEmail(User user) throws MessagingException {
@@ -159,12 +202,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         if (existingOtp != null) {
             String otp = RedisKeyConfig.getActivationOtpKey(existingOtp);
-            long ttl = redisService.getTtl(otp);
-            int minResendInterval = RedisKeyConfig.OTP_EXPIRED_TIME - RedisKeyConfig.OTP_TIME_RESENT;
-
-            if (ttl > minResendInterval) {
-                return null;
-            }
+//            long ttl = redisService.getTtl(otp);
+//            int minResendInterval = RedisKeyConfig.OTP_EXPIRED_TIME - RedisKeyConfig.OTP_TIME_RESENT;
+//
+//            if (ttl > minResendInterval) {
+//                return null;
+//            }
 
             redisService.save(otp, userId, RedisKeyConfig.OTP_EXPIRED_TIME);
             redisService.save(userActivationKey, existingOtp, RedisKeyConfig.OTP_EXPIRED_TIME);

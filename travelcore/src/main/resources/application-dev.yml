@@ -9,6 +9,17 @@ spring:
     show-sql: false
     hibernate:
       ddl-auto: update
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 50
+          order_inserts: true
+          order_updates: true
+
+  cache:
+    type: caffeine
+    caffeine:
+      spec: maximumSize=1000,expireAfterWrite=1h
 
   mail:
     host: localhost
@@ -72,9 +83,26 @@ application:
         auth_token: 61e3cb5b860cf768134591e355f49431
         account_sid: AC2abc6671bea8d335d19f674920aa794c
 
+    flight-api:
+      default: mockflight
+      aviationstack:
+        name: aviationstack
+        endpoint: https://api.aviationstack.com/v1/
+        access-key: d3c2399140f42d6f8300db8b7927098b
+
   frontend:
     url: "http://localhost:4200"
     oauth-redirect-url: "http://localhost:4200/oauth-redirect"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "metrics"
+  metrics:
+    enable:
+      all: true
+
 
 server:
   port: 9090

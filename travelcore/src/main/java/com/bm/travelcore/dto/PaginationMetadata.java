@@ -5,16 +5,16 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PaginationMeta {
+public class PaginationMetadata {
     private int currentPage;
     private int pageSize;
-    private long totalItems;
+    private int totalItems;
     private int totalPages;
 
-    public PaginationMeta(int currentPage, int pageSize, long totalItems, int totalPages) {
+    public PaginationMetadata(int currentPage, int pageSize, int totalItems) {
         this.currentPage = currentPage;
         this.pageSize = pageSize;
         this.totalItems = totalItems;
-        this.totalPages = totalPages;
+        this.totalPages = (int) Math.ceil((double) totalItems / pageSize);
     }
 }

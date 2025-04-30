@@ -11,4 +11,5 @@ public interface AgencyService {
     Agency getByCode(String code);
     void delete(Long id);
     void update(Long id, AgencyReqDTO request);
+    void assignAgencyToUser(Long userId, Long agencyId);
 }

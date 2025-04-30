@@ -72,6 +72,10 @@ public class User implements UserDetails, Principal {
     @Column(name = "updated_at", insertable = false)
     private LocalDateTime updatedAt;
 
+    @OneToOne
+    @JoinColumn(name = "agency_id")
+    private Agency agency;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AirlineAirportGroupConfig> airlineAirportGroupConfigs;
 

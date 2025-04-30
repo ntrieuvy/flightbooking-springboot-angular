@@ -39,4 +39,13 @@ public class ApplicationProperties {
 
     @Value("${application.frontend.url}")
     private String frontendUrl;
+
+    @Value("${application.provider.flight-api.default}")
+    private String providerFlightApiDefault;
+
+    @Value("${application.provider.flight-api.aviationstack.endpoint}")
+    private String aviationstackEndpoint;
+
+    @Value("${application.provider.flight-api.aviationstack.access-key}")
+    private String ativitionstackAccessKey;
 }

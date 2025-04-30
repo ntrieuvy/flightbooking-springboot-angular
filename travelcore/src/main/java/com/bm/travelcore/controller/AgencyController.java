@@ -1,7 +1,6 @@
 package com.bm.travelcore.controller;
 
-import com.bm.travelcore.dto.AgencyReqDTO;
-import com.bm.travelcore.dto.AgencyResDTO;
+import com.bm.travelcore.dto.*;
 import com.bm.travelcore.populator.impl.AgencyListResPopulator;
 import com.bm.travelcore.service.AgencyService;
 import jakarta.validation.Valid;
@@ -55,9 +54,17 @@ public class AgencyController {
         agencyService.delete(id);
         return ResponseEntity.noContent().build();
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<Void> updateAgency(@PathVariable Long id, @Valid @RequestBody AgencyReqDTO request) {
         agencyService.update(id, request);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/{userId}/assign/{agencyId}")
+    public ResponseEntity<String> assignAgencyToUser(@PathVariable Long userId,
+                                                     @PathVariable Long agencyId) {
+        agencyService.assignAgencyToUser(userId, agencyId);
+        return ResponseEntity.ok("Agency assigned to user successfully");
     }
 }

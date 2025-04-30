@@ -25,7 +25,7 @@ public class SmsProviderFactory {
     public SmsProviderStrategy getStrategy(String provider) {
         SmsProviderStrategy strategy = strategyMap.get(provider);
         if (strategy == null) {
-            throw new IllegalArgumentException("Invalid provider: " + provider);
+            throw new IllegalArgumentException("Invalid sms provider: " + provider);
         }
         return strategy;
     }

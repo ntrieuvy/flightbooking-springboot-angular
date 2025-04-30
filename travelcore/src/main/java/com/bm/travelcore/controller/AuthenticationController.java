@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
-    private final SmsService smsService;
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.ACCEPTED)
@@ -37,9 +36,21 @@ public class AuthenticationController {
     }
 
     @GetMapping("/activate-account")
-    public void comfirm(
+    public ResponseEntity<AuthenticationResDTO> comfirm(
             @RequestParam String otp
     ) throws MessagingException {
-        authenticationService.activateAccount(otp);
+        return ResponseEntity.ok(authenticationService.activateAccount(otp));
     }
+
+    @GetMapping("/check-user-exists")
+    public ResponseEntity<Boolean> checkUserExists(@RequestParam String identifier) {
+        boolean exists = authenticationService.isUserExists(identifier);
+        return ResponseEntity.ok(exists);
+    }
+
+    @GetMapping("/resend-otp")
+    public void resendOtp(@RequestParam String identifier) throws MessagingException {
+        authenticationService.resendOtp(identifier);
+    }
+
 }

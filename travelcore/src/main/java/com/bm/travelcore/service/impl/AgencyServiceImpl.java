@@ -4,11 +4,15 @@ import com.bm.travelcore.constant.ExceptionMessages;
 import com.bm.travelcore.dto.AgencyReqDTO;
 import com.bm.travelcore.handler.NotFoundException;
 import com.bm.travelcore.model.Agency;
+import com.bm.travelcore.model.User;
 import com.bm.travelcore.repository.AgencyRepository;
+import com.bm.travelcore.repository.UserRepository;
 import com.bm.travelcore.service.AgencyService;
+import com.bm.travelcore.service.CommissionService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,6 +21,8 @@ import java.util.List;
 public class AgencyServiceImpl implements AgencyService {
 
     private final AgencyRepository agencyRepository;
+    private final UserRepository userRepository;
+    private final CommissionService commissionService;
 
     @Override
     public List<Agency> getAll(int page, int pageSize) {
@@ -62,5 +68,20 @@ public class AgencyServiceImpl implements AgencyService {
         agency.setAddress(request.getAddress());
 
         agencyRepository.save(agency);
+    }
+
+    @Override
+    @Transactional
+    public void assignAgencyToUser(Long userId, Long agencyId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        Agency agency = agencyRepository.findById(agencyId)
+                .orElseThrow(() -> new RuntimeException("Agency not found"));
+
+        user.setAgency(agency);
+        agency.setUser(user);
+
+        userRepository.save(user);
     }
 }

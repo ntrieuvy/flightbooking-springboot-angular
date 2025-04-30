@@ -2,6 +2,7 @@ package com.bm.travelcore.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -14,7 +15,12 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "COMMISSION")
+@Table(name = "COMMISSION", indexes = {
+        @Index(name = "idx_commission_agency", columnList = "agency_id"),
+        @Index(name = "idx_commission_airline", columnList = "airline_id"),
+        @Index(name = "idx_commission_airport_group", columnList = "airport_group_id"),
+        @Index(name = "idx_commission_composite", columnList = "agency_id,airline_id,airport_group_id")
+})
 @EntityListeners(AuditingEntityListener.class)
 public class Commission {
 
@@ -33,7 +39,7 @@ public class Commission {
     private Airline airline;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "agency_id", nullable = false)
+    @JoinColumn(name = "agency_id", nullable = true)
     private Agency agency;
 
     @Column(name = "service_fee_adt", nullable = false)

@@ -11,4 +11,6 @@ public class AppConstant {
     public static final String TEMPLATE_PROP_USERNAME = "username";
     public static final String TEMPLATE_PROP_CONFIRMATION_URL = "confirmationUrl";
     public static final String TEMPLATE_PROP_ACTIVATION_CODE = "activationCode";
+    public static final String COMMISSION_CACHE = "commissions";
+    public static final String AIRPORT_GROUP_CACHE = "airportGroups";
 }

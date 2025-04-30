@@ -65,15 +65,9 @@ public class Order {
     @Builder.Default
     private Boolean isSendMail = false;
 
-    // Uncomment when ready to use these relationships
-    /*
-
-
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderDetail> orderDetails;
 
-
-    */
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Invoice> invoices;
 

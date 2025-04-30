@@ -55,6 +55,9 @@ public class Agency {
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
 
+    @OneToOne(mappedBy = "agency", cascade = CascadeType.ALL, orphanRemoval = true)
+    private User user;
+
     @OneToMany(mappedBy = "agency", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Commission> commissions;
 
