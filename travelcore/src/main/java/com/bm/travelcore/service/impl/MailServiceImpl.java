@@ -1,15 +1,12 @@
 package com.bm.travelcore.service.impl;
 
 import com.bm.travelcore.config.ApplicationProperties;
-import com.bm.travelcore.constant.AppConstant;
+import com.bm.travelcore.utils.constant.AppConstant;
 import com.bm.travelcore.model.enums.EmailTemplateName;
 import com.bm.travelcore.service.MailService;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
@@ -17,8 +14,6 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 
-import java.io.Console;
-import java.lang.constant.Constable;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;

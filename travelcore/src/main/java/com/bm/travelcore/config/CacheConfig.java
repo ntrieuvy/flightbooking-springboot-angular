@@ -1,6 +1,6 @@
 package com.bm.travelcore.config;
 
-import com.bm.travelcore.constant.AppConstant;
+import com.bm.travelcore.utils.constant.AppConstant;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.concurrent.ConcurrentMapCacheManager;

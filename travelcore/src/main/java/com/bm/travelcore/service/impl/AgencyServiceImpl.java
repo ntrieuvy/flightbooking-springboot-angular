@@ -1,8 +1,8 @@
 package com.bm.travelcore.service.impl;
 
-import com.bm.travelcore.constant.ExceptionMessages;
+import com.bm.travelcore.utils.constant.ExceptionMessages;
 import com.bm.travelcore.dto.AgencyReqDTO;
-import com.bm.travelcore.handler.NotFoundException;
+import com.bm.travelcore.utils.handler.NotFoundException;
 import com.bm.travelcore.model.Agency;
 import com.bm.travelcore.model.User;
 import com.bm.travelcore.repository.AgencyRepository;

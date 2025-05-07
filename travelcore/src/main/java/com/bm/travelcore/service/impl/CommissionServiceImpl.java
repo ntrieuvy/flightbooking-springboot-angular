@@ -1,12 +1,13 @@
 package com.bm.travelcore.service.impl;
 
-import com.bm.travelcore.constant.AppConstant;
-import com.bm.travelcore.dto.*;
+import com.bm.travelcore.utils.constant.AppConstant;
 import com.bm.travelcore.model.*;
 import com.bm.travelcore.repository.AirportRepository;
 import com.bm.travelcore.repository.CommissionRepository;
 import com.bm.travelcore.service.CommissionService;
 import com.bm.travelcore.service.UserService;
+import com.bm.travelcore.strategy.datacom.data.*;
+import com.bm.travelcore.strategy.datacom.data.FlightData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -30,7 +31,7 @@ public class CommissionServiceImpl implements CommissionService {
 
     @Override
     @Transactional
-    public FlightSearchDatacomResDTO applyCommission(FlightSearchDatacomResDTO datacomResDTO) {
+    public FlightSearchResData applyCommission(FlightSearchResData datacomResDTO) {
         if (shouldSkipCommissionProcessing(datacomResDTO)) {
             return datacomResDTO;
         }
@@ -52,36 +53,36 @@ public class CommissionServiceImpl implements CommissionService {
         return datacomResDTO;
     }
 
-    private boolean shouldSkipCommissionProcessing(FlightSearchDatacomResDTO datacomResDTO) {
+    private boolean shouldSkipCommissionProcessing(FlightSearchResData datacomResDTO) {
         return datacomResDTO == null || !datacomResDTO.isSuccess()
                 || datacomResDTO.getListGroup() == null || datacomResDTO.getListGroup().isEmpty();
     }
 
-    private Set<String> collectAllAirportCodes(FlightSearchDatacomResDTO datacomResDTO) {
+    private Set<String> collectAllAirportCodes(FlightSearchResData datacomResDTO) {
         final int MAX_AIRPORTS = 1000;
         Set<String> codes = new HashSet<>(MAX_AIRPORTS * 2);
 
         datacomResDTO.getListGroup().parallelStream()
                 .filter(Objects::nonNull)
                 .takeWhile(group -> codes.size() < MAX_AIRPORTS)
-                .flatMap(group -> Optional.ofNullable(group.getListAirOption())
+                .flatMap(group -> Optional.ofNullable(group.getListAirOptionRes())
                         .orElse(Collections.emptyList())
                         .stream())
                 .filter(Objects::nonNull)
-                .takeWhile(airOption -> codes.size() < MAX_AIRPORTS)
-                .flatMap(airOption -> Optional.ofNullable(airOption.getListFlightOption())
+                .takeWhile(airOptionRes -> codes.size() < MAX_AIRPORTS)
+                .flatMap(airOptionRes -> Optional.ofNullable(airOptionRes.getListFlightOption())
                         .orElse(Collections.emptyList())
                         .stream())
                 .filter(Objects::nonNull)
                 .takeWhile(flightOption -> codes.size() < MAX_AIRPORTS)
-                .flatMap(flightOption -> Optional.ofNullable(flightOption.getListFlight())
+                .flatMap(flightOption -> Optional.ofNullable(flightOption.getListFlightData())
                         .orElse(Collections.emptyList())
                         .stream())
                 .filter(Objects::nonNull)
-                .takeWhile(flight -> codes.size() < MAX_AIRPORTS)
-                .forEach(flight -> {
-                    if (flight.getStartPoint() != null) codes.add(flight.getStartPoint());
-                    if (flight.getEndPoint() != null) codes.add(flight.getEndPoint());
+                .takeWhile(flightData -> codes.size() < MAX_AIRPORTS)
+                .forEach(flightData -> {
+                    if (flightData.getStartPoint() != null) codes.add(flightData.getStartPoint());
+                    if (flightData.getEndPoint() != null) codes.add(flightData.getEndPoint());
                 });
 
         return codes;
@@ -99,34 +100,34 @@ public class CommissionServiceImpl implements CommissionService {
     }
 
     private void processGroupFares(Group group, User user, Map<String, Commission> commissions) {
-        if (group.getListAirOption() == null || group.getListAirOption().isEmpty()) {
+        if (group.getListAirOptionRes() == null || group.getListAirOptionRes().isEmpty()) {
             return;
         }
 
-        group.getListAirOption().forEach(airOption ->
-                processAirOptionFares(airOption, user, commissions)
+        group.getListAirOptionRes().forEach(airOptionRes ->
+                processAirOptionFares(airOptionRes, user, commissions)
         );
     }
 
-    private void processAirOptionFares(AirOption airOption, User user, Map<String, Commission> commissions) {
-        if (airOption.getListFareOption() == null || airOption.getListFareOption().isEmpty() ||
-                airOption.getListFlightOption() == null || airOption.getListFlightOption().isEmpty()) {
+    private void processAirOptionFares(AirOptionRes airOptionRes, User user, Map<String, Commission> commissions) {
+        if (airOptionRes.getListFareOption() == null || airOptionRes.getListFareOption().isEmpty() ||
+                airOptionRes.getListFlightOption() == null || airOptionRes.getListFlightOption().isEmpty()) {
             return;
         }
 
-        List<AirOption.FlightOption.Flight> flights = airOption.getListFlightOption().get(0).getListFlight();
-        if (flights == null || flights.isEmpty()) {
+        List<FlightData> flightData = airOptionRes.getListFlightOption().get(0).getListFlightData();
+        if (flightData == null || flightData.isEmpty()) {
             return;
         }
 
-        AirOption.FlightOption.Flight firstFlight = flights.get(0);
-        AirportGroup airportGroup = getCachedAirportGroup(firstFlight.getStartPoint(), firstFlight.getEndPoint());
+        FlightData firstFlightData = flightData.get(0);
+        AirportGroup airportGroup = getCachedAirportGroup(firstFlightData.getStartPoint(), firstFlightData.getEndPoint());
 
         if (airportGroup == null) {
             return;
         }
 
-        airOption.getListFareOption().forEach(fareOption ->
+        airOptionRes.getListFareOption().forEach(fareOption ->
                 applyCommissionToFareOption(fareOption, user, fareOption.getAirline(),
                         airportGroup, commissions)
         );
@@ -180,6 +181,7 @@ public class CommissionServiceImpl implements CommissionService {
         if (commissionFee > 0) {
             farePax.setBaseFare(farePax.getBaseFare() + commissionFee);
             farePax.setTotalFare(farePax.getTotalFare() + commissionFee);
+            farePax.getListFareItem().get(0).setAmount(farePax.getListFareItem().get(0).getAmount() + commissionFee);
         }
     }
 

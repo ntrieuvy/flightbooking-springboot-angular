@@ -1,8 +1,8 @@
 package com.bm.travelcore.service.impl;
 
 import com.bm.travelcore.config.ApplicationProperties;
-import com.bm.travelcore.constant.AppConstant;
-import com.bm.travelcore.constant.ExceptionMessages;
+import com.bm.travelcore.utils.constant.AppConstant;
+import com.bm.travelcore.utils.constant.ExceptionMessages;
 import com.bm.travelcore.config.RedisKeyConfig;
 import com.bm.travelcore.dto.AuthenticationReqDTO;
 import com.bm.travelcore.dto.AuthenticationResDTO;
@@ -17,10 +17,8 @@ import com.bm.travelcore.repository.UserRepository;
 import com.bm.travelcore.service.*;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -214,9 +212,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             return existingOtp;
         } else {
             String generatedOtp = generateActivationCode(AppConstant.ACTIVATION_CODE_LENGTH);
-            String otp = RedisKeyConfig.getActivationOtpKey(generatedOtp);
+            String otp = RedisKeyConfig.getActivationOtpKey(generatedOtp); // bugs
             redisService.save(otp, userId, RedisKeyConfig.OTP_EXPIRED_TIME);
-            redisService.save(userActivationKey, generatedOtp, RedisKeyConfig.OTP_EXPIRED_TIME);
+            redisService.save(userActivationKey, otp, RedisKeyConfig.OTP_EXPIRED_TIME);
             return generatedOtp;
         }
     }

@@ -25,7 +25,7 @@ public class Order {
     private Long id;
 
     @Column(name = "provider_booking_id")
-    private Integer providerBookingId;
+    private String providerBookingId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", nullable = false)
@@ -42,7 +42,7 @@ public class Order {
     @Builder.Default
     private Integer status = 1;
 
-    @Lob // Use @Lob for CLOB in Oracle
+    @Lob
     private String note;
 
     @ManyToOne(fetch = FetchType.LAZY)

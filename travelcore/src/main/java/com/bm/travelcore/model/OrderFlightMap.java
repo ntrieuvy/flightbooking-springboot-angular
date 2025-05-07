@@ -27,4 +27,6 @@ public class OrderFlightMap {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "flight_id", nullable = false)
     private Flight flight;
+
+    private Integer leg;
 }

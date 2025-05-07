@@ -24,6 +24,9 @@ public class Flight {
     @SequenceGenerator(name = "flight_seq_gen", sequenceName = "flight_seq", allocationSize = 1)
     private Long id;
 
+    @Column(name = "unique_key", unique = true)
+    private String uniqueKey;
+
     @Column(nullable = false)
     private String code;
 

@@ -1,9 +1,10 @@
 package com.bm.travelcore.dto;
 
+import com.bm.travelcore.strategy.datacom.data.FlightSearchResData;
 import lombok.Data;
 
 @Data
 public class SearchFlightResDTO {
-   PaginationMetadata paginationMetadata;
-   FlightSearchDatacomResDTO data;
+   PaginationMetadataDTO paginationMetadataDTO;
+   FlightSearchResData data;
 }

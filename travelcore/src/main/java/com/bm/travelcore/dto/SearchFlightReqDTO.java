@@ -22,6 +22,8 @@ public class SearchFlightReqDTO {
     @Max(2)
     private Integer infant;
 
+    private String airlineCode;
+
     @NotNull
     @Size(min = 1)
     private List<FlightInfo> flights;
@@ -41,10 +43,7 @@ public class SearchFlightReqDTO {
 
         private String end;
 
-        @JsonFormat(pattern = "yyyy-MM-dd")
-        private LocalDate date;
-
-        private String airline;
+        private String date;
     }
 
     private Integer page = 1;

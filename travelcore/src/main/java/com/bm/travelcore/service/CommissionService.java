@@ -1,8 +1,8 @@
 package com.bm.travelcore.service;
 
-import com.bm.travelcore.dto.*;
+import com.bm.travelcore.strategy.datacom.data.FlightSearchResData;
 
 public interface CommissionService {
 
-    FlightSearchDatacomResDTO applyCommission(FlightSearchDatacomResDTO datacomResDTO);
+    FlightSearchResData applyCommission(FlightSearchResData datacomResDTO);
 }

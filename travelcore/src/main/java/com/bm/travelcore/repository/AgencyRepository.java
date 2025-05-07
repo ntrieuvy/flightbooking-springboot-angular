@@ -9,4 +9,5 @@ import java.util.Optional;
 public interface AgencyRepository extends JpaRepository<Agency, Long> {
     Optional<Agency> findByCode(String code);
 
+    Agency findByEmail(String email);
 }

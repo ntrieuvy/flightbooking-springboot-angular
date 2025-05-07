@@ -42,7 +42,8 @@ public class SecurityConfig {
                                     "/swagger-ui/**",
                                     "/webjars/**",
                                     "/swagger-ui.html",
-                                    "/flights",
+                                    "/flights/search",
+                                    "/airports",
                                     "/actuator/**"
                             ).permitAll()
                                     .anyRequest().authenticated()

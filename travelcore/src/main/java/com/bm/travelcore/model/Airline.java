@@ -29,6 +29,9 @@ public class Airline {
     @Column(name = "logo")
     private String logo;
 
+    @Column(name = "is_active")
+    private Boolean isActive;
+
     @OneToMany(mappedBy = "airline", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Ticket> tickets;
 

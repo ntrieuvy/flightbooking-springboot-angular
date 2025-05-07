@@ -63,10 +63,11 @@ application:
   security:
     jwt:
       secret-key: QWxhZGRpbjpvcGVuIHNlc2FtZSBzGVuIHNlc2FtZSBzYW1wbQWxhZGRpbjpvGUgdGV4dA==
-      expiration: 8640000
+      expiration: 864000
 
   mailing:
     not_reply_email: donotreply@teamsolutions.com
+    contact: contact@travelteamsolutions.com
     frontend:
       activation_url: http://localhost:8080/api/v1/auth/activate-account
 
@@ -84,7 +85,16 @@ application:
         account_sid: AC2abc6671bea8d335d19f674920aa794c
 
     flight-api:
-      default: mockflight
+      default: datacom
+      datacom:
+        name: "datacom"
+        endpoint: "http://localhost:3000"
+        private-key: "datacomkey"
+        api-account: "datacomapiaccount"
+        api-password: "datacomapipassword"
+        currency: "VND"
+        language: "vi"
+        ip-address: "10.0.0.1"
       aviationstack:
         name: aviationstack
         endpoint: https://api.aviationstack.com/v1/
