@@ -16,7 +16,7 @@ $box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  min-height: 60vh;
   background-color: $light-gray;
   padding: 2rem;
 }
@@ -46,7 +46,6 @@ $box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 }
 
-// Form Elements
 .form-group {
   margin-bottom: 1.5rem;
   position: relative;
@@ -75,6 +74,57 @@ $box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 
     &.invalid {
       border-color: $error-color;
+    }
+  }
+}
+
+.social-login {
+  margin: 20px 0;
+  text-align: center;
+
+  .divider {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+
+    &::before,
+    &::after {
+      content: "";
+      flex: 1;
+      border-bottom: 1px solid #ddd;
+    }
+
+    span {
+      padding: 0 10px;
+      color: #666;
+      font-size: 14px;
+    }
+  }
+
+  .btn-google {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 12px;
+    background: white;
+    color: #444;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: #f8f8f8;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    img {
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
     }
   }
 }
@@ -132,7 +182,9 @@ $box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .password-section {
@@ -172,7 +224,6 @@ $box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 }
 
-// Footer
 .auth-footer {
   margin-top: 1.5rem;
   text-align: center;

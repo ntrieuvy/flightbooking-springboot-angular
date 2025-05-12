@@ -1,0 +1,98 @@
+.callback-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+  background: #f8f9fa;
+  padding: 20px;
+}
+
+.callback-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  padding: 40px;
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+}
+
+.message {
+  color: #2d3748;
+  font-size: 1.25rem;
+  margin: 24px 0 8px;
+  font-weight: 500;
+}
+
+.hint {
+  color: #718096;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.spinner {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  margin: 0 auto;
+}
+
+.spinner-blade {
+  position: absolute;
+  left: 44.5%;
+  top: 37%;
+  width: 10%;
+  height: 25%;
+  border-radius: 50%/20%;
+  background-color: #4299e1;
+  animation: spinner-fade 1s linear infinite;
+  
+  @for $i from 1 through 8 {
+    &:nth-child(#{$i}) {
+      animation-delay: 0.1s * ($i - 1);
+      transform: rotate(45deg * ($i - 1)) translateY(-150%);
+    }
+  }
+}
+
+@keyframes spinner-fade {
+  0% { opacity: 0.1; }
+  50% { opacity: 1; }
+  100% { opacity: 0.1; }
+}
+
+@media (max-width: 480px) {
+  .callback-card {
+    padding: 24px;
+  }
+  
+  .message {
+    font-size: 1.1rem;
+  }
+}
+
+.callback-card.error {
+  background: #fff5f5;
+  
+  .error-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 20px;
+    background: #fed7d7;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #e53e3e;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .message.error {
+    color: #e53e3e;
+  }
+  
+  .hint.error {
+    color: #c53030;
+  }
+}

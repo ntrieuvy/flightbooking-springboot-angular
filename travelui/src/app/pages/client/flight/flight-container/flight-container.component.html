@@ -1,0 +1,39 @@
+<div class="search-container__top">
+    <app-flight-search (searchSubmitted)="handleSearch($event)"></app-flight-search>
+</div>
+
+<div class="search-container">
+    <div class="search-container__main-content">
+        <app-filters-sidebar
+            [airlines]="airlines"
+            [selectedAirlines]="selectedAirlines"
+            [sortBy]="sortBy"
+            [minPrice]="minPrice"
+            [maxPrice]="maxPrice"
+            (sortChange)="onSortChange($event)"
+            (airlineToggle)="toggleAirlineSelection($event.airline, $event.checked)"
+            (priceChange)="onPriceChange($event.min, $event.max)"
+        ></app-filters-sidebar>
+
+        <app-results-list
+            [loading]="loading"
+            [error]="error"
+            [flightResults]="flightResults"
+            [filteredGroups]="filteredGroups"
+            [activeTabIndex]="activeTabIndex"
+            [currentPage]="currentPage"
+            [totalPages]="totalPages"
+            [pageSize]="pageSize"
+            [selectedFlights]="selectedFlights"
+            [showDetailModal]="showDetailModal"
+            [selectedFlight]="selectedFlight"
+            (tabChange)="activeTabIndex = $event"
+            (pageChange)="onPageChange($event)"
+            (fareSelect)="onFareSelect($event)"
+            (flightBook)="bookFlight($event)"
+            (flightDetail)="openFlightDetailModal($event)"
+            (closeModal)="closeDetailModal()"
+            (submitBooking)="submitBooking()"
+        ></app-results-list>
+    </div>
+</div>

@@ -68,6 +68,17 @@
         <span *ngIf="isLoading" class="spinner"></span>
       </button>
 
+      <div class="social-login">
+        <div class="divider">
+          <span>or</span>
+        </div>
+        
+        <button type="button" class="btn-google" (click)="loginWithGoogle()">
+          <img src="assets/images/icon/google-icon.svg" alt="" width="20" height="20">
+          Continue with Google
+        </button>
+      </div>
+
       <div class="auth-footer">
         <p>By continuing, you agree to our <a href="#">Terms</a> and <a href="#">Privacy Policy</a></p>
       </div>

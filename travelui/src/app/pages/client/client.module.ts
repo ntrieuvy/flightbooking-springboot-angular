@@ -11,20 +11,24 @@ import { CurrencySwitcherComponent } from './layout/topbar/currency-switcher/cur
 import { LanguageSwitcherComponent } from './layout/topbar/language-switcher/language-switcher.component';
 import { AuthComponent } from './auth/auth.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MainpageComponent } from './mainpage/mainpage.component';
+import { FlightComponent } from './flight/flight.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { LayoutComponent } from './layout/layout.component';
-import { SearchComponent } from './mainpage/search/search.component';
-import { BookingComponent } from './booking/booking.component';
+import { FlightContainerComponent } from './flight/flight-container/flight-container.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 import { ProfileComponent } from './profile/profile.component';
-import { FlightSearchComponent } from './mainpage/search/flight-search/flight-search.component';
-import { FlightDetailModalComponent } from './mainpage/search/flight-detail-modal/flight-detail-modal.component';
+import { FlightSearchComponent } from './flight/flight-container/flight-search/flight-search.component';
+import { FlightDetailModalComponent } from './flight/flight-container/flight-detail-modal/flight-detail-modal.component';
+import { FiltersSidebarComponent } from './flight/flight-container/filters-sidebar/filters-sidebar.component';
+import { ResultsListComponent } from './flight/flight-container/results-list/results-list.component';
+import { IndexComponent } from './index/index.component';
+import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
 // import { FlightCheckoutComponent } from './booking/flight-checkout/flight-checkout.component';
 
 
 @NgModule({
   declarations: [
-    MainpageComponent,
+    FlightComponent,
     NavItemComponent,
     TopbarComponent,
     HeaderComponent,
@@ -33,11 +37,15 @@ import { FlightDetailModalComponent } from './mainpage/search/flight-detail-moda
     LanguageSwitcherComponent,
     AuthComponent,
     LayoutComponent,
-    SearchComponent,
-    BookingComponent,
+    FlightContainerComponent,
+    CheckoutComponent,
     ProfileComponent,
     FlightSearchComponent,
     FlightDetailModalComponent,
+    FiltersSidebarComponent,
+    ResultsListComponent,
+    IndexComponent,
+    AuthCallbackComponent,
     // FlightCheckoutComponent
   ],
   imports: [

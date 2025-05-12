@@ -2,11 +2,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, switchMap, catchError } from 'rxjs/operators';
 import { Subscription, EMPTY } from 'rxjs';
-import { AuthService } from '../../../core/services/auth.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { Router } from '@angular/router';
-import { RegistrationReqDTO } from '../../../core/models/interface/registration-req.dto';
-import { AuthenticationReqDTO } from '../../../core/models/interface/authentication-req.dto';
-import { AuthenticationResDTO } from '../../../core/models/interface/authentication-res.dto';
+import { RegistrationReqDTO } from 'src/app/core/models/interface/registration-req.dto';
+import { AuthenticationReqDTO } from 'src/app/core/models/interface/authentication-req.dto';
+import { AuthenticationResDTO } from 'src/app/core/models/interface/authentication-res.dto';
 
 @Component({
   selector: 'app-auth',
@@ -114,8 +114,6 @@ export class AuthComponent implements OnInit, OnDestroy {
     this.isLoading = false;
     this.isExistingUser = response;
     this.showPasswordFields = true;
-
-    console.log('User exists:', this.isExistingUser);
 
     if (this.isExistingUser) {
       this.authForm.get('firstName')?.reset();
@@ -234,6 +232,6 @@ export class AuthComponent implements OnInit, OnDestroy {
   }
 
   loginWithGoogle() {
-
+    this.authService.initiateSocialLogin("google");
   }
 }

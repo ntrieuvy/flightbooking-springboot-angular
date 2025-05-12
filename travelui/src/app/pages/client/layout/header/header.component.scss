@@ -66,7 +66,7 @@ $transition-timing: 0.3s;
 
     @media (min-width: $mobile-breakpoint) {
         position: relative !important;
-        z-index: 0 !important;
+        z-index: 100 !important;
     }
 
     @media (max-width: $mobile-breakpoint) {

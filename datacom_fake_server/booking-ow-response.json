@@ -1,0 +1,641 @@
+{
+  "StatusCode": "000",
+  "Success": true,
+  "Message": "Booking successful",
+  "Language": "vi",
+  "RequestID": 123456,
+  "OrderId": "BOOK-VN-20250509-123456",
+  "ListBooking": [
+    {
+      "Source": "API",
+      "System": "VN",
+      "Airline": "VN",
+      "OrderCode": "BOOK-VN-20250509-123456",
+      "OrderId": "BOOK-VN-20250509-123456",
+      "GdsCode": "VN",
+      "BookingCode": "ABC123",
+      "BookingStatus": "Confirmed",
+      "ExpirationTime": "2025-05-08T23:59:00",
+      "TimePurchase": "2025-05-07T15:30:00",
+      "TotalPrice": 4773000,
+      "Currency": "VND",
+      "BookingPcc": "VN123",
+      "BookingSignIn": "AGENT01",
+      "BookingImage": null,
+      "ResponseTime": 5,
+      "AutoIssue": true,
+      "Sandbox": false,
+      "StatusCode": "000",
+      "Message": "Booking successful",
+      "Warning": null,
+      "GuestContact": {
+        "Title": "MR",
+        "Name": "Nguyen Van A",
+        "Area": "VN",
+        "Phone": "0912345678",
+        "Email": "guest@example.com",
+        "Address": "123 Main Street, Hanoi",
+        "Remark": "Special meal for infant",
+        "ReceiveEmail": true
+      },
+      "AgentContact": {
+        "Title": "MR",
+        "Name": "Travel Agent",
+        "Area": "VN",
+        "Phone": "0987654321",
+        "Email": "agent@travel.com",
+        "Address": "456 Agent Street, Hanoi",
+        "Remark": null,
+        "ReceiveEmail": true
+      },
+      "ListFlightFare": [
+        {
+          "Leg": 1,
+          "Journey": "HANSGN09052025",
+          "Itinerary": 1,
+          "Airline": "VN",
+          "System": "VN",
+          "Source": "API",
+          "Remark": null,
+          "FareInfo": {
+            "OptionId": 0,
+            "FareClass": "H",
+            "FareBasis": "HPXVNFS",
+            "FareFamily": "Economy Classic",
+            "CabinCode": "M",
+            "CabinName": "ECONOMY",
+            "Refundable": true,
+            "Availability": 9,
+            "Unavailable": false,
+            "ExpiryDate": null,
+            "BaseFare": 2419000,
+            "BaseFareOrigin": 2419000,
+            "PriceAdt": 3182000,
+            "PriceAdtOrigin": 3182000,
+            "NetFare": 3182000,
+            "NetFareOrigin": 3182000,
+            "TotalFare": 3182000,
+            "TotalFareOrigin": 3182000,
+            "Currency": "VND",
+            "Airline": "VN",
+            "System": "VN",
+            "Source": "API",
+            "Tourcode": null,
+            "ListFarePax": [
+              {
+                "PaxType": "ADT",
+                "PaxNumb": 1,
+                "BaseFare": 2419000,
+                "BaseFareOrigin": 2419000,
+                "NetFare": 3182000,
+                "NetFareOrigin": 3182000,
+                "TotalFare": 3182000,
+                "TotalFareOrigin": 3182000,
+                "ListFareItem": [
+                  {
+                    "Code": "TICKET_FARE",
+                    "Amount": 2419000,
+                    "Name": "Ticket fare"
+                  },
+                  {
+                    "Code": "TICKET_TAX",
+                    "Amount": 763000,
+                    "Name": "Ticket taxes"
+                  }
+                ],
+                "ListTaxDetail": [
+                  {
+                    "Code": "YR",
+                    "Amount": 450000,
+                    "Name": "YR"
+                  },
+                  {
+                    "Code": "AX",
+                    "Amount": 99000,
+                    "Name": "AX"
+                  },
+                  {
+                    "Code": "C4",
+                    "Amount": 20000,
+                    "Name": "C4"
+                  },
+                  {
+                    "Code": "UE",
+                    "Amount": 194000,
+                    "Name": "UE"
+                  }
+                ],
+                "ListFareInfo": [
+                  {
+                    "SegmentId": "1",
+                    "StartPoint": "HAN",
+                    "EndPoint": "SGN",
+                    "FareClass": "H",
+                    "FareBasis": "HPXVNFS",
+                    "HandBaggage": "1 piece x 10kg",
+                    "FreeBaggage": "1 piece x 23kg",
+                    "Availability": 9
+                  }
+                ]
+              },
+              {
+                "PaxType": "CHD",
+                "PaxNumb": 1,
+                "BaseFare": 1814250,
+                "BaseFareOrigin": 1814250,
+                "NetFare": 2386500,
+                "NetFareOrigin": 2386500,
+                "TotalFare": 2386500,
+                "TotalFareOrigin": 2386500,
+                "ListFareItem": [
+                  {
+                    "Code": "TICKET_FARE",
+                    "Amount": 1814250,
+                    "Name": "Ticket fare"
+                  },
+                  {
+                    "Code": "TICKET_TAX",
+                    "Amount": 572250,
+                    "Name": "Ticket taxes"
+                  }
+                ],
+                "ListTaxDetail": [
+                  {
+                    "Code": "YR",
+                    "Amount": 337500,
+                    "Name": "YR"
+                  },
+                  {
+                    "Code": "AX",
+                    "Amount": 74250,
+                    "Name": "AX"
+                  },
+                  {
+                    "Code": "C4",
+                    "Amount": 15000,
+                    "Name": "C4"
+                  },
+                  {
+                    "Code": "UE",
+                    "Amount": 145500,
+                    "Name": "UE"
+                  }
+                ],
+                "ListFareInfo": [
+                  {
+                    "SegmentId": "1",
+                    "StartPoint": "HAN",
+                    "EndPoint": "SGN",
+                    "FareClass": "H",
+                    "FareBasis": "HPXVNFS",
+                    "HandBaggage": "1 piece x 10kg",
+                    "FreeBaggage": "1 piece x 23kg",
+                    "Availability": 9
+                  }
+                ]
+              },
+              {
+                "PaxType": "INF",
+                "PaxNumb": 1,
+                "BaseFare": 241900,
+                "BaseFareOrigin": 241900,
+                "NetFare": 318200,
+                "NetFareOrigin": 318200,
+                "TotalFare": 318200,
+                "TotalFareOrigin": 318200,
+                "ListFareItem": [
+                  {
+                    "Code": "TICKET_FARE",
+                    "Amount": 241900,
+                    "Name": "Ticket fare"
+                  },
+                  {
+                    "Code": "TICKET_TAX",
+                    "Amount": 76300,
+                    "Name": "Ticket taxes"
+                  }
+                ],
+                "ListTaxDetail": [
+                  {
+                    "Code": "YR",
+                    "Amount": 45000,
+                    "Name": "YR"
+                  },
+                  {
+                    "Code": "AX",
+                    "Amount": 9900,
+                    "Name": "AX"
+                  },
+                  {
+                    "Code": "C4",
+                    "Amount": 2000,
+                    "Name": "C4"
+                  },
+                  {
+                    "Code": "UE",
+                    "Amount": 19400,
+                    "Name": "UE"
+                  }
+                ],
+                "ListFareInfo": [
+                  {
+                    "SegmentId": "1",
+                    "StartPoint": "HAN",
+                    "EndPoint": "SGN",
+                    "FareClass": "H",
+                    "FareBasis": "HPXVNFS",
+                    "HandBaggage": "1 piece x 10kg",
+                    "FreeBaggage": "1 piece x 10kg",
+                    "Availability": 9
+                  }
+                ]
+              }
+            ]
+          },
+          "ListFlight": [
+            {
+              "Leg": 1,
+              "FlightId": "1",
+              "Airline": "VN",
+              "Operator": "VN",
+              "StartPoint": "HAN",
+              "EndPoint": "SGN",
+              "StartDate": "2025-05-09T05:00:00",
+              "EndDate": "2025-05-09T07:10:00",
+              "DepartDate": "09052025 0500",
+              "ArriveDate": "09052025 0710",
+              "FlightNumber": "205",
+              "StopNum": 0,
+              "Duration": 130,
+              "ListSegment": [
+                {
+                  "Leg": 1,
+                  "SegmentId": "1",
+                  "Airline": "VN",
+                  "Operator": "VN",
+                  "StartPoint": "HAN",
+                  "EndPoint": "SGN",
+                  "StartDate": "2025-05-09T05:00:00",
+                  "EndDate": "2025-05-09T07:10:00",
+                  "DepartDate": "09052025 0500",
+                  "ArriveDate": "09052025 0710",
+                  "StartTerminal": "1",
+                  "EndTerminal": "3",
+                  "FlightNumber": "205",
+                  "Equipment": "321",
+                  "FareClass": "H",
+                  "FareBasis": "HPXVNFS",
+                  "Duration": 130,
+                  "HasStop": false,
+                  "StopPoint": null,
+                  "StopTime": 0,
+                  "TechnicalStop": null,
+                  "MarriageGrp": null,
+                  "FlightsMiles": 0,
+                  "Status": "Confirmed"
+                }
+              ]
+            }
+          ],
+          "Adt": 1,
+          "Chd": 1,
+          "Inf": 1,
+          "Session": "DTC099-EE9E19A8FE124B40B6AB1AFBB6EF8226",
+          "Status": true,
+          "Error": null,
+          "Message": "Flight booked successfully",
+          "Language": "vi",
+          "AgentId": "AGENT01",
+          "AgentCode": "TRAVEL01",
+          "AgentType": "B2B"
+        }
+      ],
+      "ListPassenger": [
+        {
+          "Index": 1,
+          "ParentId": 0,
+          "NameId": "PAX001",
+          "Type": "ADT",
+          "Title": "MR",
+          "Gender": 1,
+          "GivenName": "Van A",
+          "Surname": "Nguyen",
+          "DateOfBirth": "1980-01-01",
+          "PassengerId": "PAX001",
+          "Passport": {
+            "DocumentType": "PASSPORT",
+            "DocumentCode": "P12345678","ListBaggage": [
+              {
+                "System": "VN",
+                "Airline": "VN",
+                "Value": "1PC23KG",
+                "Type": "CHECKED",
+                "PaxType": "ADT",
+                "Name": "Checked Baggage",
+                "Description": "1 piece x 23kg",
+                "Price": 0,
+                "Currency": "VND",
+                "Leg": 1,
+                "StartPoint": "HAN",
+                "EndPoint": "SGN",
+                "StatusCode": "Confirmed",
+                "Confirmed": true,
+                "Session": "DTC099-EE9E19A8FE124B40B6AB1AFBB6EF8226"
+              },
+            "DocumentExpiry": "2030-01-01",
+            "Nationality": "VN",
+            "IssueCountry": "VN"
+          },
+
+            {
+              "System": "VN",
+              "Airline": "VN",
+              "Value": "1PC10KG",
+              "Type": "CARRY_ON",
+              "PaxType": "ADT",
+              "Name": "Hand Baggage",
+              "Description": "1 piece x 10kg",
+              "Price": 0,
+              "Currency": "VND",
+              "Leg": 1,
+              "StartPoint": "HAN",
+              "EndPoint": "SGN",
+              "StatusCode": "Confirmed",
+              "Confirmed": true,
+              "Session": "DTC099-EE9E19A8FE124B40B6AB1AFBB6EF8226"
+            }
+          ],
+          "ListPreSeat": [],
+          "ListService": [],
+          "ListFareInfo": [
+            {
+              "Code": "TICKET_FARE",
+              "Amount": 2419000,
+              "Name": "Ticket fare"
+            },
+            {
+              "Code": "TICKET_TAX",
+              "Amount": 763000,
+              "Name": "Ticket taxes"
+            }
+          ],
+          "ListMembership": []
+        },
+        {
+          "Index": 2,
+          "ParentId": 1,
+          "NameId": "PAX002",
+          "Type": "CHD",
+          "Title": "MS",
+          "Gender": 2,
+          "GivenName": "Thi B",
+          "Surname": "Nguyen",
+          "DateOfBirth": "2015-05-05",
+          "PassengerId": "PAX002",
+          "Passport": {
+            "DocumentType": "PASSPORT",
+            "DocumentCode": "P87654321",
+            "DocumentExpiry": "2030-01-01",
+            "Nationality": "VN",
+            "IssueCountry": "VN"
+          },
+          "ListBaggage": [
+            {
+              "System": "VN",
+              "Airline": "VN",
+              "Value": "1PC23KG",
+              "Type": "CHECKED",
+              "PaxType": "CHD",
+              "Name": "Checked Baggage",
+              "Description": "1 piece x 23kg",
+              "Price": 0,
+              "Currency": "VND",
+              "Leg": 1,
+              "StartPoint": "HAN",
+              "EndPoint": "SGN",
+              "StatusCode": "Confirmed",
+              "Confirmed": true,
+              "Session": "DTC099-EE9E19A8FE124B40B6AB1AFBB6EF8226"
+            },
+            {
+              "System": "VN",
+              "Airline": "VN",
+              "Value": "1PC10KG",
+              "Type": "CARRY_ON",
+              "PaxType": "CHD",
+              "Name": "Hand Baggage",
+              "Description": "1 piece x 10kg",
+              "Price": 0,
+              "Currency": "VND",
+              "Leg": 1,
+              "StartPoint": "HAN",
+              "EndPoint": "SGN",
+              "StatusCode": "Confirmed",
+              "Confirmed": true,
+              "Session": "DTC099-EE9E19A8FE124B40B6AB1AFBB6EF8226"
+            }
+          ],
+          "ListPreSeat": [],
+          "ListService": [],
+          "ListFareInfo": [
+            {
+              "Code": "TICKET_FARE",
+              "Amount": 1814250,
+              "Name": "Ticket fare"
+            },
+            {
+              "Code": "TICKET_TAX",
+              "Amount": 572250,
+              "Name": "Ticket taxes"
+            }
+          ],
+          "ListMembership": []
+        },
+        {
+          "Index": 3,
+          "ParentId": 1,
+          "NameId": "PAX003",
+          "Type": "INF",
+          "Title": "INF",
+          "Gender": 1,
+          "GivenName": "Van C",
+          "Surname": "Nguyen",
+          "DateOfBirth": "2024-01-01",
+          "PassengerId": "PAX003",
+          "Passport": {
+            "DocumentType": "PASSPORT",
+            "DocumentCode": "P11223344",
+            "DocumentExpiry": "2025-12-31",
+            "Nationality": "VN",
+            "IssueCountry": "VN"
+          },
+          "ListBaggage": [
+            {
+              "System": "VN",
+              "Airline": "VN",
+              "Value": "1PC10KG",
+              "Type": "CARRY_ON",
+              "PaxType": "INF",
+              "Name": "Hand Baggage",
+              "Description": "1 piece x 10kg",
+              "Price": 0,
+              "Currency": "VND",
+              "Leg": 1,
+              "StartPoint": "HAN",
+              "EndPoint": "SGN",
+              "StatusCode": "Confirmed",
+              "Confirmed": true,
+              "Session": "DTC099-EE9E19A8FE124B40B6AB1AFBB6EF8226"
+            }
+          ],
+          "ListPreSeat": [],
+          "ListService": [
+            {
+              "System": "VN",
+              "Airline": "VN",
+              "Value": "INFMEAL",
+              "Type": "MEAL",
+              "PaxType": "INF",
+              "Name": "Infant Meal",
+              "Description": "Special meal for infant",
+              "Price": 0,
+              "Currency": "VND",
+              "Leg": 1,
+              "StartPoint": "HAN",
+              "EndPoint": "SGN",
+              "StatusCode": "Confirmed",
+              "Confirmed": true,
+              "Session": "DTC099-EE9E19A8FE124B40B6AB1AFBB6EF8226"
+            }
+          ],
+          "ListFareInfo": [
+            {
+              "Code": "TICKET_FARE",
+              "Amount": 241900,
+              "Name": "Ticket fare"
+            },
+            {
+              "Code": "TICKET_TAX",
+              "Amount": 76300,
+              "Name": "Ticket taxes"
+            }
+          ],
+          "ListMembership": []
+        }
+      ],
+      "ListTicket": [
+        {
+          "Index": 1,
+          "System": "VN",
+          "Airline": "VN",
+          "BookingCode": "ABC123",
+          "ConjTktNum": null,
+          "TicketNumber": "1234567890",
+          "TicketType": "E-Ticket",
+          "TicketStatus": "Issued",
+          "TicketRelated": null,
+          "RelatedType": null,
+          "ServiceType": null,
+          "ServiceCode": null,
+          "PaxType": "ADT",
+          "FullName": "NGUYEN VAN A",
+          "GivenName": "VAN A",
+          "Surname": "NGUYEN",
+          "NameId": "PAX001",
+          "Fare": 2419000,
+          "Tax": 763000,
+          "Fee": 0,
+          "Vat": 0,
+          "Total": 3182000,
+          "Currency": "VND",
+          "Itinerary": 1,
+          "StartPoint": "HAN",
+          "EndPoint": "SGN",
+          "DepartDate": "09052025 0500",
+          "ReturnDate": null,
+          "FareClass": "H",
+          "FareBasis": "HPXVNFS",
+          "FlightType": "Domestic",
+          "Segments": "VN205",
+          "Remark": null,
+          "TicketImage": null,
+          "IssueDate": "2025-05-07T15:35:00"
+        },
+        {
+          "Index": 2,
+          "System": "VN",
+          "Airline": "VN",
+          "BookingCode": "ABC123",
+          "ConjTktNum": null,
+          "TicketNumber": "1234567891",
+          "TicketType": "E-Ticket",
+          "TicketStatus": "Issued",
+          "TicketRelated": null,
+          "RelatedType": null,
+          "ServiceType": null,
+          "ServiceCode": null,
+          "PaxType": "CHD",
+          "FullName": "NGUYEN THI B",
+          "GivenName": "THI B",
+          "Surname": "NGUYEN",
+          "NameId": "PAX002",
+          "Fare": 1814250,
+          "Tax": 572250,
+          "Fee": 0,
+          "Vat": 0,
+          "Total": 2386500,
+          "Currency": "VND",
+          "Itinerary": 1,
+          "StartPoint": "HAN",
+          "EndPoint": "SGN",
+          "DepartDate": "09052025 0500",
+          "ReturnDate": null,
+          "FareClass": "H",
+          "FareBasis": "HPXVNFS",
+          "FlightType": "Domestic",
+          "Segments": "VN205",
+          "Remark": null,
+          "TicketImage": null,
+          "IssueDate": "2025-05-07T15:35:00"
+        },
+        {
+          "Index": 3,
+          "System": "VN",
+          "Airline": "VN",
+          "BookingCode": "ABC123",
+          "ConjTktNum": null,
+          "TicketNumber": "1234567892",
+          "TicketType": "E-Ticket",
+          "TicketStatus": "Issued",
+          "TicketRelated": null,
+          "RelatedType": null,
+          "ServiceType": null,
+          "ServiceCode": null,
+          "PaxType": "INF",
+          "FullName": "NGUYEN VAN C",
+          "GivenName": "VAN C",
+          "Surname": "NGUYEN",
+          "NameId": "PAX003",
+          "Fare": 241900,
+          "Tax": 76300,
+          "Fee": 0,
+          "Vat": 0,
+          "Total": 318200,
+          "Currency": "VND",
+          "Itinerary": 1,
+          "StartPoint": "HAN",
+          "EndPoint": "SGN",
+          "DepartDate": "09052025 0500",
+          "ReturnDate": null,
+          "FareClass": "H",
+          "FareBasis": "HPXVNFS",
+          "FlightType": "Domestic",
+          "Segments": "VN205",
+          "Remark": "Special meal for infant",
+          "TicketImage": null,
+          "IssueDate": "2025-05-07T15:35:00"
+        }
+      ]
+    }
+  ]
+}

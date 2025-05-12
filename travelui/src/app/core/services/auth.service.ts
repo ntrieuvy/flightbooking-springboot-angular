@@ -7,6 +7,7 @@ import { RegistrationReqDTO } from '../models/interface/registration-req.dto';
 import { AuthenticationReqDTO } from '../models/interface/authentication-req.dto';
 import { AuthenticationResDTO } from '../models/interface/authentication-res.dto';
 import { JwtHelperService } from './jwt-helper.service';
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
@@ -20,7 +21,8 @@ export class AuthService {
 
     constructor(
         private apiService: ApiService,
-        private jwtHelper: JwtHelperService
+        private jwtHelper: JwtHelperService,
+        private router: Router
     ) { }
 
     checkUserExists(identifier: string): Observable<boolean> {
@@ -64,10 +66,27 @@ export class AuthService {
         return this.apiService.get<void>(`${this.endpoint}/resend-otp`, params);
     }
 
-    loginWithGoogle(token: string): Observable<AuthenticationResDTO> {
-        return this.apiService.post<AuthenticationResDTO>(`${this.endpoint}/google-auth`, { token })
+    initiateSocialLogin(type: string): void {
+        this.apiService.post<{ redirectUrl: string }>(
+            `${this.endpoint}/social/authenticate?type=${type}`
+        ).subscribe({
+            next: (response) => {
+                window.location.href = response.redirectUrl;
+            },
+            error: (err) => {
+                console.error('Failed to initiate social login', err);
+            }
+        });
+    }
+
+    handleGoogleCallback(code: string): Observable<AuthenticationResDTO> {
+        return this.apiService.post<AuthenticationResDTO>(`${this.endpoint}/google/callback`, { code })
             .pipe(
-                tap(response => this.handleLoginSuccess(response))
+                tap(response => this.handleLoginSuccess(response)),
+                catchError(error => {
+                    this.router.navigate(['/auth'], { queryParams: { error: 'google_auth_failed' } });
+                    return throwError(() => error);
+                })
             );
     }
 

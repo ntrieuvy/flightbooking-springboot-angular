@@ -1,0 +1,168 @@
+<div class="dtc-flight-container">
+    <div *ngIf="loading" class="dtc-loading-state">
+        <div class="dtc-spinner"></div>
+        <p>Searching for flight...</p>
+    </div>
+
+    <div *ngIf="error" class="dtc-error-state">
+        ⚠️ {{ error }}
+    </div>
+
+    <div *ngIf="flightResults?.data?.ListGroup?.length > 0" class="dtc-flight-results">
+        <nav class="dtc-results-tabs">
+            <button *ngFor="let group of filteredGroups; let i = index" [class.dtc-active]="activeTabIndex === i"
+                (click)="onTabChange(i)">
+                {{ getAirportName(group.StartPoint) }} → {{ getAirportName(group.EndPoint) }}
+            </button>
+        </nav>
+
+        <div *ngIf="selectedFlights.length > 0" class="dtc-booking-actions">
+            <div class="dtc-selected-info">
+                <div class="dtc-selected-count">
+                    {{ selectedFlights.length }} flight(s) selected
+                </div>
+                <div class="dtc-total-price">
+                    Total: {{ getTotalPrice() | currency:'VND':'symbol':'1.0-0' }}
+                </div>
+            </div>
+            <button class="dtc-btn dtc-btn-primary dtc-submit-booking" (click)="onSubmitBooking()"
+                [disabled]="selectedFlights.length === 0">
+                Book Now
+            </button>
+        </div>
+
+        <div class="dtc-flight-list">
+            <div *ngFor="let option of getPaginatedOptions()" class="dtc-air-option"
+                [attr.data-session]="option.SessionId" [attr.data-air-option]="option.AirOptionId"
+                [attr.data-airline]="option.Airline">
+
+                <div class="dtc-flight-summ" (click)="onFlightDetail(option)">
+                    <div class="dtc-flight-info">
+                        <div class="dtc-flight-air-logo">
+                            <img [src]="getAirlineLogo(option.Airline)" [alt]="option.Airline" class="dtc-airline-logo">
+                            <div class="dtc-flight-mobile-info dtc-mobile-flight-number">
+                                {{ option.ListFlightOption[0].ListFlight[0].FlightNumber }}
+                            </div>
+                        </div>
+
+                        <div class="dtc-airline">
+                            <div class="dtc-airline-name">{{ getAirlineName(option.Airline) }}</div>
+                            <div class="dtc-aircraft dtc-sf-regular">
+                                {{ option.ListFlightOption[0].ListFlight[0].StartDate | date:'dd/MM/yyyy' }}
+                            </div>
+                        </div>
+
+                        <div class="dtc-flight-startdate">
+                            <div class="dtc-flight-time dtc-sf-bold">
+                                {{ formatTime(option.ListFlightOption[0].ListFlight[0].StartDate) }}
+                            </div>
+                            <div class="dtc-flight-point dtc-sf-light">
+                                {{ option.ListFlightOption[0].ListFlight[0].StartPoint }}
+                            </div>
+                        </div>
+
+                        <div class="dtc-flight-connector"
+                            [title]="isDirectFlight(option) ? 'Bay thẳng' : 'Có quá cảnh'">
+                            <div class="dtc-flight-total-time dtc-sf-regular">
+                                {{ formatDuration(option.ListFlightOption[0].ListFlight[0].Duration) }}
+                            </div>
+                            <div class="dtc-flight-connector-line"></div>
+                            <!-- <div class="dtc-flight-connector-wrap">
+                                <div class="dtc-flight-connector-point dtc-sf-light dtc-flight-stop">
+                                    {{ option.ListFlightOption[0].ListFlight[0].AircraftType || 'Unknown' }}
+                                </div>
+                                <div class="dtc-t-startdate dtc-flight-connector-point">
+                                    {{ option.ListFlightOption[0].ListFlight[0].StartDate | date:'dd/MM/yyyy' }}
+                                </div>
+                            </div> -->
+                        </div>
+
+                        <div class="dtc-flight-enddate">
+                            <div class="dtc-flight-time dtc-sf-bold">
+                                {{ formatTime(option.ListFlightOption[0].ListFlight[0].EndDate) }}
+                                <span *ngIf="hasDayDifference(option)" class="dtc-day-difference">+1</span>
+                            </div>
+                            <div class="dtc-flight-point dtc-sf-light">
+                                {{ option.ListFlightOption[0].ListFlight[0].EndPoint }}
+                            </div>
+                        </div>
+
+                        <div class="dtc-flighnum">
+                            <div class="dtc-flight-number">
+                                {{ option.ListFlightOption[0].ListFlight[0].FlightNumber }}
+                            </div>
+                            <div class="dtc-detail dtc-sf-light">
+                                <span class="dtc-detail-icon">
+                                    <img src="https://plg.datacom.vn/img/information.png" width="14">
+                                </span>
+                                <span class="dtc-detail-txt">details</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dtc-flight-price-content">
+                    <div class="dtc-fare-option">
+                        <button type="button" class="dtc-btn dtc-total-fare"
+                            (click)="toggleFareOptions(option, $event)">
+                            <b>{{ option.selectedFare?.TotalFare | currency:'VND':'symbol':'1.0-0' }}</b>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="dtc-currency-dropicon" viewBox="0 0 19 20"
+                                fill="none">
+                                <path
+                                    d="M5.86625 7.29248L9.5 10.9262L13.1338 7.29248L14.25 8.41665L9.5 13.1666L4.75 8.41665L5.86625 7.29248Z"
+                                    fill="#212529"></path>
+                            </svg>
+                        </button>
+                        <div class="dtc-list-fare-option" *ngIf="option.showFareOptions">
+                            <div *ngFor="let fare of option.ListFareOption"
+                                [class.dtc-active]="fare.FareBasis === option.selectedFare?.FareBasis"
+                                (click)="onFareSelect(option, fare.FareBasis)">
+                                <div class="dtc-line-1">
+                                    <span class="dtc-farename">{{ fare.CabinName }}</span>
+                                    <span class="dtc-price">{{ fare.ListFarePax[0].TotalFare |
+                                        currency:'VND':'symbol':'1.0-0' }}</span>
+                                </div>
+                                <div class="dtc-line-2">
+                                    <span class="dtc-farebasis">{{ fare.ListFarePax[0].ListFareInfo[0].FareBasis
+                                        }}</span>
+                                    <span class="dtc-remain"><strong>{{ fare.ListFarePax[0].ListFareInfo[0].Availability
+                                            }}</strong></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dtc-fselect-btn">
+                        <button type="button" class="dtc-btn dtc-btn-primary dtc-btn-select-flight"
+                            [ngClass]="{ 'dtc-btn-remove': isFlightSelected(option) }" (click)="onBookFlight(option)">
+                            <span class="dtc-select-flight-text">
+                                {{ isFlightSelected(option) ? 'Remove' : 'Book' }}
+                            </span>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="dtc-pagination-controls" *ngIf="filteredGroups[activeTabIndex]?.ListAirOption?.length > pageSize">
+            <span (click)="onPageChange(currentPage - 1)" [class.dtc-disabled]="currentPage === 1">
+                &laquo; Previous
+            </span>
+            <span class="dtc-page-info">
+                Page {{ currentPage }} of {{ totalPages }}
+            </span>
+            <span (click)="onPageChange(currentPage + 1)" [class.dtc-disabled]="currentPage === totalPages">
+                Next &raquo;
+            </span>
+        </div>
+
+        <app-flight-detail-modal [showDetailModal]="showDetailModal" [selectedOption]="selectedFlight"
+            (closeModal)="onCloseModal()">
+        </app-flight-detail-modal>
+    </div>
+
+    <div *ngIf="!loading && !error && flightResults?.data?.ListGroup?.length === 0" class="dtc-no-results">
+        ✈️ No flight found matching your criteria
+    </div>
+</div>

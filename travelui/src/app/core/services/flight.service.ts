@@ -10,6 +10,7 @@ import { ApiService } from './api.service';
 })
 export class FlightService {
     private readonly endpoint = '/flights';
+    private readonly searchEndpoint = '/search';
 
     constructor(private apiService: ApiService) {}
 
@@ -20,7 +21,7 @@ export class FlightService {
             pageSize: searchData.pageSize || 10
         };
 
-        return this.apiService.post<FlightsResDTO>(`${this.endpoint}`, data)
+        return this.apiService.post<FlightsResDTO>(`${this.endpoint + this.searchEndpoint}`, data)
             .pipe(
                 catchError(error => {
                     console.error('Search Flights Error:', error);

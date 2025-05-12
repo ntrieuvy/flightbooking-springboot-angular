@@ -14,7 +14,7 @@ export class HeaderComponent {
   isMenuOpen: boolean = false;
 
   navItems: NavItem[] = [
-    { label: 'FLIGHT TICKETS' , slug: 'flight-tickets' },
+    { label: 'FLIGHT TICKETS' , slug: 'flight' },
     { label: 'HOTELS', slug: 'hotels' },
     { label: 'VILLAS & HOMESTAYS', slug: 'villas-homestays' },
     {
@@ -22,7 +22,7 @@ export class HeaderComponent {
       slug: 'bus-boat-tickets',
       children: [
         { label: 'BUS TICKETS', slug: 'bus-tickets' },
-        { label: 'BOAT TICKETS', slug: 'boat-tickets' }
+        { label: 'BOAT TICKETS', slug: 'boat-tickets' },
       ]
     },
     { label: 'CONTACT', slug: 'contact' },

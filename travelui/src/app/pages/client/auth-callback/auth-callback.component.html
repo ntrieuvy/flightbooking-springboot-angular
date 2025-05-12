@@ -1,0 +1,24 @@
+<div class="callback-container">
+  <div class="callback-card" [class.error]="error">
+    <ng-container *ngIf="!error; else errorState">
+      <div class="spinner">
+        <div class="spinner-blade"></div>
+        <div class="spinner-blade"></div>
+        <div class="spinner-blade"></div>
+        <div class="spinner-blade"></div>
+        <div class="spinner-blade"></div>
+        <div class="spinner-blade"></div>
+        <div class="spinner-blade"></div>
+        <div class="spinner-blade"></div>
+      </div>
+      <h2 class="message">{{ loadingMessage }}</h2>
+      <p class="hint">Please wait while we authenticate your account</p>
+    </ng-container>
+
+    <ng-template #errorState>
+      <div class="error-icon">!</div>
+      <h2 class="message error">Authentication Failed</h2>
+      <p class="hint error">Redirecting to login page...</p>
+    </ng-template>
+  </div>
+</div>

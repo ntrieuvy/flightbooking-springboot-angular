@@ -1,0 +1,35 @@
+.search-container__top {
+  position: sticky;
+  top: 50px;
+  background: white;
+  z-index: 10;
+  padding: 1rem 0;
+
+  @media (max-width: 768px) {
+    padding: 0;
+    top: 0;
+    z-index: 0;
+    position: relative;
+  }
+}
+
+
+.search-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+
+  &__main-content {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    // gap: 2rem;
+    margin-top: 0.5rem;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      padding: 0;
+      margin: 0;
+      max-width: 100%;
+    }
+  }
+}
