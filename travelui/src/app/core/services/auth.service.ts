@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 export class AuthService {
     private readonly endpoint = '/auth';
     private readonly AUTH_TOKEN_KEY = 'authToken';
+    private readonly CART_KEY = 'bookCart';
 
     private authStatusSubject = new BehaviorSubject<boolean>(this.checkAuthStatus());
     public authStatus$ = this.authStatusSubject.asObservable();
@@ -112,14 +113,16 @@ export class AuthService {
         return token ? !this.jwtHelper.isTokenExpired(token) : false;
     }
 
-    getCurrentUser(): { fullName: string; email: string } | null {
+    getCurrentUser(): { id: string, fullName: string; email: string; phone: string } | null {
         const token = this.getToken();
         if (!token) return null;
 
         const payload = this.jwtHelper.decodeToken(token);
         return payload ? {
+            id: payload.id,
             fullName: payload.fullName,
-            email: payload.sub
+            email: payload.sub.includes("@") ? payload.sub : "",
+            phone: payload.sub.includes("@") ? "" : payload.sub,
         } : null;
     }
 
@@ -129,7 +132,20 @@ export class AuthService {
     }
 
     getToken(): string | null {
-        return localStorage.getItem(this.AUTH_TOKEN_KEY);
+        const token = localStorage.getItem(this.AUTH_TOKEN_KEY);
+        if (this.jwtHelper.isTokenExpired(token)) {
+            localStorage.removeItem(this.AUTH_TOKEN_KEY);
+            return;
+        }
+        return token;
+    }
+
+    getCart(): any | null {
+        return localStorage.getItem(this.CART_KEY);
+    }
+
+    setCart(data: any): void {
+        localStorage.setItem(this.CART_KEY, data);
     }
 
     private checkAuthStatus(): boolean {

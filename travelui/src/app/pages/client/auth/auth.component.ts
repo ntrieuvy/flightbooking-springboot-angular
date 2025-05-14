@@ -175,7 +175,14 @@ export class AuthComponent implements OnInit, OnDestroy {
 
   private handleAuthSuccess(response: AuthenticationResDTO): void {
     this.isLoading = false;
-    this.router.navigate(['/']);
+    const returnUrl = this.getReturnUrl();
+  
+    this.router.navigateByUrl(returnUrl || '/');
+  }
+
+  private getReturnUrl(): string | null {
+    const queryParams = new URLSearchParams(window.location.search);
+    return queryParams.get('returnUrl');
   }
 
   private handleRegisterSuccess(response: AuthenticationResDTO): void {

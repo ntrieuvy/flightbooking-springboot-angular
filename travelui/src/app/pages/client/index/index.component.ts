@@ -57,16 +57,16 @@ export class IndexComponent implements OnInit {
 
   testimonials = [
     {
-      text: '"I had an amazing experience with the Safari Adventure. Our guide was extremely knowledgeable and we saw all the animals we hoped to see. Worth every penny!"',
-      author: '- Sarah Thompson'
+      text: '"The Ha Long Bay cruise was absolutely stunning. The limestone islands and emerald waters were like something out of a dream. Highly recommended!"',
+      author: '- Emily Nguyen'
     },
     {
-      text: '"The Cultural Tour of Kyoto was exceptional. The local knowledge provided by our guide gave us insights we would never have discovered on our own."',
-      author: '- David Chen'
+      text: '"Exploring Hoi An Ancient Town at night was magical. The lanterns, the food, and the riverside atmosphere created unforgettable memories."',
+      author: '- Michael Tran'
     },
     {
-      text: '"Booking through TravelGigs made our Bali vacation stress-free. The Premium package had the perfect balance of activities and relaxation time."',
-      author: '- Jessica Williams'
+      text: '"Our trekking trip in Sapa was incredible. The views of the terraced rice fields and the hospitality of the local people were beyond expectations."',
+      author: '- Laura Pham'
     }
   ];
 

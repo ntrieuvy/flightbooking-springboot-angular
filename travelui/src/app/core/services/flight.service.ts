@@ -4,13 +4,17 @@ import { catchError } from 'rxjs/operators';
 import { FlightsResDTO } from '../models/interface/flights-res.dto';
 import { FlightReqDTO } from '../models/interface/flights-req.dto';
 import { ApiService } from './api.service';
+import { BookFlightReqDTO } from '../models/interface/book-flight-req.dto';
+import { BookFlightResDTO } from '../models/interface/book-flight-res.dto';
 
 @Injectable({
     providedIn: 'root'
 })
 export class FlightService {
+
     private readonly endpoint = '/flights';
     private readonly searchEndpoint = '/search';
+    private readonly bookEndpoint = '/book';
 
     constructor(private apiService: ApiService) {}
 
@@ -29,4 +33,14 @@ export class FlightService {
                 })
             );
     }
+
+    bookFlight(data: BookFlightReqDTO): Observable<BookFlightResDTO> {
+    return this.apiService.post<BookFlightResDTO>(`${this.endpoint + this.bookEndpoint}`, data)
+      .pipe(
+        catchError(error => {
+          console.error('Booking Flight Error:', error);
+          return throwError(() => new Error('Failed to book flight'));
+        })
+      );
+  }
 }

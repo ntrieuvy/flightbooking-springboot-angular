@@ -1,1 +1,148 @@
-<p>profile works!</p>
+<div class="profile-container">
+  <div class="profile-grid">
+    <div class="profile-main">
+      <div class="profile-card">
+        <div class="card-header">
+          <h2>Profile Information</h2>
+        </div>
+        
+        <div *ngIf="loading; else profileContent" class="loading-container">
+          <div class="spinner"></div>
+          <p>Loading profile...</p>
+        </div>
+
+        <ng-template #profileContent>
+          <form *ngIf="profileForm" [formGroup]="profileForm" class="profile-form">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="firstname">First Name</label>
+                <input 
+                  id="firstname" 
+                  type="text" 
+                  formControlName="firstname"
+                  [readonly]="!isEditing"
+                  class="form-input">
+              </div>
+              <div class="form-group">
+                <label for="lastname">Last Name</label>
+                <input 
+                  id="lastname" 
+                  type="text" 
+                  formControlName="lastname"
+                  [readonly]="!isEditing"
+                  class="form-input">
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input 
+                  id="email" 
+                  type="email" 
+                  formControlName="email"
+                  [readonly]="!isEditing"
+                  class="form-input">
+              </div>
+              <div class="form-group">
+                <label for="phoneNumber">Phone Number</label>
+                <input 
+                  id="phoneNumber" 
+                  type="tel" 
+                  formControlName="phoneNumber"
+                  [readonly]="!isEditing"
+                  class="form-input">
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button 
+                *ngIf="!isEditing"
+                type="button" 
+                class="btn btn-primary"
+                (click)="toggleEdit()">
+                <span class="btn-icon">✏️</span>
+                Edit Profile
+              </button>
+
+              <div *ngIf="isEditing" class="action-group">
+                <button 
+                  type="button" 
+                  class="btn btn-secondary"
+                  (click)="toggleEdit()">
+                  <span class="btn-icon">✖</span>
+                  Cancel
+                </button>
+                <button 
+                  type="button" 
+                  class="btn btn-success"
+                  (click)="saveProfile()"
+                  [disabled]="loading || profileForm.invalid">
+                  <span class="btn-icon">✓</span>
+                  Save Changes
+                  <span *ngIf="loading" class="btn-spinner"></span>
+                </button>
+              </div>
+            </div>
+          </form>
+        </ng-template>
+      </div>
+    </div>
+
+    <div class="profile-sidebar">
+      <div class="profile-card">
+        <div class="card-header">
+          <h2>Change Password</h2>
+        </div>
+        
+        <form *ngIf="passwordForm" [formGroup]="passwordForm" class="profile-form">
+          <div class="form-group">
+            <label for="currentPassword">Current Password</label>
+            <input 
+              id="currentPassword" 
+              type="password" 
+              formControlName="currentPassword"
+              class="form-input">
+          </div>
+          <div class="form-group">
+            <label for="newPassword">New Password</label>
+            <input 
+              id="newPassword" 
+              type="password" 
+              formControlName="newPassword"
+              class="form-input">
+            <small class="error-message" 
+                   *ngIf="passwordForm.get('newPassword')?.errors?.minlength">
+              Password must be at least 8 characters
+            </small>
+          </div>
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input 
+              id="confirmPassword" 
+              type="password" 
+              formControlName="confirmPassword"
+              class="form-input">
+            <small class="error-message" 
+                   *ngIf="passwordForm.errors?.mismatch">
+              Passwords do not match
+            </small>
+          </div>
+
+          <div class="form-actions">
+            <button 
+              type="button" 
+              class="btn btn-warning"
+              (click)="changePassword()"
+              [disabled]="passwordLoading || passwordForm.invalid">
+              <span class="btn-icon">🔑</span>
+              Change Password
+              <span *ngIf="passwordLoading" class="btn-spinner"></span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <app-booking-history></app-booking-history>
+  </div>
+</div>

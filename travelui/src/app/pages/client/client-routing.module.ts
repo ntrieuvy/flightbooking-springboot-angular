@@ -7,6 +7,8 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { ProfileComponent } from './profile/profile.component';
 import { IndexComponent } from './index/index.component';
 import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
+import { BookingHistoryComponent } from './booking-history/booking-history.component';
+import { BookingConfirmationComponent } from './booking-confirmation/booking-confirmation.component';
 
 import { AuthGuard } from 'src/app/core/guards/auth.guard';
 
@@ -21,6 +23,8 @@ const routes: Routes = [
       { path: 'flight', component: FlightComponent },
       { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard] },
       { path: 'profile', component: ProfileComponent },
+      { path: 'booking/history', component: BookingHistoryComponent, canActivate: [AuthGuard] },
+      { path: 'booking/comfirmation', component: BookingConfirmationComponent, canActivate: [AuthGuard] }
     ]
   }
 ];

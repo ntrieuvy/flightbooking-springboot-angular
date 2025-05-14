@@ -48,6 +48,10 @@ export class JwtHelperService {
     return this.decodeToken(token);
   }
 
+  getUserId(): string | null {
+    return this.getCurrentUser()?.id || null;
+  }
+
   getUserEmail(): string | null {
     return this.getCurrentUser()?.sub || null;
   }
@@ -66,6 +70,10 @@ export class JwtHelperService {
 
   getPhoneNumber(): string | null {
     return this.getCurrentUser()?.phoneNumber || null;
+  }
+
+  getLoginProvider(): string | null {
+    return this.getCurrentUser()?.loginProvider || null;
   }
 
   clearCache(): void {

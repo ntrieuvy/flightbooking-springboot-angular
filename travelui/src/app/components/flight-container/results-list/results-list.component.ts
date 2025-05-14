@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-results-list',
@@ -25,11 +26,15 @@ export class ResultsListComponent {
   @Output() pageChange = new EventEmitter<number>();
   @Output() fareSelect = new EventEmitter<{ option: any, value: string }>();
   @Output() flightBook = new EventEmitter<any>();
+  @Output() flightRemove = new EventEmitter<any>();
   @Output() flightDetail = new EventEmitter<any>();
   @Output() closeModal = new EventEmitter<void>();
   @Output() submitBooking = new EventEmitter<void>();
 
-  constructor(private datePipe: DatePipe) { }
+  constructor(
+    private datePipe: DatePipe,
+    private route: ActivatedRoute,
+  ) { }
 
   toggleFareOptions(option: any, event: MouseEvent) {
     event.stopPropagation();
@@ -60,13 +65,15 @@ export class ResultsListComponent {
 
   onFareSelect(option: any, value: string) {
     option.showFareOptions = false;
-    console.log(option.showFareOptions);
-    console.log(option);
     this.fareSelect.emit({ option, value });
   }
 
   onBookFlight(option: any) {
-    this.flightBook.emit(option);
+    if (this.isFlightSelected(option)) {
+      this.flightRemove.emit(option);
+    } else {
+      this.flightBook.emit(option);
+    }
   }
 
   onFlightDetail(flight: any) {
@@ -140,9 +147,38 @@ export class ResultsListComponent {
 
   getTotalPrice(): number {
     return this.selectedFlights.reduce((total, flight) => {
-      return total + (flight.selectedFare?.TotalFare || 0);
+      const fareList = flight.selectedFare?.ListFarePax || [];
+
+      let numPassengers = this.getQuantityPassengers();
+
+      const flightTotal = fareList.reduce((sum, pax) => {
+        let count = 0;
+        switch (pax.PaxType) {
+          case 'ADT':
+            count = numPassengers.adt;
+            break;
+          case 'CHD':
+            count = numPassengers.chd;
+            break;
+          case 'INF':
+            count = numPassengers.inf;
+            break;
+        }
+        return sum + (pax.TotalFare || 0) * count;
+      }, 0);
+
+      return total + flightTotal;
     }, 0);
   }
+
+  getQuantityPassengers(): {adt: number, chd: number, inf: number, total: number} {
+    const params = this.route.snapshot.queryParams;
+    const adultsCount = parseInt(params['adults'], 10) || 0;
+    const childrenCount = parseInt(params['children'], 10) || 0;
+    const infantCount = parseInt(params['infant'], 10) || 0;
+    return { adt: adultsCount, chd: childrenCount, inf: infantCount, total: adultsCount + childrenCount + infantCount }
+  }
+
 
   getAirlineLogo(code: string): string {
     const url = "https://plg.datacom.vn/img/airlines/";

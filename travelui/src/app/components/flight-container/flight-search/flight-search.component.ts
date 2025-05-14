@@ -39,18 +39,28 @@ export class FlightSearchComponent implements OnInit {
   ngOnInit() {
     this.setupFormListeners();
     this.route.queryParams.subscribe(params => {
+      const isEmptyParams = Object.keys(params).length === 0;
+      const isFlightsPage = this.router.url.startsWith('/flight');
+
+      if (isEmptyParams && isFlightsPage) {
+        this.onSubmit();
+        return;
+      }
+
       const from = params['from'];
       const to = params['to'];
       const departureDate = params['departureDate'];
       const returnDate = params['returnDate'];
       const adults = parseInt(params['adults'] || '1', 10);
       const children = parseInt(params['children'] || '0', 10);
+      const infant = parseInt(params['infant'] || '0', 2);
 
       this.searchForm.patchValue({
         from: from || 'HAN',
         to: to || 'SGN',
         adults: adults,
         children: children,
+        infant: infant,
         departDate: departureDate || this.formatDateUI(new Date())
       });
 
@@ -115,7 +125,8 @@ export class FlightSearchComponent implements OnInit {
       to: formValue.to,
       departureDate: formValue.departDate,
       adults: formValue.adults,
-      children: formValue.children
+      children: formValue.children,
+      infant: formValue.infant
     };
 
     if (formValue.tripType === 'Round Trip') {

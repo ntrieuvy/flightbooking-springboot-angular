@@ -4,10 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { AdminRoutingModule } from './admin-routing.module';
+import { AdminDoashboardComponent } from './admin-doashboard/admin-doashboard.component';
 
 @NgModule({
   declarations: [
-  ],
+  AdminDoashboardComponent],
   imports: [
     CommonModule,
     FormsModule,

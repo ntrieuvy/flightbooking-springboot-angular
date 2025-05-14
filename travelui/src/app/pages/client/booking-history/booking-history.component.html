@@ -1,0 +1,193 @@
+<div class="booking-history">
+  <header class="booking-header">
+    <h1 class="booking-title">Booking History</h1>
+    <p class="booking-subtitle">View and manage your flight bookings</p>
+  </header>
+
+  <div class="loading-state" *ngIf="isLoading">
+    <div class="spinner"></div>
+    <p>Loading your bookings...</p>
+  </div>
+
+  <div class="empty-state" *ngIf="!isLoading && orders.length === 0">
+    <div class="empty-icon">✈️</div>
+    <h3>No bookings found</h3>
+    <p>You haven't made any bookings yet. Start your journey now!</p>
+    <a href="/flight" class="btn btn-primary">Search Flights</a>
+  </div>
+
+  <div class="order-list">
+    <div *ngFor="let order of orders" class="order-item" [class.expanded]="expandedOrderId === order.id">
+      <div class="order-summary" (click)="toggleOrderDetails(order.id)">
+        <div class="order-meta">
+          <span class="order-id">Booking #{{order.providerBookingId || order.id}}</span>
+          <span class="order-date">{{datePipe.transform(order.createdAt, 'mediumDate')}}</span>
+        </div>
+        <div class="order-status" [class]="'status-' + order.status">
+          {{getOrderStatus(order.status)}}
+        </div>
+        <div class="order-price">
+          {{order.orderDetails[0]?.currency || 'USD'}} 
+          {{calculateTotalOrderPrice(order) | number:'1.2-2'}}
+        </div>
+        <span class="toggle-icon">{{expandedOrderId === order.id ? '▲' : '▼'}}</span>
+      </div>
+
+      <div *ngIf="expandedOrderId === order.id" class="order-details">
+        <section class="flight-section">
+          <h2 class="section-title">Flight Details</h2>
+          <div *ngFor="let detail of order.orderDetails" class="flight-detail">
+            <div class="flight-header">
+              <span class="airline">{{detail.airline}}</span>
+              <span class="booking-ref">Booking Ref: {{detail.bookingCode}}</span>
+            </div>
+            
+            <div *ngFor="let flight of detail.flights" class="flight-segment">
+              <div class="flight-route">
+                <span class="departure">{{flight.departure}}</span>
+                <span class="arrow">→</span>
+                <span class="arrival">{{flight.arrival}}</span>
+              </div>
+              <div class="flight-timing">
+                <span class="date">{{datePipe.transform(flight.date, 'mediumDate')}}</span>
+                <span class="time">
+                  {{flight.std}} - {{flight.sta}}
+                </span>
+                <span class="duration" *ngIf="flight.duration">({{flight.duration}} mins)</span>
+              </div>
+              <div class="flight-number">
+                Flight: {{flight.airline}}{{flight.number}}
+                <span *ngIf="flight.operating"> (Operated by {{flight.operating}})</span>
+              </div>
+              <div class="flight-class" *ngIf="flight.fareClass || flight.groupClass">
+                Class: {{flight.fareClass || flight.groupClass}}
+              </div>
+              <div class="baggage-info" *ngIf="flight.handBaggage || flight.allowanceBaggage">
+                <span *ngIf="flight.handBaggage">Hand baggage: {{flight.handBaggage}}</span>
+                <span *ngIf="flight.allowanceBaggage">Checked baggage: {{flight.allowanceBaggage}}</span>
+              </div>
+            </div>
+            
+            <div class="passenger-summary">
+              <div class="passenger-count">
+                <span class="count-item">
+                  <span class="icon">👤</span>
+                  {{getPassengerCount(order.passengers).adults}} Adult(s)
+                </span>
+                <span class="count-item" *ngIf="getPassengerCount(order.passengers).children > 0">
+                  <span class="icon">🧒</span>
+                  {{getPassengerCount(order.passengers).children}} Child(ren)
+                </span>
+                <span class="count-item" *ngIf="getPassengerCount(order.passengers).infants > 0">
+                  <span class="icon">👶</span>
+                  {{getPassengerCount(order.passengers).infants}} Infant(s)
+                </span>
+              </div>
+              
+              <div class="price-breakdown">
+                <div class="price-row">
+                  <span>Base Fare: </span>
+                  <span>{{detail.currency}} {{detail.totalNetPrice | number:'1.2-2'}}</span>
+                </div>
+                <div class="price-row">
+                  <span>Taxes & Fees: </span>
+                  <span>{{detail.currency}} 
+                    {{(detail.taxAdt * detail.numberAdt + detail.taxChd * detail.numberChd + detail.taxInf * detail.numberInf + detail.commissionTotal) | number:'1.2-2'}}
+                  </span>
+                </div>
+                <div class="price-row" *ngIf="detail.totalServiceFee > 0">
+                  <span>Service Fee:</span>
+                  <span>{{detail.currency}} {{detail.totalServiceFee | number:'1.2-2'}}</span>
+                </div>
+                <div class="price-row" *ngIf="detail.totalDiscount > 0">
+                  <span>Discount:</span>
+                  <span>-{{detail.currency}} {{detail.totalDiscount | number:'1.2-2'}}</span>
+                </div>
+                <div class="price-row total">
+                  <span>Total:</span>
+                  <span>{{detail.currency}} {{detail.totalPrice | number:'1.2-2'}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="passenger-section">
+          <h2 class="section-title">Passenger Information</h2>
+          <div *ngFor="let passenger of order.passengers" class="passenger-card">
+            <span class="passenger-badge">{{passenger.type | uppercase}}</span>
+            <div class="passenger-details">
+              <h3 class="passenger-name">{{passenger.firstName}} {{passenger.lastName}}</h3>
+              <div class="passenger-info">
+                <span class="gender">{{passenger.gender | titlecase}}</span>
+                <span class="dob">{{datePipe.transform(passenger.dob, 'mediumDate')}}</span>
+              </div>
+              <div class="passport-info" *ngIf="passenger.passport">
+                <span>{{passenger.passport.documentType | titlecase}}: {{passenger.passport.documentCode}}</span>
+                <span>Nationality: {{passenger.passport.nationality}}</span>
+                <span>Expires: {{datePipe.transform(passenger.passport.documentExpiry, 'mediumDate')}}</span>
+              </div>
+              <div class="baggage-info" *ngIf="passenger.baggages && passenger.baggages.length > 0">
+                <strong>Baggage:</strong>
+                <div *ngFor="let baggage of passenger.baggages">
+                  <span>{{baggage.name}}: {{baggage.value}} ({{baggage.currency}} {{baggage.price | number:'1.2-2'}})</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="ticket-section" *ngIf="hasTickets(order)">
+          <h2 class="section-title">Ticket Information</h2>
+          <div *ngFor="let detail of order.orderDetails">
+            <div *ngFor="let ticket of detail.tickets" class="ticket-card">
+              <div class="ticket-header">
+                <span class="ticket-number">{{ticket.airline}}-{{ticket.ticketNumber}}</span>
+                <span class="ticket-status" [class]="'status-' + (ticket.status || 'issued')">
+                  {{ticket.status || 'Issued' | titlecase}}
+                </span>
+              </div>
+              <div class="ticket-body">
+                <div class="ticket-passenger">{{ticket.passengerName}}</div>
+                <div class="ticket-flight">
+                  <span>{{ticket.startPoint}} → {{ticket.endPoint}}</span>
+                  <span>{{datePipe.transform(ticket.departDate, 'mediumDate')}}</span>
+                </div>
+                <div class="ticket-meta">
+                  <span>Booking Code: {{ticket.bookingCode}}</span>
+                  <span>Fare Class: {{ticket.fareClass}}</span>
+                  <span>Issued: {{datePipe.transform(ticket.issueDate, 'mediumDate')}}</span>
+                </div>
+              </div>
+              <div class="ticket-error" *ngIf="ticket.errorMessage">
+                Error: {{ticket.errorMessage}}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="contact-section">
+          <h2 class="section-title">Contact Information</h2>
+          <div class="contact-card">
+            <div class="contact-name">{{order.customer.fullName}}</div>
+            <div class="contact-email">{{order.customer.email}}</div>
+            <div class="contact-phone">{{order.customer.phone}}</div>
+            <div class="contact-address">{{order.customer.address}}</div>
+          </div>
+        </section>
+
+        <section class="actions-section">
+          <h2 class="section-title">Booking Actions</h2>
+          <div class="action-buttons">
+            <button class="btn btn-secondary" *ngIf="hasTickets(order)">
+              <span class="icon">🎫</span> View Ticket
+            </button>
+            <button class="btn btn-secondary">
+              <span class="icon">🖨️</span> Print Itinerary
+            </button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>

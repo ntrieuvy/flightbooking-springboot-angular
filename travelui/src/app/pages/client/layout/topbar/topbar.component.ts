@@ -39,7 +39,7 @@ export class TopbarComponent implements OnInit, OnDestroy {
     { code: 'VND', name: 'Việt Nam Đồng' },
     { code: 'JPY', name: 'Japanese Yen' }
   ];
-  currentCurrency: Currency = this.currencies[0];
+  currentCurrency: Currency = this.currencies[1];
 
   languages: Language[] = [
     { locale: 'en', name: 'English', flag: 'us' },
@@ -74,7 +74,7 @@ export class TopbarComponent implements OnInit, OnDestroy {
       const currentUser = this.authService.getCurrentUser();
       if (currentUser) {
         this.userName = currentUser.fullName || '';
-        this.email = currentUser.email || '';
+        this.email = currentUser.email;
         this.userNameInitial = this.userName.charAt(0).toUpperCase();
       }
       

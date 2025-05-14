@@ -83,8 +83,6 @@ export class FlightContainerComponent implements OnInit {
     this.maxPrice = null;
     this.flightResults = null;
 
-    console.log("Searching flights with data:", event.requestData);
-
     this.flightService.searchFlights(event.requestData).subscribe({
       next: (res: FlightsResDTO) => {
         this.flightResults = res;
@@ -228,13 +226,17 @@ export class FlightContainerComponent implements OnInit {
 
   submitBooking() {
     const bookingData = this.selectedFlights.map(flight => ({
+      session: this.flightResults.data.Session,
+      airOptionId: flight.OptionId,
+      flightOptionId: flight.ListFlightOption[0].OptionId,
+      fareOptionId: flight.selectedFare.OptionId,
       flightNumber: flight.ListFlightOption[0].ListFlight[0].FlightNumber,
       airline: flight.Airline,
       departure: flight.ListFlightOption[0].ListFlight[0].StartDate,
       arrival: flight.ListFlightOption[0].ListFlight[0].EndDate,
       fare: {
         type: flight.selectedFare.FareBasis,
-        price: flight.selectedFare.TotalFare,
+        price: flight.selectedFare.PriceAdt,
         currency: flight.selectedFare.Currency
       }
     }));
@@ -242,6 +244,7 @@ export class FlightContainerComponent implements OnInit {
     console.log('Submitting booking:', bookingData);
     const formData = this.route.snapshot.queryParams;
     console.log('Form data:', formData);
+    console.log("selected", this.selectedFlights)
     this.router.navigate(['/checkout'], {
       state: {
         bookingData,
@@ -335,9 +338,10 @@ export class FlightContainerComponent implements OnInit {
     );
   }
 
-  getTotalPrice(): number {
-    return this.selectedFlights.reduce((total, flight) => {
-      return total + (flight.selectedFare?.TotalFare || 0);
-    }, 0);
+  removeFlight(flightToRemove: any) {
+    this.selectedFlights = this.selectedFlights.filter(flight => 
+      flight.ListFlightOption[0].ListFlight[0].FlightNumber !== 
+      flightToRemove.ListFlightOption[0].ListFlight[0].FlightNumber
+    );
   }
 }

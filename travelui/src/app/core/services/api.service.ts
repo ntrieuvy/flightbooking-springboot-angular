@@ -19,36 +19,19 @@ export class ApiService {
     return this.http.post<T>(
       `${this.apiUrl}${path}`,
       body,
-      { headers: this.getHeaders() }
     );
   }
 
   put<T>(path: string, body: object = {}): Observable<T> {
     return this.http.put<T>(
       `${this.apiUrl}${path}`,
-      body,
-      { headers: this.getHeaders() }
+      body
     );
   }
 
   delete<T>(path: string): Observable<T> {
     return this.http.delete<T>(
-      `${this.apiUrl}${path}`,
-      { headers: this.getHeaders() }
+      `${this.apiUrl}${path}`
     );
-  }
-
-  private getHeaders(): HttpHeaders {
-    const headersConfig = {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    };
-
-    const token = localStorage.getItem('token');
-    if (token) {
-      headersConfig['Authorization'] = `Bearer ${token}`;
-    }
-
-    return new HttpHeaders(headersConfig);
   }
 }

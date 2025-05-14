@@ -1,198 +1,359 @@
-<div class="booking-container">
-    <h2>Booking Details - {{slug | titlecase}}</h2>
+<div class="checkout-container">
+  <div class="progress-steps">
+    <div class="step" [class.active]="currentStep === 1">
+      <span class="step-number">1</span>
+      <span class="step-label">Passenger Details</span>
+    </div>
+    <div class="step" [class.active]="currentStep === 2">
+      <span class="step-number">2</span>
+      <span class="step-label">Contact Information</span>
+    </div>
+    <div class="step" [class.active]="currentStep === 3">
+      <span class="step-number">3</span>
+      <span class="step-label">Review & Payment</span>
+    </div>
+  </div>
 
-    <div class="progress-steps">
-        <div class="step active">Passenger Information</div>
-        <div class="step">Seat Selection</div>
-        <div class="step">Payment</div>
-        <div class="step">Confirmation</div>
+  <div class="booking-info">
+    <div class="booking-summary">
+      <h3>Your Booking</h3>
+      <div class="flight-summary" *ngFor="let flight of bookingData">
+        <div class="airline">{{ flight.airline }} - {{ flight.flightNumber }}</div>
+        <div class="flight-details">
+          <div class="departure">
+            <div class="time">{{ formatTime(flight.departure) }}</div>
+            <div class="date">{{ formatDate(flight.departure) }}</div>
+          </div>
+          <div class="duration">→</div>
+          <div class="arrival">
+            <div class="time">{{ formatTime(flight.arrival) }}</div>
+            <div class="date">{{ formatDate(flight.arrival) }}</div>
+          </div>
+        </div>
+        <div class="fare">
+          <span>Fare: {{ flight.fare.type }}</span>
+          <span class="price">{{ flight.fare.price | number }} {{ flight.fare.currency }}</span>
+        </div>
+      </div>
+      <div class="total-price">
+        Total: {{ getTotalPrice() | number }} {{ bookingData[0]?.fare.currency || 'USD' }}
+      </div>
     </div>
 
-    <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()" class="booking-form">
-        <div class="form-section">
-            <h3>Adult Passengers ({{searchForm.adults}})</h3>
-            <div formArrayName="adults">
-                <div *ngFor="let adult of adults.controls; let i = index" [formGroupName]="i" class="passenger-form">
-                    <h4>Adult {{i + 1}}</h4>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Full Name</label>
-                            <input type="text" formControlName="fullName">
-                            <div *ngIf="adult.get('fullName')?.touched && adult.get('fullName')?.errors"
-                                class="error-message">
-                                Full name is required
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>ID Card/Passport Number</label>
-                            <input type="text" formControlName="idNumber">
-                            <div *ngIf="adult.get('idNumber')?.touched && adult.get('idNumber')?.errors"
-                                class="error-message">
-                                ID number is required
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Date of Birth</label>
-                            <input type="date" formControlName="dob">
-                            <div *ngIf="adult.get('dob')?.touched && adult.get('dob')?.errors" class="error-message">
-                                Date of birth is required
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Gender</label>
-                            <select formControlName="gender">
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
+    <div class="step-container" *ngIf="currentStep === 1">
+      <h2>Passenger Information</h2>
+
+      <form class="passenger-form">
+        <div class="passenger-group" *ngFor="let passenger of passengers; let i = index">
+          <h3>
+            <span *ngIf="passenger.type === 'ADT'">Adult {{ i + 1 }}</span>
+            <span *ngIf="passenger.type === 'CHD'">Child {{ i - formData.adults + 1 }}</span>
+            <span *ngIf="passenger.type === 'INF'">Infant</span>
+          </h3>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name <span class="required">*</span></label>
+              <input type="text" [(ngModel)]="passenger.firstName" [ngModelOptions]="{standalone: true}" required>
             </div>
+            <div class="form-group">
+              <label>Last Name <span class="required">*</span></label>
+              <input type="text" [(ngModel)]="passenger.lastName" [ngModelOptions]="{standalone: true}" required>
+            </div>
+            <div class="form-group">
+              <label>Gender <span class="required">*</span></label>
+              <select [(ngModel)]="passenger.gender" [ngModelOptions]="{standalone: true}">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Date of Birth <span class="required">*</span></label>
+              <input type="date" [(ngModel)]="passenger.dob" [ngModelOptions]="{standalone: true}" required
+                (change)="validatePassengerAge(passenger)">
+              <div class="hint" *ngIf="passenger.dob">
+                <span *ngIf="passenger.type === 'CHD'">Age: {{ calculateAge(passenger.dob) }} (must be 2-12)</span>
+                <span *ngIf="passenger.type === 'INF'">Age: {{ calculateAge(passenger.dob) }} (must be under 2)</span>
+              </div>
+            </div>
+            <div class="form-group" *ngIf="passenger.type === 'ADT'">
+              <label>Document Type <span class="required">*</span></label>
+              <select [(ngModel)]="passenger.passport.documentType" [ngModelOptions]="{standalone: true}" required>
+                <option value="passport">Passport</option>
+                <option value="national_id">National ID</option>
+                <option value="driving_license">Driving License</option>
+              </select>
+            </div>
+            <div class="form-group" *ngIf="passenger.type === 'ADT'">
+              <label>Document Code (Number) <span class="required">*</span></label>
+              <input type="text" [(ngModel)]="passenger.passport.documentCode" [ngModelOptions]="{standalone: true}"
+                required>
+            </div>
+          </div>
+
+          <!-- <div *ngIf="passenger.type === 'INF'">
+            <label>Accompanying Adult</label>
+            <select [(ngModel)]="passenger.parentId" name="parentId-{{i}}">
+              
+            </select>
+          </div> -->
+
+          <div class="form-row" *ngIf="passenger.type === 'ADT'">
+            <div class="form-group">
+              <label>Document Expiry Date<span class="required">*</span></label>
+              <input type="date" [(ngModel)]="passenger.passport.documentExpiry" [ngModelOptions]="{standalone: true}">
+              <div class="hint"
+                *ngIf="passenger.passport.documentExpiry && isPassportExpired(passenger.passport.documentExpiry)">
+                Document is expired!
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Nationality <span class="required">*</span></label>
+              <select [(ngModel)]="passenger.passport.nationality" [ngModelOptions]="{standalone: true}" required>
+                <option value="">Select Nationality</option>
+                <option *ngFor="let country of countries" [value]="country">{{country}}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Issue Country <span class="required">*</span></label>
+              <select [(ngModel)]="passenger.passport.issueCountry" [ngModelOptions]="{standalone: true}" required>
+                <option value="">Select Country</option>
+                <option *ngFor="let country of countries" [value]="country">{{country}}</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- <div class="form-row">
+            <label>Baggage Options</label>
+            <div *ngFor="let bag of baggageOptions">
+              <input type="checkbox" [checked]="passenger.baggages.includes(bag)" (change)="toggleBaggage(passenger, bag)">
+              {{ bag.value }}kg - {{ bag.price | currency }}
+            </div>
+          </div> -->
+
+        </div>
+      </form>
+
+      <div class="navigation-buttons">
+        <button class="btn prev-btn" (click)="prevStep()" [disabled]="currentStep === 1">Back</button>
+        <button class="btn next-btn" (click)="nextStep()">Continue</button>
+      </div>
+    </div>
+
+    <!-- Step 2: Contact Information -->
+    <div class="step-container" *ngIf="currentStep === 2">
+      <h2>Contact Information</h2>
+
+      <form class="contact-form">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" [(ngModel)]="contactInfo.fullName" [ngModelOptions]="{standalone: true}" required>
         </div>
 
-        <div class="form-section" *ngIf="searchForm.children > 0">
-            <h3>Child Passengers ({{searchForm.children}})</h3>
-            <div formArrayName="children">
-                <div *ngFor="let child of children.controls; let i = index" [formGroupName]="i" class="passenger-form">
-                    <h4>Child {{i + 1}}</h4>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Full Name</label>
-                            <input type="text" formControlName="fullName">
-                            <div *ngIf="child.get('fullName')?.touched && child.get('fullName')?.errors"
-                                class="error-message">
-                                Full name is required
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>ID Card/Passport Number</label>
-                            <input type="text" formControlName="idNumber">
-                            <div *ngIf="child.get('idNumber')?.touched && child.get('idNumber')?.errors"
-                                class="error-message">
-                                ID number is required
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Date of Birth</label>
-                            <input type="date" formControlName="dob">
-                            <div *ngIf="child.get('dob')?.touched && child.get('dob')?.errors" class="error-message">
-                                Date of birth is required
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Gender</label>
-                            <select formControlName="gender">
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" [(ngModel)]="contactInfo.email" [ngModelOptions]="{standalone: true}" required readonly>
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" [(ngModel)]="contactInfo.phone" [ngModelOptions]="{standalone: true}" required>
+          </div>
         </div>
 
-        <div class="form-section" *ngIf="searchForm.infants > 0">
-            <h3>Infant Passengers ({{searchForm.infants}})</h3>
-            <div formArrayName="infants">
-                <div *ngFor="let infant of infants.controls; let i = index" [formGroupName]="i" class="passenger-form">
-                    <h4>Infant {{i + 1}}</h4>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Full Name</label>
-                            <input type="text" formControlName="fullName">
-                            <div *ngIf="infant.get('fullName')?.touched && infant.get('fullName')?.errors"
-                                class="error-message">
-                                Full name is required
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Birth Certificate Number</label>
-                            <input type="text" formControlName="birthCertNumber">
-                            <div *ngIf="infant.get('birthCertNumber')?.touched && infant.get('birthCertNumber')?.errors"
-                                class="error-message">
-                                Birth certificate number is required
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Date of Birth</label>
-                            <input type="date" formControlName="dob">
-                            <div *ngIf="infant.get('dob')?.touched && infant.get('dob')?.errors" class="error-message">
-                                Date of birth is required
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Gender</label>
-                            <select formControlName="gender">
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="form-group">
+          <label>Address</label>
+          <textarea [(ngModel)]="contactInfo.address" [ngModelOptions]="{standalone: true}" rows="3"></textarea>
         </div>
 
-        <div class="form-section contact-section" formGroupName="contactInfo">
-            <h3>Contact Information</h3>
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Full Name</label>
-                    <input type="text" formControlName="fullName">
-                    <div *ngIf="bookingForm.get('contactInfo.fullName')?.touched && bookingForm.get('contactInfo.fullName')?.errors"
-                        class="error-message">
-                        Full name is required
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Phone Number</label>
-                    <input type="tel" formControlName="phone">
-                    <div *ngIf="bookingForm.get('contactInfo.phone')?.touched && bookingForm.get('contactInfo.phone')?.errors"
-                        class="error-message">
-                        Valid phone number is required
-                    </div>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" formControlName="email">
-                    <div *ngIf="bookingForm.get('contactInfo.email')?.touched && bookingForm.get('contactInfo.email')?.errors"
-                        class="error-message">
-                        Valid email is required
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>ID Card/Passport Number</label>
-                    <input type="text" formControlName="idNumber">
-                    <div *ngIf="bookingForm.get('contactInfo.idNumber')?.touched && bookingForm.get('contactInfo.idNumber')?.errors"
-                        class="error-message">
-                        ID number is required
-                    </div>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group full-width">
-                    <label>Address</label>
-                    <input type="text" formControlName="address">
-                    <div *ngIf="bookingForm.get('contactInfo.address')?.touched && bookingForm.get('contactInfo.address')?.errors"
-                        class="error-message">
-                        Address is required
-                    </div>
-                </div>
-            </div>
+        <!-- Add invoice option toggle -->
+        <div class="form-group">
+          <span class="check-invoice">
+            <label>I need an invoice</label>
+            <input type="checkbox" [(ngModel)]="needInvoice" [ngModelOptions]="{standalone: true}">
+          </span>
         </div>
 
-        <div class="form-actions">
-            <button type="submit" class="btn-primary">Continue to Seat Selection</button>
+        <!-- Invoice form (shown when needInvoice is true) -->
+        <div class="invoice-form" *ngIf="needInvoice">
+          <h3>Invoice Information</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Tax ID</label>
+              <input type="text" [(ngModel)]="invoiceInfo.taxId" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="form-group">
+              <label>Company Name</label>
+              <input type="text" [(ngModel)]="invoiceInfo.name" [ngModelOptions]="{standalone: true}">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Address</label>
+              <input type="text" [(ngModel)]="invoiceInfo.address" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="form-group">
+              <label>City</label>
+              <input type="text" [(ngModel)]="invoiceInfo.city" [ngModelOptions]="{standalone: true}">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Receiver Name</label>
+              <input type="text" [(ngModel)]="invoiceInfo.receiver" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="form-group">
+              <label>Receiver Email</label>
+              <input type="email" [(ngModel)]="invoiceInfo.email" [ngModelOptions]="{standalone: true}">
+            </div>
+          </div>
         </div>
-    </form>
+      </form>
+
+      <div class="navigation-buttons">
+        <button class="btn prev-btn" (click)="prevStep()">Back</button>
+        <button class="btn next-btn" (click)="nextStep()">Continue</button>
+      </div>
+    </div>
+
+    <!-- Step 3: Review & Payment -->
+    <div class="step-container" *ngIf="currentStep === 3">
+      <h2>Review Your Booking</h2>
+
+      <div class="review-section">
+        <h3>Passenger Details</h3>
+        <div class="passenger-review" *ngFor="let passenger of passengers; let i = index">
+          <h4>
+            <span *ngIf="passenger.type === 'ADT'">Adult {{ i + 1 }}</span>
+            <span *ngIf="passenger.type === 'CHD'">Child {{ i - formData.adults + 1 }}</span>
+            <span *ngIf="passenger.type === 'INF'">Infant</span>
+          </h4>
+          <div class="passenger-details-grid">
+            <div>
+              <strong>Name:</strong> {{ passenger.firstName }} {{ passenger.lastName }}
+            </div>
+            <div>
+              <strong>Gender:</strong> {{ passenger.gender | titlecase }}
+            </div>
+            <div>
+              <strong>Date of Birth:</strong> {{ passenger.dob | date:'mediumDate' }}
+            </div>
+            <div *ngIf="passenger.type === 'ADT'">
+              <strong>Document Type:</strong> {{ passenger.passport.documentType | titlecase }}
+            </div>
+            <div *ngIf="passenger.type === 'ADT'">
+              <strong>Document Number:</strong> {{ passenger.passport.documentCode }}
+            </div>
+            <div *ngIf="passenger.type === 'ADT' && passenger.passport.documentExpiry">
+              <strong>Document Expiry:</strong> {{ passenger.passport.documentExpiry | date:'mediumDate' }}
+            </div>
+            <div *ngIf="passenger.type === 'ADT'">
+              <strong>Nationality:</strong> {{ passenger.passport.nationality }}
+            </div>
+            <div *ngIf="passenger.type === 'ADT'">
+              <strong>Issue Country:</strong> {{ passenger.passport.issueCountry }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-section">
+        <h3>Contact Information</h3>
+        <p>{{ contactInfo.fullName }}</p>
+        <p>{{ contactInfo.email }}</p>
+        <p>{{ contactInfo.phone }}</p>
+        <p>{{ contactInfo.address }}</p>
+      </div>
+
+      <div class="review-section" *ngIf="needInvoice">
+        <h3>Invoice Information</h3>
+        <div class="invoice-details-grid">
+          <div><strong>Tax ID:</strong> {{ invoiceInfo.taxId }}</div>
+          <div><strong>Company Name:</strong> {{ invoiceInfo.name }}</div>
+          <div><strong>Address:</strong> {{ invoiceInfo.address }}</div>
+          <div><strong>City:</strong> {{ invoiceInfo.city }}</div>
+          <div><strong>Receiver:</strong> {{ invoiceInfo.receiver }}</div>
+          <div><strong>Receiver Email:</strong> {{ invoiceInfo.email }}</div>
+        </div>
+      </div>
+
+      <div class="review-section">
+        <h3>Payment</h3>
+        <div class="payment-methods">
+          <label class="payment-method">
+            <input type="radio" name="payment" [checked]="selectedPayment === 'cash'" (click)="selectPayment('cash')">
+            <span>Pay by Cash</span>
+          </label>
+          <label class="payment-method">
+            <input type="radio" name="payment" [checked]="selectedPayment === 'vnpay'" (click)="selectPayment('vnpay')">
+            <span>VNPAY</span>
+          </label>
+          <label class="payment-method">
+            <input type="radio" name="payment" [checked]="selectedPayment === 'bank'" (click)="selectPayment('bank')">
+            <span>Bank Transfer</span>
+          </label>
+        </div>
+
+        <!-- Cash Payment -->
+        <div class="payment-details" *ngIf="selectedPayment === 'cash'">
+          <div class="cash-info">
+            <p>Cash payment is accepted at the counter at our branch located at <strong>TravelTeamSolutions Office, 78
+                Street 36, Van Phuc Residential Area, Thu Duc, Ho Chi Minh City, Vietnam</strong>. Please note that
+              reservations are held for up to 60 minutes from the time of
+              booking.</p>
+          </div>
+        </div>
+
+        <!-- VNPAY Payment -->
+        <div class="payment-details" *ngIf="selectedPayment === 'vnpay'">
+          <div class="vnpay-form">
+            <button class="btn vnpay-btn">Proceed to VNPAY</button>
+          </div>
+        </div>
+
+        <!-- Bank Transfer -->
+        <div class="payment-details" *ngIf="selectedPayment === 'bank'">
+          <div class="bank-transfer">
+            <div class="bank-info">
+              <h4>Bank Account Information</h4>
+              <div class="bank-details">
+                <p><strong>Bank Name:</strong> BIDV</p>
+                <p><strong>Account Name:</strong> NGUYEN QUOC TRANG</p>
+                <p><strong>Account Number:</strong> 6711378400</p>
+                <p><strong>Branch:</strong> BIDV - CN DONG DONG NAI</p>
+              </div>
+            </div>
+            <div class="qr-code">
+              <img src="assets/images/QR-BIDV.png" alt="Bank Transfer QR Code">
+              <p>Scan this QR code to make payment</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="total-review">
+        <h3>Total Amount</h3>
+        <div class="amount">{{ getTotalPrice() | number }} {{ bookingData[0]?.fare.currency || 'USD' }}</div>
+      </div>
+
+      <div class="terms-agreement">
+        <label>
+          <input type="checkbox" required checked>
+          I agree to the <a href="#">terms and conditions</a> and <a href="#">privacy policy</a>
+        </label>
+      </div>
+
+      <div class="navigation-buttons">
+        <button class="btn prev-btn" (click)="prevStep()">Back</button>
+        <button class="btn submit-btn" [class.loading]="isSubmitting" (click)="onSubmit()" [disabled]="isSubmitting">
+          Complete Booking
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

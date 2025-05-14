@@ -7,5 +7,5 @@ export interface Passenger {
   passportNumber: string;
   passportExpiry: Date;
   nationality: string;
-  type: 'adult' | 'child' | 'infant';
+  type: 'ADT' | 'CHD' | 'INF';
 } 

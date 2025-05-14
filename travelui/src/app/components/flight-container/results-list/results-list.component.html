@@ -22,7 +22,7 @@
                     {{ selectedFlights.length }} flight(s) selected
                 </div>
                 <div class="dtc-total-price">
-                    Total: {{ getTotalPrice() | currency:'VND':'symbol':'1.0-0' }}
+                    Total: {{ getTotalPrice() | currency:'VND':'symbol':'1.0-0' }} for {{ getQuantityPassengers().total  }} passengers
                 </div>
             </div>
             <button class="dtc-btn dtc-btn-primary dtc-submit-booking" (click)="onSubmitBooking()"
@@ -105,7 +105,7 @@
                     <div class="dtc-fare-option">
                         <button type="button" class="dtc-btn dtc-total-fare"
                             (click)="toggleFareOptions(option, $event)">
-                            <b>{{ option.selectedFare?.TotalFare | currency:'VND':'symbol':'1.0-0' }}</b>
+                            <b>{{ option.selectedFare?.PriceAdt | currency:'VND':'symbol':'1.0-0' }}</b>
                             <svg xmlns="http://www.w3.org/2000/svg" class="dtc-currency-dropicon" viewBox="0 0 19 20"
                                 fill="none">
                                 <path
@@ -123,9 +123,9 @@
                                         currency:'VND':'symbol':'1.0-0' }}</span>
                                 </div>
                                 <div class="dtc-line-2">
-                                    <span class="dtc-farebasis">{{ fare.ListFarePax[0].ListFareInfo[0].FareBasis
+                                    <span class="dtc-farebasis">{{ fare.FareBasis
                                         }}</span>
-                                    <span class="dtc-remain"><strong>{{ fare.ListFarePax[0].ListFareInfo[0].Availability
+                                    <span class="dtc-remain"><strong>{{ fare.Availability
                                             }}</strong></span>
                                 </div>
                             </div>
