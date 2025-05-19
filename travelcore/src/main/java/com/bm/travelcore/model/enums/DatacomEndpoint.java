@@ -6,11 +6,11 @@ import lombok.Setter;
 public enum DatacomEndpoint {
     ADDON_SERVICE("/flights/addonservice"),
     BOOKING("/flights/book"),
-    CANCEL("/flights/void"),
+    CANCEL("/flight/cancelbooking"),
     CHANGE_FLIGHT("/flights/changeFlight"),
     BAGGAGE("/flights/getbaggage"),
     ISSUE("/flights/issue"),
-    PASSENGER("/flights/changepassenger"),
+    PASSENGER("flight/updatepassenger"),
     VERIFY("/flights/verifyflight"),
     SEARCH("/flights/search"),
     SEARCH_MIN("/flights/searchmin");

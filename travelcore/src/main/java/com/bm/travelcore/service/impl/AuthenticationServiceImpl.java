@@ -1,14 +1,13 @@
 package com.bm.travelcore.service.impl;
 
 import com.bm.travelcore.config.ApplicationProperties;
+import com.bm.travelcore.dto.*;
+import com.bm.travelcore.model.enums.LoginProvider;
 import com.bm.travelcore.utils.constant.AppConstant;
 import com.bm.travelcore.utils.constant.ExceptionMessages;
 import com.bm.travelcore.config.RedisKeyConfig;
-import com.bm.travelcore.dto.AuthenticationReqDTO;
-import com.bm.travelcore.dto.AuthenticationResDTO;
 import com.bm.travelcore.model.enums.IdentifyType;
 import com.bm.travelcore.model.enums.Roles;
-import com.bm.travelcore.dto.RegistrationReqDTO;
 import com.bm.travelcore.model.Role;
 import com.bm.travelcore.model.User;
 import com.bm.travelcore.model.enums.EmailTemplateName;
@@ -24,10 +23,14 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -41,11 +44,14 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final RedisService redisService;
     private final ApplicationProperties properties;
 
-    private final MailService mailService;
+    private final EmailService EMailService;
     private final JwtService jwtService;
     private final SmsService smsService;
 
     private final UserDetailsService userDetailsService;
+    private final ApplicationProperties applicationProperties;
+    private final RestTemplate restTemplate;
+    private final UserService userService;
 
     @Override
     public void register(RegistrationReqDTO reqDTO) throws MessagingException {
@@ -83,6 +89,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .accountLocked(Boolean.FALSE)
                 .enabled(Boolean.FALSE)
                 .roles(List.of(userRole))
+                .loginProvider(LoginProvider.LOCAL)
                 .build();
 
         userRepository.save(user);
@@ -96,18 +103,25 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public AuthenticationResDTO authenticate(AuthenticationReqDTO authenticationReqDTO) {
+        String username = authenticationReqDTO.getIdentifier();
+        if (username.contains("@")) {
+            username = username + ":" + LoginProvider.LOCAL.name();
+        }
+
         var auth = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        authenticationReqDTO.getIdentifier(),
+                        username,
                         authenticationReqDTO.getPassword()
                 )
         );
+
         var claims = new HashMap<String, Object>();
         var user = (User) auth.getPrincipal();
         claims.put("fullName", user.getFullName());
         claims.put("firstName", user.getFirstname());
         claims.put("lastName", user.getLastname());
         claims.put("phoneNumber", user.getPhoneNumber());
+        claims.put("authProvider", user.getLoginProvider().name());
         var jwtToken = jwtService.generateToken(claims, user);
         return AuthenticationResDTO.builder().token(jwtToken).build();
     }
@@ -129,10 +143,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         userRepository.save(user);
 
         var claims = new HashMap<String, Object>();
+        claims.put("id", user.getId());
         claims.put("fullName", user.getFullName());
         claims.put("firstName", user.getFirstname());
         claims.put("lastName", user.getLastname());
         claims.put("phoneNumber", user.getPhoneNumber());
+        claims.put("authProvider", user.getLoginProvider().name());
         var jwtToken = jwtService.generateToken(claims, user);
 
         redisService.delete(key);
@@ -141,9 +157,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public boolean isUserExists(String identifier) {
+    public boolean isUserExists(String identifier, LoginProvider provider) {
         try {
-            userDetailsService.loadUserByUsername(identifier);
+            userService.loadUserByUsername(identifier, provider);
             return true;
         } catch (UsernameNotFoundException ex) {
             return false;
@@ -167,16 +183,116 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         }
     }
 
+    @Override
+    public String buildAuthUrl(String provider) {
+        if ("google".equals(provider)) {
+            return buildGoogleAuthUrl();
+        }
+        throw new IllegalArgumentException("Unsupported provider: " + provider);
+    }
+
+    @Override
+    public AuthenticationResDTO authenticateWithGoogle(String code) {
+        try {
+            GoogleTokenResDTO tokenResponse = exchangeCodeForToken(code);
+
+            GoogleUserInfo userInfo = getUserInfo(tokenResponse.getAccessToken());
+
+            User user = processOAuth2User(userInfo);
+            var claims = new HashMap<String, Object>();
+            claims.put("id", user.getId());
+            claims.put("fullName", user.getFullName());
+            claims.put("firstName", user.getFirstname());
+            claims.put("lastName", user.getLastname());
+            claims.put("phoneNumber", user.getPhoneNumber());
+            claims.put("authProvider", user.getLoginProvider().name());
+            String jwt = jwtService.generateToken(claims, user);
+
+            return AuthenticationResDTO.builder().token(jwt).build();
+        } catch (Exception ex) {
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
+
+    private User processOAuth2User(GoogleUserInfo oAuth2UserInfo) {
+        Optional<User> userOptional = userRepository.findByEmailAndLoginProvider(
+                oAuth2UserInfo.getEmail(),
+                LoginProvider.GOOGLE
+        );
+
+        User user;
+        if (userOptional.isPresent()) {
+            user = userOptional.get();
+        } else {
+            Role userRole = roleRepository.findByName(String.valueOf(Roles.ROLE_USER))
+                    .orElseThrow(() -> new IllegalArgumentException(ExceptionMessages.ROLE_USER_WAS_NOT_INITIALIZED));
+
+            user = userRepository.save(User
+                            .builder()
+                            .firstname(oAuth2UserInfo.getGiven_name())
+                            .lastname(oAuth2UserInfo.getFamily_name())
+                            .email(oAuth2UserInfo.getEmail())
+                            .phoneNumber(null)
+                            .password(passwordEncoder.encode(oAuth2UserInfo.getEmail()))
+                            .loginProvider(LoginProvider.GOOGLE)
+                            .accountLocked(Boolean.FALSE)
+                            .enabled(Boolean.TRUE)
+                            .roles(List.of(userRole))
+                            .build()
+            );
+        }
+
+        return user;
+    }
+
+    private GoogleUserInfo getUserInfo(String accessToken) {
+        String userInfoUrl = applicationProperties.getGoogleUserinfo();
+
+        return restTemplate.getForObject(
+                userInfoUrl + "?access_token=" + accessToken,
+                GoogleUserInfo.class
+        );
+    }
+
+    private GoogleTokenResDTO exchangeCodeForToken(String code) {
+        String tokenUrl = applicationProperties.getGoogleTokenUri();
+
+        Map<String, String> params = Map.of(
+                "code", code,
+                "client_id", applicationProperties.getGoogleClientId(),
+                "client_secret", applicationProperties.getGoogleClientSecret(),
+                "redirect_uri", applicationProperties.getRedirectUri(),
+                "grant_type", "authorization_code"
+        );
+
+        return restTemplate.postForObject(tokenUrl, params, GoogleTokenResDTO.class);
+    }
+
+    private String buildGoogleAuthUrl() {
+        String baseUrl = applicationProperties.getGoogleAuthorization();
+        String redirectUriEncoded = URLEncoder.encode(applicationProperties.getRedirectUri(), StandardCharsets.UTF_8);
+
+        String scope = URLEncoder.encode("openid profile email", StandardCharsets.UTF_8);
+
+        return baseUrl +
+                "?client_id=" + applicationProperties.getGoogleClientId() +
+                "&redirect_uri=" + redirectUriEncoded +
+                "&response_type=code" +
+                "&scope=" + scope +
+                "&access_type=offline" +
+                "&prompt=consent";
+    }
+
     private void sendValidationEmail(User user) throws MessagingException {
         String newToken = generateAndSaveActivationOtp(user);
         if (newToken == null) {
             throw new IllegalArgumentException(ExceptionMessages.ACTIVATION_EMAIL_SENT_WAIT_5_MINUTES);
         } else {
-            mailService.sendValidateMail(
+            EMailService.sendValidateEmail(
                     user.getEmail(),
                     user.getFullName(),
                     EmailTemplateName.ACTIVATE_ACCOUNT,
-                    properties.getActivationUrl() + "?otp=" + newToken,
+                    properties.getRedirectUri() + "?otp=" + newToken,
                     newToken,
                     AppConstant.SUBJECT_MAIL
             );

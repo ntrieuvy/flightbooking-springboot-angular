@@ -43,9 +43,12 @@ public class Passenger {
     private String lastName;
 
     @Column(nullable = false)
-    private Boolean gender;
+    private String gender;
 
     private LocalDate birthday;
+
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    private Passport passport;
 
     @CreatedDate
     @Column(updatable = false)

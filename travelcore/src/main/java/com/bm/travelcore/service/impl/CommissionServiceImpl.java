@@ -1,6 +1,12 @@
 package com.bm.travelcore.service.impl;
 
-import com.bm.travelcore.utils.constant.AppConstant;
+import com.bm.travelcore.dto.CommissionDTO;
+import com.bm.travelcore.model.enums.Roles;
+import com.bm.travelcore.populator.impl.CommissionModelPopulator;
+import com.bm.travelcore.populator.impl.CommissionResPopulator;
+import com.bm.travelcore.repository.AirlineRepository;
+import com.bm.travelcore.repository.RoleRepository;
+import com.bm.travelcore.service.FlightCacheService;
 import com.bm.travelcore.model.*;
 import com.bm.travelcore.repository.AirportRepository;
 import com.bm.travelcore.repository.CommissionRepository;
@@ -8,8 +14,8 @@ import com.bm.travelcore.service.CommissionService;
 import com.bm.travelcore.service.UserService;
 import com.bm.travelcore.strategy.datacom.data.*;
 import com.bm.travelcore.strategy.datacom.data.FlightData;
+import com.bm.travelcore.utils.constant.ExceptionMessages;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +34,11 @@ public class CommissionServiceImpl implements CommissionService {
 
     private final Map<String, AirportGroup> airportGroupCache = new ConcurrentHashMap<>();
     private final Map<String, Commission> commissionCache = new ConcurrentHashMap<>();
+    private final AirlineRepository airlineRepository;
+    private final FlightCacheService flightCacheService;
+    private final CommissionResPopulator commissionResPopulator;
+    private final CommissionModelPopulator commissionModelPopulator;
+    private final RoleRepository roleRepository;
 
     @Override
     @Transactional
@@ -37,7 +48,7 @@ public class CommissionServiceImpl implements CommissionService {
         }
 
         User tempUser = userService.getCurrentAccount();
-        if (tempUser == null) {
+        if (tempUser == null || tempUser.getAgency() == null) {
             tempUser = userService.getSysAccount();
         }
         final User user = tempUser;
@@ -52,6 +63,67 @@ public class CommissionServiceImpl implements CommissionService {
 
         return datacomResDTO;
     }
+
+    @Override
+    public void processCommissionFeeForOrderDetail(Long agencyId, OrderDetail orderDetail, Flight flight) {
+        Airport airport = airportRepository.findByCode(flight.getDeparture());
+        if (airport == null) {
+            return;
+        }
+        Commission commission = commissionRepository.findByAgencyIdAndAirlineCodeAndAirportGroupId(agencyId, flight.getAirline(), airport.getAirportGroup().getId());
+
+        if (commission == null) {
+            return;
+        }
+
+        orderDetail.setCommissionAdt(orderDetail.getCommissionAdt() + commission.getSelfServiceFeeAdt());
+        orderDetail.setCommissionChd(orderDetail.getCommissionChd() + commission.getSelfServiceFeeChd());
+        orderDetail.setCommissionInf(orderDetail.getCommissionInf() + commission.getSelfServiceFeeInf());
+        orderDetail.setSystemCommissionAdt(orderDetail.getSystemCommissionAdt() + commission.getServiceFeeAdt());
+        orderDetail.setSystemCommissionChd(orderDetail.getSystemCommissionChd() + commission.getServiceFeeChd());
+        orderDetail.setSystemCommissionInf(orderDetail.getSystemCommissionInf() + commission.getServiceFeeInf());
+    }
+
+    @Override
+    public List<Commission> findAllByUser(User user) {
+        return userService.isSysUser(user) ? commissionRepository.findAll() : commissionRepository.findByUserId(user.getId());
+    }
+
+    @Override
+    public List<Commission> addOrUpdateCommissions(User user, List<CommissionDTO> commissionListReqDTO) {
+        List<Commission> commissions = new ArrayList<>();
+
+        commissionListReqDTO.forEach(commissionDTO -> {
+            Commission commission;
+
+            if (commissionDTO.getId() != null) {
+                Optional<Commission> optionalCommission = commissionRepository.findById(commissionDTO.getId());
+                commission = optionalCommission.orElseGet(Commission::new);
+            } else {
+                commission = new Commission();
+            }
+
+            if (userService.isSysUser(user) || commission.getUser() != null && commission.getUser().getId().equals(user.getId())) {
+                commissionModelPopulator.populate(commissionDTO, commission);
+                commissions.add(commission);
+            }
+        });
+
+        commissionRepository.saveAll(commissions);
+        commissionRepository.flush();
+
+        return commissions;
+    }
+
+    @Override
+    public void deleteByUser(User user, Long id) {
+        Commission commission = commissionRepository.findById(id).orElse(null);
+        if (commission != null && commission.getUser().getId().equals(user.getId())) {
+            commissionRepository.deleteById(id);
+        }
+    }
+
+
 
     private boolean shouldSkipCommissionProcessing(FlightSearchResData datacomResDTO) {
         return datacomResDTO == null || !datacomResDTO.isSuccess()
@@ -143,12 +215,12 @@ public class CommissionServiceImpl implements CommissionService {
         AirportGroup startGroup = airportGroupCache.get(startPoint);
         AirportGroup endGroup = airportGroupCache.get(endPoint);
 
-        if (startGroup != null && endGroup != null && startGroup.equals(endGroup)) {
+        if (startGroup != null && startGroup.equals(endGroup)) {
             airportGroupCache.put(routeKey, startGroup);
             return startGroup;
         }
 
-        AirportGroup group = findAirportGroupForFlight(startPoint, endPoint);
+        AirportGroup group = flightCacheService.findAirportGroupForFlight(startPoint, endPoint);
         if (group != null) {
             airportGroupCache.put(routeKey, group);
         }
@@ -160,7 +232,7 @@ public class CommissionServiceImpl implements CommissionService {
         String commissionKey = createCommissionKey(user, airlineCode, airportGroup.getId());
         Commission commission = commissions.computeIfAbsent(commissionKey,
                 k -> commissionCache.computeIfAbsent(commissionKey,
-                        key -> getCommission(user.getId(), airlineCode, airportGroup.getId())));
+                        key -> flightCacheService.getCommission(user.getId(), airlineCode, airportGroup.getId())));
 
         if (commission != null && fareOption.getListFarePax() != null) {
             fareOption.getListFarePax().forEach(farePax ->
@@ -169,12 +241,13 @@ public class CommissionServiceImpl implements CommissionService {
 
             fareOption.setTotalFare(fareOption.getListFarePax().get(0).getTotalFare());
             fareOption.setBaseFare(fareOption.getListFarePax().get(0).getBaseFare());
+            fareOption.setPriceAdt(fareOption.getTotalFare());
         }
     }
 
     private void applyCommissionToPax(FarePax farePax, Commission commission, User user) {
         String paxType = farePax.getPaxType().trim().toUpperCase();
-        double commissionFee = user.getAgency() != null
+        double commissionFee = user.getAgency() != null && user.getId() != 1
                 ? getSelfServiceFee(paxType, commission)
                 : getServiceFee(paxType, commission);
 
@@ -204,26 +277,6 @@ public class CommissionServiceImpl implements CommissionService {
 
     private String createCommissionKey(User user, String airlineCode, Long airportGroupId) {
         return user.getId() + "-" + airlineCode + "-" + airportGroupId;
-    }
-
-    @Cacheable(value = AppConstant.COMMISSION_CACHE, key = "#userId + '-' + #airlineCode + '-' + #airportGroupId", unless = "#result == null")
-    public Commission getCommission(Long userId, String airlineCode, Long airportGroupId) {
-        return commissionRepository.findByUserIdAndAirlineCodeAndAirportGroupId(
-                userId, airlineCode, airportGroupId);
-    }
-
-    @Cacheable(value = AppConstant.AIRPORT_GROUP_CACHE, key = "#startPointCode + '-' + #endPointCode", unless = "#result == null")
-    public AirportGroup findAirportGroupForFlight(String startPointCode, String endPointCode) {
-        Airport startAirport = airportRepository.findByCode(startPointCode);
-        Airport endAirport = airportRepository.findByCode(endPointCode);
-
-        if (startAirport != null && endAirport != null &&
-                startAirport.getAirportGroup() != null &&
-                Objects.equals(startAirport.getAirportGroup(), endAirport.getAirportGroup())) {
-            return startAirport.getAirportGroup();
-        }
-
-        return null;
     }
 
     private double getSelfServiceFee(String paxType, Commission commission) {

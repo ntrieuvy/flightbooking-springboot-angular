@@ -12,4 +12,5 @@ public interface JwtService {
     public Date extractExpirationToken(String token);
     public boolean isTokenExprired(String token);
     public Boolean validateToken(String token, UserDetails userDetails);
+    public String extractProvider(String token);
 }

@@ -28,17 +28,38 @@ public class Baggage {
     @JoinColumn(name = "passenger_id", nullable = false)
     private Passenger passenger;
 
+    @Column(name = "system")
+    private String system;
+
+    @Column(name = "type")
+    private String type;
+
+    @Column(name = "pax_type")
+    private String paxType;
+
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "start_point")
+    private String startPoint;
+
+    @Column(name = "end_point")
+    private String endPoint;
+
+    @Column(name = "status_code")
+    private String statusCode;
+
+    @Column(name = "confirmed")
+    private Boolean confirmed;
+
+    @Column(name = "b_session")
+    private String session;
+
     @Column(name = "airline", nullable = false)
     private String airline;
 
     @Column(name = "leg")
     private Integer leg;
-
-    @Column(name = "route", nullable = false)
-    private String route;
-
-    @Column(name = "code", nullable = false)
-    private String code;
 
     @Column(name = "currency")
     private String currency;
@@ -49,16 +70,8 @@ public class Baggage {
     @Column(name = "price", nullable = false)
     private Double price;
 
-    @Column(name = "price_root")
-    @Builder.Default
-    private Double priceRoot = 0.00;
-
     @Column(name = "value", nullable = false)
     private String value;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
 
     @CreatedDate
     @Column(name = "created_at", updatable = false)

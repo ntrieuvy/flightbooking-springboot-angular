@@ -19,5 +19,16 @@ public interface CommissionRepository extends JpaRepository<Commission, Long> {
             @Param("airlineCode") String airlineCode,
             @Param("airportGroupId") Long airportGroupId);
 
+    @Query("SELECT c FROM Commission c " +
+            "JOIN FETCH c.airline a " +
+            "JOIN FETCH c.airportGroup " +
+            "WHERE c.agency.id = :agencyId " +
+            "AND a.code = :airlineCode " +
+            "AND c.airportGroup.id = :airportGroupId")
+    Commission findByAgencyIdAndAirlineCodeAndAirportGroupId(
+            @Param("agencyId") Long agencyId,
+            @Param("airlineCode") String airlineCode,
+            @Param("airportGroupId") Long airportGroupId);
+
     List<Commission> findByUserId(Long id);
 }

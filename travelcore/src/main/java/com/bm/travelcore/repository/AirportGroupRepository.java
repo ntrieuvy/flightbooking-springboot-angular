@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface AirportGroupRepository extends JpaRepository<AirportGroup, Long> {
     List<AirportGroup> findByAirports_Id(Long airportId);
+
+    AirportGroup findByName(String name);
 }

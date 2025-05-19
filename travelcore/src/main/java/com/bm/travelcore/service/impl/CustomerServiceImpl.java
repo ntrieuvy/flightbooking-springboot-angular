@@ -17,24 +17,27 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer storeCustomer(ContactInfo guestContact, Agency agency) {
-        String[] nameParts = guestContact.getName().split(" ");
-        String lastName = nameParts[0];
-        String firstName = nameParts[nameParts.length - 1];
+        Customer customer = customerRepository.findByEmail(guestContact.getEmail());
+        if (customer == null) {
+            String[] nameParts = guestContact.getName().split(" ");
+            String lastName = nameParts[0];
+            String firstName = nameParts[nameParts.length - 1];
+            customer = Customer
+                    .builder()
+                    .fullName(guestContact.getName())
+                    .firstName(firstName)
+                    .lastName(lastName)
+                    .email(guestContact.getEmail())
+                    .phone(guestContact.getPhone())
+                    .gender(helper.getGenderByTitle(guestContact.getTitle()))
+                    .address(guestContact.getAddress())
+                    .note(guestContact.getRemark())
+                    .agency(agency)
+                    .build();
 
-        Customer customer = Customer
-                .builder()
-                .fullName(guestContact.getName())
-                .firstName(firstName)
-                .lastName(lastName)
-                .email(guestContact.getEmail())
-                .phone(guestContact.getPhone())
-                .gender(helper.getGenderByTitle(guestContact.getTitle()))
-                .address(guestContact.getAddress())
-                .note(guestContact.getRemark())
-                .agency(agency)
-                .build();
+            customerRepository.save(customer);
+        }
 
-        customerRepository.save(customer);
         return customer;
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -196,4 +197,12 @@ public class OrderDetail {
 
     @OneToMany(mappedBy = "orderDetail", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Ticket> tickets;
+
+    public void addFlight(OrderFlightMap orderFlightMap) {
+        if (this.orderFlightMaps == null) {
+            this.orderFlightMaps = new ArrayList<>();
+        }
+        this.orderFlightMaps.add(orderFlightMap);
+        orderFlightMap.setOrderDetail(this);
+    }
 }

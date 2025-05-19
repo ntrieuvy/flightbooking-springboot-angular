@@ -87,5 +87,5 @@ public class Booking {
     private List<PassengerRes> listPassenger;
 
     @JsonProperty("ListTicket")
-    private List<Ticket> listTicket;
+    private List<TicketData> listTicketData;
 }

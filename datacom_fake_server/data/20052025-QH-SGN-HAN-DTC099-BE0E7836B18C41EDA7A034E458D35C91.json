@@ -1,0 +1,1047 @@
+{
+  "StatusCode": "000",
+  "Success": true,
+  "Expired": false,
+  "Message": "Th\u00E0nh c\u00F4ng",
+  "Language": "vi",
+  "CustomProperties": null,
+  "RequestID": 0,
+  "ApiQueries": [],
+  "Session": "DTC099-84C1F216BC7C48AFBEABB25501B500BC",
+  "ListGroup": [
+    {
+      "Leg": 1,
+      "TripType": "OW",
+      "Journey": "SGNHAN20052025",
+      "StartPoint": "SGN",
+      "EndPoint": "HAN",
+      "DepartDate": "20052025",
+      "ListAirOption": [
+        {
+          "OptionId": 0,
+          "Leg": 0,
+          "Itinerary": 1,
+          "Airline": "QH",
+          "System": "QH",
+          "Source": "AGT",
+          "Remark": null,
+          "ListFlightOption": [
+            {
+              "OptionId": 0,
+              "ListFlight": [
+                {
+                  "Leg": 0,
+                  "FlightId": "1",
+                  "Airline": "QH",
+                  "Operator": "QH",
+                  "StartPoint": "SGN",
+                  "EndPoint": "HAN",
+                  "StartDate": "2025-05-20T23:50:00",
+                  "EndDate": "2025-05-21T02:00:00",
+                  "DepartDate": "20052025 2350",
+                  "ArriveDate": "21052025 0200",
+                  "FlightNumber": "290",
+                  "StopNum": 0,
+                  "Duration": 130,
+                  "ListSegment": [
+                    {
+                      "Leg": 0,
+                      "SegmentId": "1",
+                      "Airline": "QH",
+                      "Operator": "QH",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "StartDate": "2025-05-20T23:50:00",
+                      "EndDate": "2025-05-21T02:00:00",
+                      "DepartDate": "20052025 2350",
+                      "ArriveDate": "21052025 0200",
+                      "StartTerminal": "1",
+                      "EndTerminal": "1",
+                      "FlightNumber": "290",
+                      "Equipment": "320",
+                      "FareClass": null,
+                      "FareBasis": null,
+                      "Duration": 130,
+                      "HasStop": false,
+                      "StopPoint": null,
+                      "StopTime": 0,
+                      "TechnicalStop": null,
+                      "MarriageGrp": null,
+                      "FlightsMiles": 0,
+                      "Status": null
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "ListFareOption": [
+            {
+              "OptionId": 0,
+              "FareClass": "N",
+              "FareBasis": "NES0F",
+              "FareFamily": "EconomySmart",
+              "CabinCode": "ECONOMY",
+              "CabinName": "ECONOMY",
+              "Refundable": false,
+              "Availability": 5,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 1249000,
+              "BaseFareOrigin": 1249000,
+              "PriceAdt": 1944000,
+              "PriceAdtOrigin": 1944000,
+              "NetFare": 1944000,
+              "NetFareOrigin": 1944000,
+              "TotalFare": 1944000,
+              "TotalFareOrigin": 1944000,
+              "Currency": "VND",
+              "Airline": "QH",
+              "System": "QH",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 1249000,
+                  "BaseFareOrigin": 1249000,
+                  "NetFare": 1944000,
+                  "NetFareOrigin": 1944000,
+                  "TotalFare": 1944000,
+                  "TotalFareOrigin": 1944000,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 1249000,
+                      "Name": "Ticket fare"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 695000,
+                      "Name": "Ticket taxes"
+                    }
+                  ],
+                  "ListTaxDetail": [],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "1",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "N",
+                      "FareBasis": "NES0F",
+                      "HandBaggage": "7kg",
+                      "FreeBaggage": "",
+                      "Availability": 5,
+                      "FareFamily": "EconomySmart",
+                      "CabinCode": "ECONOMY",
+                      "CabinName": "ECONOMY"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "OptionId": 1,
+              "FareClass": "B",
+              "FareBasis": "BEF0F",
+              "FareFamily": "EconomyFlex",
+              "CabinCode": "ECONOMY",
+              "CabinName": "ECONOMY",
+              "Refundable": false,
+              "Availability": 9,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 2289000,
+              "BaseFareOrigin": 2289000,
+              "PriceAdt": 3068000,
+              "PriceAdtOrigin": 3068000,
+              "NetFare": 3068000,
+              "NetFareOrigin": 3068000,
+              "TotalFare": 3068000,
+              "TotalFareOrigin": 3068000,
+              "Currency": "VND",
+              "Airline": "QH",
+              "System": "QH",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 2289000,
+                  "BaseFareOrigin": 2289000,
+                  "NetFare": 3068000,
+                  "NetFareOrigin": 3068000,
+                  "TotalFare": 3068000,
+                  "TotalFareOrigin": 3068000,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 2289000,
+                      "Name": "Ticket fare"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 779000,
+                      "Name": "Ticket taxes"
+                    }
+                  ],
+                  "ListTaxDetail": [],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "1",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "B",
+                      "FareBasis": "BEF0F",
+                      "HandBaggage": "7kg",
+                      "FreeBaggage": "",
+                      "Availability": 9,
+                      "FareFamily": "EconomyFlex",
+                      "CabinCode": "ECONOMY",
+                      "CabinName": "ECONOMY"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "OptionId": 2,
+              "FareClass": "I",
+              "FareBasis": "IBSAG0F",
+              "FareFamily": "BusinessSmart",
+              "CabinCode": "BUSINESS",
+              "CabinName": "BUSINESS",
+              "Refundable": false,
+              "Availability": 5,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 4099000,
+              "BaseFareOrigin": 4099000,
+              "PriceAdt": 5022000,
+              "PriceAdtOrigin": 5022000,
+              "NetFare": 5022000,
+              "NetFareOrigin": 5022000,
+              "TotalFare": 5022000,
+              "TotalFareOrigin": 5022000,
+              "Currency": "VND",
+              "Airline": "QH",
+              "System": "QH",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 4099000,
+                  "BaseFareOrigin": 4099000,
+                  "NetFare": 5022000,
+                  "NetFareOrigin": 5022000,
+                  "TotalFare": 5022000,
+                  "TotalFareOrigin": 5022000,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 4099000,
+                      "Name": "Ticket fare"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 923000,
+                      "Name": "Ticket taxes"
+                    }
+                  ],
+                  "ListTaxDetail": [],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "1",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "I",
+                      "FareBasis": "IBSAG0F",
+                      "HandBaggage": "2 x 7kg",
+                      "FreeBaggage": "",
+                      "Availability": 5,
+                      "FareFamily": "BusinessSmart",
+                      "CabinCode": "BUSINESS",
+                      "CabinName": "BUSINESS"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "OptionId": 3,
+              "FareClass": "J",
+              "FareBasis": "JBFAG0F",
+              "FareFamily": "BusinessFlex",
+              "CabinCode": "BUSINESS",
+              "CabinName": "BUSINESS",
+              "Refundable": false,
+              "Availability": 7,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 5999000,
+              "BaseFareOrigin": 5999000,
+              "PriceAdt": 7074000,
+              "PriceAdtOrigin": 7074000,
+              "NetFare": 7074000,
+              "NetFareOrigin": 7074000,
+              "TotalFare": 7074000,
+              "TotalFareOrigin": 7074000,
+              "Currency": "VND",
+              "Airline": "QH",
+              "System": "QH",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 5999000,
+                  "BaseFareOrigin": 5999000,
+                  "NetFare": 7074000,
+                  "NetFareOrigin": 7074000,
+                  "TotalFare": 7074000,
+                  "TotalFareOrigin": 7074000,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 5999000,
+                      "Name": "Ticket fare"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 1075000,
+                      "Name": "Ticket taxes"
+                    }
+                  ],
+                  "ListTaxDetail": [],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "1",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "J",
+                      "FareBasis": "JBFAG0F",
+                      "HandBaggage": "2 x 7kg",
+                      "FreeBaggage": "",
+                      "Availability": 7,
+                      "FareFamily": "BusinessFlex",
+                      "CabinCode": "BUSINESS",
+                      "CabinName": "BUSINESS"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "OptionId": 1,
+          "Leg": 0,
+          "Itinerary": 1,
+          "Airline": "QH",
+          "System": "QH",
+          "Source": "AGT",
+          "Remark": null,
+          "ListFlightOption": [
+            {
+              "OptionId": 1,
+              "ListFlight": [
+                {
+                  "Leg": 0,
+                  "FlightId": "2",
+                  "Airline": "QH",
+                  "Operator": "QH",
+                  "StartPoint": "SGN",
+                  "EndPoint": "HAN",
+                  "StartDate": "2025-05-20T07:10:00",
+                  "EndDate": "2025-05-20T09:20:00",
+                  "DepartDate": "20052025 0710",
+                  "ArriveDate": "20052025 0920",
+                  "FlightNumber": "204",
+                  "StopNum": 0,
+                  "Duration": 130,
+                  "ListSegment": [
+                    {
+                      "Leg": 0,
+                      "SegmentId": "1",
+                      "Airline": "QH",
+                      "Operator": "QH",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "StartDate": "2025-05-20T07:10:00",
+                      "EndDate": "2025-05-20T09:20:00",
+                      "DepartDate": "20052025 0710",
+                      "ArriveDate": "20052025 0920",
+                      "StartTerminal": "1",
+                      "EndTerminal": "1",
+                      "FlightNumber": "204",
+                      "Equipment": "320",
+                      "FareClass": null,
+                      "FareBasis": null,
+                      "Duration": 130,
+                      "HasStop": false,
+                      "StopPoint": null,
+                      "StopTime": 0,
+                      "TechnicalStop": null,
+                      "MarriageGrp": null,
+                      "FlightsMiles": 0,
+                      "Status": null
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "ListFareOption": [
+            {
+              "OptionId": 0,
+              "FareClass": "M",
+              "FareBasis": "MES0F",
+              "FareFamily": "EconomySmart",
+              "CabinCode": "ECONOMY",
+              "CabinName": "ECONOMY",
+              "Refundable": false,
+              "Availability": 9,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 1419000,
+              "BaseFareOrigin": 1419000,
+              "PriceAdt": 2128000,
+              "PriceAdtOrigin": 2128000,
+              "NetFare": 2128000,
+              "NetFareOrigin": 2128000,
+              "TotalFare": 2128000,
+              "TotalFareOrigin": 2128000,
+              "Currency": "VND",
+              "Airline": "QH",
+              "System": "QH",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 1419000,
+                  "BaseFareOrigin": 1419000,
+                  "NetFare": 2128000,
+                  "NetFareOrigin": 2128000,
+                  "TotalFare": 2128000,
+                  "TotalFareOrigin": 2128000,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 1419000,
+                      "Name": "Ticket fare"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 709000,
+                      "Name": "Ticket taxes"
+                    }
+                  ],
+                  "ListTaxDetail": [],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "1",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "M",
+                      "FareBasis": "MES0F",
+                      "HandBaggage": "7kg",
+                      "FreeBaggage": "",
+                      "Availability": 9,
+                      "FareFamily": "EconomySmart",
+                      "CabinCode": "ECONOMY",
+                      "CabinName": "ECONOMY"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "OptionId": 1,
+              "FareClass": "B",
+              "FareBasis": "BEF0F",
+              "FareFamily": "EconomyFlex",
+              "CabinCode": "ECONOMY",
+              "CabinName": "ECONOMY",
+              "Refundable": false,
+              "Availability": 9,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 2289000,
+              "BaseFareOrigin": 2289000,
+              "PriceAdt": 3068000,
+              "PriceAdtOrigin": 3068000,
+              "NetFare": 3068000,
+              "NetFareOrigin": 3068000,
+              "TotalFare": 3068000,
+              "TotalFareOrigin": 3068000,
+              "Currency": "VND",
+              "Airline": "QH",
+              "System": "QH",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 2289000,
+                  "BaseFareOrigin": 2289000,
+                  "NetFare": 3068000,
+                  "NetFareOrigin": 3068000,
+                  "TotalFare": 3068000,
+                  "TotalFareOrigin": 3068000,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 2289000,
+                      "Name": "Ticket fare"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 779000,
+                      "Name": "Ticket taxes"
+                    }
+                  ],
+                  "ListTaxDetail": [],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "1",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "B",
+                      "FareBasis": "BEF0F",
+                      "HandBaggage": "7kg",
+                      "FreeBaggage": "",
+                      "Availability": 9,
+                      "FareFamily": "EconomyFlex",
+                      "CabinCode": "ECONOMY",
+                      "CabinName": "ECONOMY"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "OptionId": 2,
+          "Leg": 0,
+          "Itinerary": 1,
+          "Airline": "QH",
+          "System": "QH",
+          "Source": "AGT",
+          "Remark": null,
+          "ListFlightOption": [
+            {
+              "OptionId": 2,
+              "ListFlight": [
+                {
+                  "Leg": 0,
+                  "FlightId": "3",
+                  "Airline": "QH",
+                  "Operator": "QH",
+                  "StartPoint": "SGN",
+                  "EndPoint": "HAN",
+                  "StartDate": "2025-05-20T18:40:00",
+                  "EndDate": "2025-05-20T20:50:00",
+                  "DepartDate": "20052025 1840",
+                  "ArriveDate": "20052025 2050",
+                  "FlightNumber": "268",
+                  "StopNum": 0,
+                  "Duration": 130,
+                  "ListSegment": [
+                    {
+                      "Leg": 0,
+                      "SegmentId": "1",
+                      "Airline": "QH",
+                      "Operator": "QH",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "StartDate": "2025-05-20T18:40:00",
+                      "EndDate": "2025-05-20T20:50:00",
+                      "DepartDate": "20052025 1840",
+                      "ArriveDate": "20052025 2050",
+                      "StartTerminal": "1",
+                      "EndTerminal": "1",
+                      "FlightNumber": "268",
+                      "Equipment": "320",
+                      "FareClass": null,
+                      "FareBasis": null,
+                      "Duration": 130,
+                      "HasStop": false,
+                      "StopPoint": null,
+                      "StopTime": 0,
+                      "TechnicalStop": null,
+                      "MarriageGrp": null,
+                      "FlightsMiles": 0,
+                      "Status": null
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "ListFareOption": [
+            {
+              "OptionId": 0,
+              "FareClass": "M",
+              "FareBasis": "MES0F",
+              "FareFamily": "EconomySmart",
+              "CabinCode": "ECONOMY",
+              "CabinName": "ECONOMY",
+              "Refundable": false,
+              "Availability": 9,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 1419000,
+              "BaseFareOrigin": 1419000,
+              "PriceAdt": 2128000,
+              "PriceAdtOrigin": 2128000,
+              "NetFare": 2128000,
+              "NetFareOrigin": 2128000,
+              "TotalFare": 2128000,
+              "TotalFareOrigin": 2128000,
+              "Currency": "VND",
+              "Airline": "QH",
+              "System": "QH",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 1419000,
+                  "BaseFareOrigin": 1419000,
+                  "NetFare": 2128000,
+                  "NetFareOrigin": 2128000,
+                  "TotalFare": 2128000,
+                  "TotalFareOrigin": 2128000,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 1419000,
+                      "Name": "Ticket fare"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 709000,
+                      "Name": "Ticket taxes"
+                    }
+                  ],
+                  "ListTaxDetail": [],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "1",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "M",
+                      "FareBasis": "MES0F",
+                      "HandBaggage": "7kg",
+                      "FreeBaggage": "",
+                      "Availability": 9,
+                      "FareFamily": "EconomySmart",
+                      "CabinCode": "ECONOMY",
+                      "CabinName": "ECONOMY"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "OptionId": 1,
+              "FareClass": "B",
+              "FareBasis": "BEF0F",
+              "FareFamily": "EconomyFlex",
+              "CabinCode": "ECONOMY",
+              "CabinName": "ECONOMY",
+              "Refundable": false,
+              "Availability": 9,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 2289000,
+              "BaseFareOrigin": 2289000,
+              "PriceAdt": 3068000,
+              "PriceAdtOrigin": 3068000,
+              "NetFare": 3068000,
+              "NetFareOrigin": 3068000,
+              "TotalFare": 3068000,
+              "TotalFareOrigin": 3068000,
+              "Currency": "VND",
+              "Airline": "QH",
+              "System": "QH",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 2289000,
+                  "BaseFareOrigin": 2289000,
+                  "NetFare": 3068000,
+                  "NetFareOrigin": 3068000,
+                  "TotalFare": 3068000,
+                  "TotalFareOrigin": 3068000,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 2289000,
+                      "Name": "Ticket fare"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 779000,
+                      "Name": "Ticket taxes"
+                    }
+                  ],
+                  "ListTaxDetail": [],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "1",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "B",
+                      "FareBasis": "BEF0F",
+                      "HandBaggage": "7kg",
+                      "FreeBaggage": "",
+                      "Availability": 9,
+                      "FareFamily": "EconomyFlex",
+                      "CabinCode": "ECONOMY",
+                      "CabinName": "ECONOMY"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "OptionId": 3,
+          "Leg": 0,
+          "Itinerary": 1,
+          "Airline": "QH",
+          "System": "QH",
+          "Source": "AGT",
+          "Remark": null,
+          "ListFlightOption": [
+            {
+              "OptionId": 3,
+              "ListFlight": [
+                {
+                  "Leg": 0,
+                  "FlightId": "4",
+                  "Airline": "QH",
+                  "Operator": "QH",
+                  "StartPoint": "SGN",
+                  "EndPoint": "HAN",
+                  "StartDate": "2025-05-20T16:40:00",
+                  "EndDate": "2025-05-20T18:55:00",
+                  "DepartDate": "20052025 1640",
+                  "ArriveDate": "20052025 1855",
+                  "FlightNumber": "254",
+                  "StopNum": 0,
+                  "Duration": 135,
+                  "ListSegment": [
+                    {
+                      "Leg": 0,
+                      "SegmentId": "1",
+                      "Airline": "QH",
+                      "Operator": "QH",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "StartDate": "2025-05-20T16:40:00",
+                      "EndDate": "2025-05-20T18:55:00",
+                      "DepartDate": "20052025 1640",
+                      "ArriveDate": "20052025 1855",
+                      "StartTerminal": "1",
+                      "EndTerminal": "1",
+                      "FlightNumber": "254",
+                      "Equipment": "321",
+                      "FareClass": null,
+                      "FareBasis": null,
+                      "Duration": 135,
+                      "HasStop": false,
+                      "StopPoint": null,
+                      "StopTime": 0,
+                      "TechnicalStop": null,
+                      "MarriageGrp": null,
+                      "FlightsMiles": 0,
+                      "Status": null
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "ListFareOption": [
+            {
+              "OptionId": 0,
+              "FareClass": "M",
+              "FareBasis": "MES0F",
+              "FareFamily": "EconomySmart",
+              "CabinCode": "ECONOMY",
+              "CabinName": "ECONOMY",
+              "Refundable": false,
+              "Availability": 9,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 1419000,
+              "BaseFareOrigin": 1419000,
+              "PriceAdt": 2128000,
+              "PriceAdtOrigin": 2128000,
+              "NetFare": 2128000,
+              "NetFareOrigin": 2128000,
+              "TotalFare": 2128000,
+              "TotalFareOrigin": 2128000,
+              "Currency": "VND",
+              "Airline": "QH",
+              "System": "QH",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 1419000,
+                  "BaseFareOrigin": 1419000,
+                  "NetFare": 2128000,
+                  "NetFareOrigin": 2128000,
+                  "TotalFare": 2128000,
+                  "TotalFareOrigin": 2128000,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 1419000,
+                      "Name": "Ticket fare"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 709000,
+                      "Name": "Ticket taxes"
+                    }
+                  ],
+                  "ListTaxDetail": [],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "1",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "M",
+                      "FareBasis": "MES0F",
+                      "HandBaggage": "7kg",
+                      "FreeBaggage": "",
+                      "Availability": 9,
+                      "FareFamily": "EconomySmart",
+                      "CabinCode": "ECONOMY",
+                      "CabinName": "ECONOMY"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "OptionId": 1,
+              "FareClass": "B",
+              "FareBasis": "BEF0F",
+              "FareFamily": "EconomyFlex",
+              "CabinCode": "ECONOMY",
+              "CabinName": "ECONOMY",
+              "Refundable": false,
+              "Availability": 9,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 2289000,
+              "BaseFareOrigin": 2289000,
+              "PriceAdt": 3068000,
+              "PriceAdtOrigin": 3068000,
+              "NetFare": 3068000,
+              "NetFareOrigin": 3068000,
+              "TotalFare": 3068000,
+              "TotalFareOrigin": 3068000,
+              "Currency": "VND",
+              "Airline": "QH",
+              "System": "QH",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 2289000,
+                  "BaseFareOrigin": 2289000,
+                  "NetFare": 3068000,
+                  "NetFareOrigin": 3068000,
+                  "TotalFare": 3068000,
+                  "TotalFareOrigin": 3068000,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 2289000,
+                      "Name": "Ticket fare"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 779000,
+                      "Name": "Ticket taxes"
+                    }
+                  ],
+                  "ListTaxDetail": [],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "1",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "B",
+                      "FareBasis": "BEF0F",
+                      "HandBaggage": "7kg",
+                      "FreeBaggage": "",
+                      "Availability": 9,
+                      "FareFamily": "EconomyFlex",
+                      "CabinCode": "ECONOMY",
+                      "CabinName": "ECONOMY"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "OptionId": 2,
+              "FareClass": "I",
+              "FareBasis": "IBSAG0F",
+              "FareFamily": "BusinessSmart",
+              "CabinCode": "BUSINESS",
+              "CabinName": "BUSINESS",
+              "Refundable": false,
+              "Availability": 3,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 4099000,
+              "BaseFareOrigin": 4099000,
+              "PriceAdt": 5022000,
+              "PriceAdtOrigin": 5022000,
+              "NetFare": 5022000,
+              "NetFareOrigin": 5022000,
+              "TotalFare": 5022000,
+              "TotalFareOrigin": 5022000,
+              "Currency": "VND",
+              "Airline": "QH",
+              "System": "QH",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 4099000,
+                  "BaseFareOrigin": 4099000,
+                  "NetFare": 5022000,
+                  "NetFareOrigin": 5022000,
+                  "TotalFare": 5022000,
+                  "TotalFareOrigin": 5022000,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 4099000,
+                      "Name": "Ticket fare"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 923000,
+                      "Name": "Ticket taxes"
+                    }
+                  ],
+                  "ListTaxDetail": [],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "1",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "I",
+                      "FareBasis": "IBSAG0F",
+                      "HandBaggage": "2 x 7kg",
+                      "FreeBaggage": "",
+                      "Availability": 3,
+                      "FareFamily": "BusinessSmart",
+                      "CabinCode": "BUSINESS",
+                      "CabinName": "BUSINESS"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "OptionId": 3,
+              "FareClass": "J",
+              "FareBasis": "JBFAG0F",
+              "FareFamily": "BusinessFlex",
+              "CabinCode": "BUSINESS",
+              "CabinName": "BUSINESS",
+              "Refundable": false,
+              "Availability": 5,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 5999000,
+              "BaseFareOrigin": 5999000,
+              "PriceAdt": 7074000,
+              "PriceAdtOrigin": 7074000,
+              "NetFare": 7074000,
+              "NetFareOrigin": 7074000,
+              "TotalFare": 7074000,
+              "TotalFareOrigin": 7074000,
+              "Currency": "VND",
+              "Airline": "QH",
+              "System": "QH",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 5999000,
+                  "BaseFareOrigin": 5999000,
+                  "NetFare": 7074000,
+                  "NetFareOrigin": 7074000,
+                  "TotalFare": 7074000,
+                  "TotalFareOrigin": 7074000,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 5999000,
+                      "Name": "Ticket fare"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 1075000,
+                      "Name": "Ticket taxes"
+                    }
+                  ],
+                  "ListTaxDetail": [],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "1",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "J",
+                      "FareBasis": "JBFAG0F",
+                      "HandBaggage": "2 x 7kg",
+                      "FreeBaggage": "",
+                      "Availability": 5,
+                      "FareFamily": "BusinessFlex",
+                      "CabinCode": "BUSINESS",
+                      "CabinName": "BUSINESS"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

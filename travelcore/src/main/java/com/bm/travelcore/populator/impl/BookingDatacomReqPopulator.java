@@ -48,8 +48,7 @@ public class BookingDatacomReqPopulator implements Populator<BookFlightReqDTO, B
                 setContactInfo(
                         ContactReqDTO.builder()
                                 .gender("MALE")
-                                .firstName(user.getAgency().getName())
-                                .lastName(StringUtil.EMPTY_STRING)
+                                .fullName(user.getAgency().getName())
                                 .phone(user.getAgency().getPhone())
                                 .email(user.getAgency().getEmail())
                                 .build()
@@ -59,14 +58,14 @@ public class BookingDatacomReqPopulator implements Populator<BookFlightReqDTO, B
         for (PassengerReqDTO passenger : source.getListPassenger()) {
             passengerReqs.add(
                     PassengerReq.builder()
-                            .index(source.getListPassenger().indexOf(passenger))
+                            .index(source.getListPassenger().indexOf(passenger) + 1)
                             .parentId(passenger.getParentId())
                             .title(helper.getTitleByGender(passenger.getGender()))
                             .type(passenger.getType())
                             .gender(passenger.getGender().equals("MALE") ? 0 : 1)
                             .givenName(passenger.getFirstName())
                             .surname(passenger.getLastName())
-                            .dateOfBirth(passenger.getBirthday())
+                            .dateOfBirth(passenger.getDob())
                             .passport(
                                     Passport.builder()
                                             .documentCode(passenger.getPassport().getDocumentCode())
@@ -83,6 +82,20 @@ public class BookingDatacomReqPopulator implements Populator<BookFlightReqDTO, B
 
         target.setListPassenger(passengerReqs);
 
+        List<AirOptionReq> airOptionReqs = new ArrayList<>();
+        source.getListAirOption().forEach(fare -> {
+            airOptionReqs.add(
+                    AirOptionReq.builder()
+                            .session(fare.getSession())
+                            .sessionType(fare.getSessionType())
+                            .airlineOptionId(fare.getAirlineOptionId())
+                            .fareOptionId(fare.getFareOptionId())
+                            .flightOptionId(fare.getFlightOptionId())
+                            .build()
+            );
+        });
+        target.setListAirOptionRes(airOptionReqs);
+
         target.setOption(
                 OptionBookingReq.builder()
                         .separateBooking(Boolean.FALSE)
@@ -93,6 +106,9 @@ public class BookingDatacomReqPopulator implements Populator<BookFlightReqDTO, B
     }
 
     private List<BaggageReq> setListBaggage(List<BaggageReqDTO> listBaggage) {
+        if (listBaggage == null) {
+            return null;
+        }
         List<BaggageReq> baggageReqs = new ArrayList<>();
         listBaggage.forEach(baggage -> {
             baggageReqs.add(
@@ -108,7 +124,7 @@ public class BookingDatacomReqPopulator implements Populator<BookFlightReqDTO, B
     private ContactInfo setContactInfo(ContactReqDTO source, Boolean receiveEmail) {
         return ContactInfo.builder()
                 .title(helper.getTitleByGender(source.getGender()))
-                .name(source.getLastName() + SPACE_SEPARATOR + source.getFirstName())
+                .name(source.getFullName())
                 .area(AREA)
                 .email(source.getEmail())
                 .phone(source.getPhone())

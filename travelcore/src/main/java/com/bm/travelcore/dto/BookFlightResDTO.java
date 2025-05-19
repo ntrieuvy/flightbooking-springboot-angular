@@ -10,6 +10,7 @@ import lombok.Setter;
 @Setter
 @Builder
 public class BookFlightResDTO {
+    public Boolean success;
     public String message;
-    public String code;
+    private String orderId;
 }

@@ -12,7 +12,7 @@ public class PassengerReqDTO {
     private String lastName;
     private Integer parentId;
     private String type;
-    private String birthday;
+    private String dob;
     private String gender;
     private PassportReqDTO passport;
     private List<BaggageReqDTO> listBaggage;

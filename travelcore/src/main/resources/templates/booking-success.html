@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Booking Confirmation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    .header { background-color: #f7f7f7; padding: 20px 0; text-align: center; text-transform: uppercase; font-weight: bold; font-size: 22px; }
+    .section-title { padding: 20px 0 10px; font-size: 18px; font-weight: bold; }
+    .info-table { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
+    .info-table td { padding: 8px 10px; border: 1px solid #ddd; }
+    .section-header { background-color: #ececec; padding: 10px; font-weight: bold; }
+    .highlight { color: #ff861e; font-weight: bold; font-size: 18px; }
+    .warning { color: #e45555; }
+    .logo { width: 50px; height: auto; }
+    table { padding: 20px; }
+  </style>
+</head>
+<body style="margin: 0; padding: 0; font-family: Arial, sans-serif; font-size: 14px; line-height: 1.5;">
+<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td>
+      <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse;">
+        <tr>
+          <td class="header">
+            <p style="margin: 0;">*** ITINERARY / BOOKING ORDER ***</p>
+            <p><img src="https://teamsolutions.vn/be/upload/banner/1699845592655195d8557bfTEAM_Solutions_LOGO_yoko.png" alt="Travel Team Solutions Logo" class="logo"></p>
+          </td>
+        </tr>
+
+        <tr>
+          <td bgcolor="#ffffff">
+            <p style="margin: 0; padding: 20px 0; font-weight: bold; font-size: 22px;">
+              Booking References:
+              <span th:each="orderDetail,iter : ${orderDetails}" th:text="${orderDetail.bookingCode} + (iter.last ? '' : ', ')"></span>
+            </p>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <p class="section-title">Flight Details</p>
+          </td>
+        </tr>
+        <tr th:each="orderDetail : ${orderDetails}">
+          <td colspan="4" style="padding-bottom: 15px;">
+            <table class="info-table" th:if="${orderDetail.orderFlightMaps != null and !orderDetail.orderFlightMaps.isEmpty()}">
+              <tr th:each="flightMap : ${orderDetail.orderFlightMaps}" th:if="${flightMap != null and flightMap.flight != null}">
+                <td colspan="4" class="section-header">
+                  <p style="margin: 0;">
+                    Flight:
+                    <span th:text="${flightMap.flight.departure} ?: 'N/A'"></span> →
+                    <span th:text="${flightMap.flight.arrival} ?: 'N/A'"></span>
+                  </p>
+                  <p style="margin: 0; padding-top: 5px;">
+                    Booking Code: <span style="font-weight: bold; color: green;" th:text="${orderDetail.bookingCode} ?: 'N/A'"></span>
+                  </p>
+                </td>
+              </tr>
+              <tr th:if="${flightMap != null and flightMap.flight != null}">
+                <td style="font-weight: bold;">Segment</td>
+                <td style="font-weight: bold;" th:text="${flightMap.flight.departure} ?: 'N/A'"></td>
+                <td style="font-weight: bold;" th:text="${flightMap.flight.arrival} ?: 'N/A'"></td>
+                <td>
+                  Flight: <span style="font-weight: bold;" th:text="${flightMap.flight.number} ?: 'N/A'"></span>
+                </td>
+              </tr>
+              <tr th:if="${flightMap != null and flightMap.flight != null}">
+                <td th:text="${flightMap.flight.airline} ?: 'N/A'"></td>
+                <td th:text="${flightMap.flight.std != null ? flightMap.flight.std : 'N/A'}"></td>
+                <td th:text="${flightMap.flight.sta != null ? flightMap.flight.sta : 'N/A'}"></td>
+                <td>
+                  Class: <span style="font-weight: bold;" th:text="${flightMap.flight.fareClass} ?: 'N/A'"></span>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p class="section-title">Passenger Information</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <table class="info-table">
+              <tr>
+                <td colspan="4" class="section-header">
+                  Passenger Details
+                </td>
+              </tr>
+              <tr>
+                <td style="font-weight: bold;">No.</td>
+                <td style="font-weight: bold;">Gender</td>
+                <td style="font-weight: bold;">Type</td>
+                <td style="font-weight: bold;">Passenger Name</td>
+              </tr>
+              <tr th:each="passenger,iterStat : ${passengers}">
+                <td th:text="${iterStat.index + 1}"></td>
+                <td th:text="${passenger.gender == 'M' ? 'Male' : 'Female'}"></td>
+                <td th:text="${passenger.type}"></td>
+                <td th:text="${passenger.firstName + ' ' + passenger.lastName}"></td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <tr th:each="orderDetail : ${orderDetails}">
+          <td style="padding-top: 15px;">
+            <table class="info-table">
+              <tr>
+                <td>
+                  <p class="highlight">
+                    Total Price:
+                    <span th:text="${orderDetail.totalPrice + orderDetail.systemCommissionTotal}"></span> VND
+                  </p>
+                  <p class="warning" th:if="${orderDetail.expiryDate != null}">
+                    <b>Payment Deadline:</b> Please complete your payment before:
+                    <span th:text="${orderDetail.expiryDate}"></span>
+                    <br>
+                    <b>Note:</b> Ticket prices may change by airlines until issuance. For flights within 24 hours, please contact our hotline immediately.
+                  </p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <p class="section-title">Contact Information</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <table class="info-table">
+              <tr>
+                <td>Full Name:</td>
+                <td style="font-weight: bold;" th:text="${customer.fullName}"></td>
+              </tr>
+              <tr>
+                <td>Phone:</td>
+                <td style="font-weight: bold;" th:text="${customer.phone}"></td>
+              </tr>
+              <tr>
+                <td>Email:</td>
+                <td style="font-weight: bold;" th:text="${customer.email}"></td>
+              </tr>
+              <tr>
+                <td>Special Request:</td>
+                <td style="font-weight: bold;" th:text="${customer.note ?: 'N/A'}"></td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <tr th:if="${invoice != null}">
+          <td>
+            <p class="section-title">Invoice Information</p>
+          </td>
+        </tr>
+        <tr th:if="${invoice != null}">
+          <td>
+            <table class="info-table">
+              <tr>
+                <td>Company Name:</td>
+                <td style="font-weight: bold;" th:text="${invoice.name ?: 'N/A'}"></td>
+              </tr>
+              <tr>
+                <td>Address:</td>
+                <td style="font-weight: bold;" th:text="${invoice.address ?: 'N/A'}"></td>
+              </tr>
+              <tr>
+                <td>City:</td>
+                <td style="font-weight: bold;" th:text="${invoice.city ?: 'N/A'}"></td>
+              </tr>
+              <tr>
+                <td>VAT Number:</td>
+                <td style="font-weight: bold;" th:text="${invoice.taxId ?: 'N/A'}"></td>
+              </tr>
+              <tr>
+                <td>Invoice Recipient:</td>
+                <td style="font-weight: bold;" th:text="${invoice.receiver ?: 'N/A'}"></td>
+              </tr>
+              <tr>
+                <td>Email:</td>
+                <td style="font-weight: bold;" th:text="${invoice.email ?: 'N/A'}"></td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

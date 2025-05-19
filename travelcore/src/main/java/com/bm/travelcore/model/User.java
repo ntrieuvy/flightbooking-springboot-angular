@@ -42,7 +42,7 @@ public class User implements UserDetails, Principal {
     @Column(name = "date_of_birth")
     private String dateOfBirth;
 
-    @Column(name = "email", unique = true)
+    @Column(name = "email")
     private String email;
 
     @Column(name = "phone_number", unique = true)
@@ -78,9 +78,6 @@ public class User implements UserDetails, Principal {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AirlineAirportGroupConfig> airlineAirportGroupConfigs;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Baggage> baggageList;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Commission> commissions;

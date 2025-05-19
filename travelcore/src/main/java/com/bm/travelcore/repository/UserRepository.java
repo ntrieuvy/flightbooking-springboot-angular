@@ -1,6 +1,7 @@
 package com.bm.travelcore.repository;
 
 import com.bm.travelcore.model.User;
+import com.bm.travelcore.model.enums.LoginProvider;
 import com.bm.travelcore.model.enums.Roles;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -11,4 +12,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByPhoneNumber(String phoneNumber);
 
     Optional<User> findFirstByRoles_Name(String name);
+
+    Optional<User> findByEmailAndLoginProvider(String email, LoginProvider loginProvider);
 }

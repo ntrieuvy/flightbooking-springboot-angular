@@ -9,8 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 public class ContactReqDTO {
     private String gender;
-    private String firstName;
-    private String lastName;
+    private String fullName;
     private String phone;
     private String email;
 }

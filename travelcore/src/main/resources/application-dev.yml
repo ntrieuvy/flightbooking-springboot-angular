@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:oracle:thin:@//localhost:1522/FREEPDB1
-    username: travelteamsolutions
-    password: 1
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     driver-class-name: oracle.jdbc.OracleDriver
 
   jpa:
@@ -24,8 +24,8 @@ spring:
   mail:
     host: localhost
     port: 1025
-    username: nqtrang
-    password: nqtrang
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
     properties:
       mail:
         smtp:
@@ -42,9 +42,14 @@ spring:
       client:
         registration:
           google:
-            client-id: 356926343838-d1ek2d8ek4pukn2mg7rfvv6buv7u0b72.apps.googleusercontent.com
-            client-secret: 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
-
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+            redirect-uri: http://localhost:4200/auth/callback
+        provider:
+          google:
+            authorization-uri: https://accounts.google.com/o/oauth2/v2/auth
+            token-uri: https://oauth2.googleapis.com/token
+            user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
   data:
     redis:
       host: localhost
@@ -62,14 +67,12 @@ spring:
 application:
   security:
     jwt:
-      secret-key: QWxhZGRpbjpvcGVuIHNlc2FtZSBzGVuIHNlc2FtZSBzYW1wbQWxhZGRpbjpvGUgdGV4dA==
-      expiration: 864000
+      secret-key: ${JWT_SECRET_KEY}
+      expiration: 8640000
 
   mailing:
     not_reply_email: donotreply@teamsolutions.com
     contact: contact@travelteamsolutions.com
-    frontend:
-      activation_url: http://localhost:8080/api/v1/auth/activate-account
 
   redis:
     token:
@@ -81,28 +84,27 @@ application:
       outgoing_number: +12525504206
       twilio:
         name: twilio
-        auth_token: 61e3cb5b860cf768134591e355f49431
-        account_sid: AC2abc6671bea8d335d19f674920aa794c
+        auth_token: ${TWILIO_AUTH_TOKEN}
+        account_sid: ${TWILIO_ACCOUNT_SID}
 
     flight-api:
       default: datacom
       datacom:
         name: "datacom"
         endpoint: "http://localhost:3000"
-        private-key: "datacomkey"
-        api-account: "datacomapiaccount"
-        api-password: "datacomapipassword"
+        private-key: ${DATACOM_PRIVATE_KEY}
+        api-account: ${DATACOM_API_ACCOUNT}
+        api-password: ${DATACOM_API_PASSWORD}
         currency: "VND"
         language: "vi"
         ip-address: "10.0.0.1"
       aviationstack:
         name: aviationstack
         endpoint: https://api.aviationstack.com/v1/
-        access-key: d3c2399140f42d6f8300db8b7927098b
+        access-key: ${AVIATIONSTACK_ACCESS_KEY}
 
   frontend:
     url: "http://localhost:4200"
-    oauth-redirect-url: "http://localhost:4200/oauth-redirect"
 
 management:
   endpoints:
@@ -112,7 +114,6 @@ management:
   metrics:
     enable:
       all: true
-
 
 server:
   port: 9090

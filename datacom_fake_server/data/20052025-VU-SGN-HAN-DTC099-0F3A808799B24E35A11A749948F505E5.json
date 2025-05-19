@@ -1,0 +1,357 @@
+{
+  "StatusCode": "000",
+  "Success": true,
+  "Expired": false,
+  "Message": "Th\u00E0nh c\u00F4ng",
+  "Language": "vi",
+  "CustomProperties": null,
+  "RequestID": 0,
+  "ApiQueries": [],
+  "Session": "DTC099-125DFC76907B4CABAC2D3A6FC6AA767C",
+  "ListGroup": [
+    {
+      "Leg": 1,
+      "TripType": "OW",
+      "Journey": "SGNHAN20052025",
+      "StartPoint": "SGN",
+      "EndPoint": "HAN",
+      "DepartDate": "20052025",
+      "ListAirOption": [
+        {
+          "OptionId": 0,
+          "Leg": 0,
+          "Itinerary": 1,
+          "Airline": "VU",
+          "System": "VU",
+          "Source": "AGT",
+          "Remark": null,
+          "ListFlightOption": [
+            {
+              "OptionId": 0,
+              "ListFlight": [
+                {
+                  "Leg": 1,
+                  "FlightId": "94165",
+                  "Airline": "VU",
+                  "Operator": "VU",
+                  "StartPoint": "SGN",
+                  "EndPoint": "HAN",
+                  "StartDate": "2025-05-20T05:45:00",
+                  "EndDate": "2025-05-20T07:55:00",
+                  "DepartDate": "20052025 0545",
+                  "ArriveDate": "20052025 0755",
+                  "FlightNumber": "750",
+                  "StopNum": 0,
+                  "Duration": 130,
+                  "ListSegment": [
+                    {
+                      "Leg": 0,
+                      "SegmentId": "0",
+                      "Airline": "VU",
+                      "Operator": "VU",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "StartDate": "2025-05-20T05:45:00",
+                      "EndDate": "2025-05-20T07:55:00",
+                      "DepartDate": "20052025 0545",
+                      "ArriveDate": "20052025 0755",
+                      "StartTerminal": null,
+                      "EndTerminal": null,
+                      "FlightNumber": "750",
+                      "Equipment": "321",
+                      "FareClass": null,
+                      "FareBasis": null,
+                      "Duration": 130,
+                      "HasStop": false,
+                      "StopPoint": null,
+                      "StopTime": 0,
+                      "TechnicalStop": null,
+                      "MarriageGrp": null,
+                      "FlightsMiles": 0,
+                      "Status": null
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "ListFareOption": [
+            {
+              "OptionId": 0,
+              "FareClass": "L",
+              "FareBasis": "LREGOW",
+              "FareFamily": "Economy Saver",
+              "CabinCode": "ECONOMY",
+              "CabinName": "ECONOMY",
+              "Refundable": false,
+              "Availability": 22,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 1008000,
+              "BaseFareOrigin": 1008000,
+              "PriceAdt": 1726040,
+              "PriceAdtOrigin": 1726040,
+              "NetFare": 1726040,
+              "NetFareOrigin": 1726040,
+              "TotalFare": 1726040,
+              "TotalFareOrigin": 1726040,
+              "Currency": "VND",
+              "Airline": "VU",
+              "System": "VU",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 1008000,
+                  "BaseFareOrigin": 1008000,
+                  "NetFare": 1726040,
+                  "NetFareOrigin": 1726040,
+                  "TotalFare": 1726040,
+                  "TotalFareOrigin": 1726040,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 1008000,
+                      "Name": "Ticket fare"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 718040,
+                      "Name": "Ticket taxes"
+                    }
+                  ],
+                  "ListTaxDetail": [
+                    {
+                      "Code": "C4",
+                      "Amount": 20000,
+                      "Name": "C4"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 80640,
+                      "Name": "UE"
+                    },
+                    {
+                      "Code": "YR02",
+                      "Amount": 480000,
+                      "Name": "YR02"
+                    },
+                    {
+                      "Code": "AX",
+                      "Amount": 99000,
+                      "Name": "AX"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 38400,
+                      "Name": "UE"
+                    }
+                  ],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "0",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "L",
+                      "FareBasis": "LREGOW",
+                      "HandBaggage": "07kg",
+                      "FreeBaggage": "",
+                      "Availability": 22,
+                      "FareFamily": "Economy Saver",
+                      "CabinCode": "ECONOMY",
+                      "CabinName": "ECONOMY"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "OptionId": 1,
+              "FareClass": "N",
+              "FareBasis": "NFLEOW",
+              "FareFamily": "Economy Flex",
+              "CabinCode": "ECONOMY",
+              "CabinName": "ECONOMY",
+              "Refundable": false,
+              "Availability": 42,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 1358000,
+              "BaseFareOrigin": 1358000,
+              "PriceAdt": 2104040,
+              "PriceAdtOrigin": 2104040,
+              "NetFare": 2104040,
+              "NetFareOrigin": 2104040,
+              "TotalFare": 2104040,
+              "TotalFareOrigin": 2104040,
+              "Currency": "VND",
+              "Airline": "VU",
+              "System": "VU",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 1358000,
+                  "BaseFareOrigin": 1358000,
+                  "NetFare": 2104040,
+                  "NetFareOrigin": 2104040,
+                  "TotalFare": 2104040,
+                  "TotalFareOrigin": 2104040,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 1358000,
+                      "Name": "Ticket fare"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 746040,
+                      "Name": "Ticket taxes"
+                    }
+                  ],
+                  "ListTaxDetail": [
+                    {
+                      "Code": "C4",
+                      "Amount": 20000,
+                      "Name": "C4"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 108640,
+                      "Name": "UE"
+                    },
+                    {
+                      "Code": "YR02",
+                      "Amount": 480000,
+                      "Name": "YR02"
+                    },
+                    {
+                      "Code": "AX",
+                      "Amount": 99000,
+                      "Name": "AX"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 38400,
+                      "Name": "UE"
+                    }
+                  ],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "0",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "N",
+                      "FareBasis": "NFLEOW",
+                      "HandBaggage": "07kg",
+                      "FreeBaggage": "",
+                      "Availability": 42,
+                      "FareFamily": "Economy Flex",
+                      "CabinCode": "ECONOMY",
+                      "CabinName": "ECONOMY"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "OptionId": 2,
+              "FareClass": "J",
+              "FareBasis": "JPRVNF",
+              "FareFamily": "PREMIUM ECONOMY",
+              "CabinCode": "ECONOMY",
+              "CabinName": "ECONOMY",
+              "Refundable": false,
+              "Availability": 6,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 3350000,
+              "BaseFareOrigin": 3350000,
+              "PriceAdt": 4255400,
+              "PriceAdtOrigin": 4255400,
+              "NetFare": 4255400,
+              "NetFareOrigin": 4255400,
+              "TotalFare": 4255400,
+              "TotalFareOrigin": 4255400,
+              "Currency": "VND",
+              "Airline": "VU",
+              "System": "VU",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 3350000,
+                  "BaseFareOrigin": 3350000,
+                  "NetFare": 4255400,
+                  "NetFareOrigin": 4255400,
+                  "TotalFare": 4255400,
+                  "TotalFareOrigin": 4255400,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 3350000,
+                      "Name": "Ticket fare"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 905400,
+                      "Name": "Ticket taxes"
+                    }
+                  ],
+                  "ListTaxDetail": [
+                    {
+                      "Code": "C4",
+                      "Amount": 20000,
+                      "Name": "C4"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 268000,
+                      "Name": "UE"
+                    },
+                    {
+                      "Code": "YR02",
+                      "Amount": 480000,
+                      "Name": "YR02"
+                    },
+                    {
+                      "Code": "AX",
+                      "Amount": 99000,
+                      "Name": "AX"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 38400,
+                      "Name": "UE"
+                    }
+                  ],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "0",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "J",
+                      "FareBasis": "JPRVNF",
+                      "HandBaggage": "12kg",
+                      "FreeBaggage": "2 x 23kg",
+                      "Availability": 6,
+                      "FareFamily": "PREMIUM ECONOMY",
+                      "CabinCode": "ECONOMY",
+                      "CabinName": "ECONOMY"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

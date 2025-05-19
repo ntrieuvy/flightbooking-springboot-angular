@@ -7,6 +7,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -73,4 +74,20 @@ public class Order {
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Passenger> passengers;
+
+    public void addOrderDetail(OrderDetail detail) {
+        if (this.orderDetails == null) {
+            this.orderDetails = new ArrayList<>();
+        }
+        this.orderDetails.add(detail);
+        detail.setOrder(this);
+    }
+
+    public void addPassenger(Passenger passenger) {
+        if (this.passengers == null) {
+            this.passengers = new ArrayList<>();
+        }
+        this.passengers.add(passenger);
+        passenger.setOrder(this);
+    }
 }

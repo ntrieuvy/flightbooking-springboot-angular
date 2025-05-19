@@ -1,5 +1,6 @@
 package com.bm.travelcore.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -43,12 +44,15 @@ public class Ticket {
     @Column(name = "passenger_name", nullable = false)
     private String passengerName;
 
-    @Column(name = "booking_file", columnDefinition = "CLOB")
-    private String bookingFile;
+    @Column(name = "segments", columnDefinition = "CLOB")
+    private String segments;
 
     @Column(name = "ticket_image", columnDefinition = "CLOB")
     private String ticketImage;
 
+    @Column(name = "ticket_type")
+    private String ticketType;
+    
     @Column(name = "total_price", nullable = false)
     @Builder.Default
     private Double totalPrice = 0.0;
@@ -58,6 +62,30 @@ public class Ticket {
 
     @Column(name = "error_message", columnDefinition = "CLOB")
     private String errorMessage;
+
+    @Column(name = "itinerary")
+    private int itinerary;
+
+    @Column(name = "start_point")
+    private String startPoint;
+
+    @Column(name = "end_point")
+    private String endPoint;
+
+    @Column(name = "depart_date")
+    private String departDate;
+
+    @Column(name = "return_date")
+    private String returnDate;
+
+    @Column(name = "fare_class")
+    private String fareClass;
+
+    @Column(name = "fare_basis")
+    private String fareBasis;
+
+    @Column(name = "flight_type")
+    private String flightType;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

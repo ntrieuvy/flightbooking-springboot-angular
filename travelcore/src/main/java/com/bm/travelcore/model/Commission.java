@@ -77,7 +77,4 @@ public class Commission {
     @LastModifiedDate
     @Column(name = "updated_at", insertable = false)
     private LocalDateTime updatedAt;
-
-    @Column(name = "last_updated_role", nullable = false)
-    private Long lastUpdatedRole;
 }

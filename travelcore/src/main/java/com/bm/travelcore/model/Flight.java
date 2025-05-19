@@ -8,6 +8,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -83,4 +84,12 @@ public class Flight {
 
     @OneToMany(mappedBy = "flight", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderFlightMap> orderFlightMaps;
+
+    public void addOrderDetail(OrderFlightMap orderFlightMap) {
+        if (this.orderFlightMaps == null) {
+            this.orderFlightMaps = new ArrayList<>();
+        }
+        this.orderFlightMaps.add(orderFlightMap);
+        orderFlightMap.setFlight(this);
+    }
 }

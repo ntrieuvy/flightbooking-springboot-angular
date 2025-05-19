@@ -1,10 +1,8 @@
 package com.bm.travelcore.controller;
 
-import com.bm.travelcore.dto.BookFlightReqDTO;
-import com.bm.travelcore.dto.BookFlightResDTO;
-import com.bm.travelcore.dto.SearchFlightReqDTO;
-import com.bm.travelcore.dto.SearchFlightResDTO;
+import com.bm.travelcore.dto.*;
 import com.bm.travelcore.service.FlightService;
+import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +21,17 @@ public class FlightController {
     }
 
     @PostMapping("/book")
-    public ResponseEntity<BookFlightResDTO> bookFlight(@Valid @RequestBody BookFlightReqDTO request) {
+    public ResponseEntity<BookFlightResDTO> bookFlight(@Valid @RequestBody BookFlightReqDTO request) throws MessagingException {
         return ResponseEntity.ok(flightService.bookFlight(request));
+    }
+
+    @PostMapping("/booking/hold")
+    public ResponseEntity<BookFlightResDTO> holdFlight(@Valid @RequestBody BookFlightReqDTO request) {
+        return ResponseEntity.ok(flightService.holdFlight(request));
+    }
+
+    @PostMapping("/cancel")
+    public ResponseEntity<BookFlightResDTO> cancelFlights(@RequestParam("orderId") String orderId) {
+        return ResponseEntity.ok(flightService.cancelFlights(orderId));
     }
 }

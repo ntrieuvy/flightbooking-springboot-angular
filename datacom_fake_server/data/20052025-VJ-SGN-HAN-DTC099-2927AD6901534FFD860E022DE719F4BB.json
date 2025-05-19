@@ -1,0 +1,3158 @@
+{
+  "StatusCode": "000",
+  "Success": true,
+  "Expired": false,
+  "Message": "Th\u00E0nh c\u00F4ng",
+  "Language": "vi",
+  "CustomProperties": null,
+  "RequestID": 0,
+  "ApiQueries": [],
+  "Session": "DTC099-2EA08F48E6DA40F9B0A9579478DAE409",
+  "ListGroup": [
+    {
+      "Leg": 1,
+      "TripType": "OW",
+      "Journey": "SGNHAN20052025",
+      "StartPoint": "SGN",
+      "EndPoint": "HAN",
+      "DepartDate": "20052025",
+      "ListAirOption": [
+        {
+          "OptionId": 0,
+          "Leg": 0,
+          "Itinerary": 1,
+          "Airline": "VJ",
+          "System": "VJ",
+          "Source": "AGT",
+          "Remark": null,
+          "ListFlightOption": [
+            {
+              "OptionId": 0,
+              "ListFlight": [
+                {
+                  "Leg": 0,
+                  "FlightId": "1",
+                  "Airline": "VJ",
+                  "Operator": "VJ",
+                  "StartPoint": "SGN",
+                  "EndPoint": "HAN",
+                  "StartDate": "2025-05-20T06:00:00",
+                  "EndDate": "2025-05-20T08:10:00",
+                  "DepartDate": "20052025 0600",
+                  "ArriveDate": "20052025 0810",
+                  "FlightNumber": "1128",
+                  "StopNum": 0,
+                  "Duration": 130,
+                  "ListSegment": [
+                    {
+                      "Leg": 0,
+                      "SegmentId": "1",
+                      "Airline": "VJ",
+                      "Operator": "VJ",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "StartDate": "2025-05-20T06:00:00",
+                      "EndDate": "2025-05-20T08:10:00",
+                      "DepartDate": "20052025 0600",
+                      "ArriveDate": "20052025 0810",
+                      "StartTerminal": "",
+                      "EndTerminal": "",
+                      "FlightNumber": "1128",
+                      "Equipment": "321",
+                      "FareClass": null,
+                      "FareBasis": null,
+                      "Duration": 130,
+                      "HasStop": false,
+                      "StopPoint": null,
+                      "StopTime": 0,
+                      "TechnicalStop": null,
+                      "MarriageGrp": null,
+                      "FlightsMiles": 0,
+                      "Status": null
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "ListFareOption": [
+            {
+              "OptionId": 0,
+              "FareClass": "W1_ECO",
+              "FareBasis": "W",
+              "FareFamily": "Eco",
+              "CabinCode": "Eco",
+              "CabinName": "Economy",
+              "Refundable": false,
+              "Availability": 15,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 1010000,
+              "BaseFareOrigin": 1010000,
+              "PriceAdt": 1674200,
+              "PriceAdtOrigin": 1674200,
+              "NetFare": 1674200,
+              "NetFareOrigin": 1674200,
+              "TotalFare": 1674200,
+              "TotalFareOrigin": 1674200,
+              "Currency": "VND",
+              "Airline": "VJ",
+              "System": "VJ",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 1010000,
+                  "BaseFareOrigin": 1010000,
+                  "NetFare": 1674200,
+                  "NetFareOrigin": 1674200,
+                  "TotalFare": 1674200,
+                  "TotalFareOrigin": 1674200,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 1010000,
+                      "Name": "W1_ECO - Eco1"
+                    },
+                    {
+                      "Code": "TICKET_VAT",
+                      "Amount": 80800,
+                      "Name": "VAT tax"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Management Fee Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 20000,
+                      "Name": "Airport Security"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 99000,
+                      "Name": "Airport Tax Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Admin Fee Domestic"
+                    }
+                  ],
+                  "ListTaxDetail": [
+                    {
+                      "Code": "UE",
+                      "Amount": 80800,
+                      "Name": "Base fares VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Management fee VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Admin fee VAT"
+                    }
+                  ],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "1",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "W1_ECO",
+                      "FareBasis": "W",
+                      "HandBaggage": "7kg",
+                      "FreeBaggage": null,
+                      "Availability": 15,
+                      "FareFamily": "Eco",
+                      "CabinCode": "Eco",
+                      "CabinName": "Economy"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "OptionId": 1,
+              "FareClass": "W1_DLX",
+              "FareBasis": "W",
+              "FareFamily": "Deluxe",
+              "CabinCode": "Deluxe",
+              "CabinName": "Economy",
+              "Refundable": false,
+              "Availability": 15,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 1560000,
+              "BaseFareOrigin": 1560000,
+              "PriceAdt": 2268200,
+              "PriceAdtOrigin": 2268200,
+              "NetFare": 2268200,
+              "NetFareOrigin": 2268200,
+              "TotalFare": 2268200,
+              "TotalFareOrigin": 2268200,
+              "Currency": "VND",
+              "Airline": "VJ",
+              "System": "VJ",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 1560000,
+                  "BaseFareOrigin": 1560000,
+                  "NetFare": 2268200,
+                  "NetFareOrigin": 2268200,
+                  "TotalFare": 2268200,
+                  "TotalFareOrigin": 2268200,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 1560000,
+                      "Name": "W1_DLX - Deluxe1"
+                    },
+                    {
+                      "Code": "TICKET_VAT",
+                      "Amount": 124800,
+                      "Name": "VAT tax"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Management Fee Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 20000,
+                      "Name": "Airport Security"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 99000,
+                      "Name": "Airport Tax Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Admin Fee Domestic"
+                    }
+                  ],
+                  "ListTaxDetail": [
+                    {
+                      "Code": "UE",
+                      "Amount": 124800,
+                      "Name": "Base fares VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Management fee VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Admin fee VAT"
+                    }
+                  ],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "1",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "W1_DLX",
+                      "FareBasis": "W",
+                      "HandBaggage": "7kg",
+                      "FreeBaggage": null,
+                      "Availability": 15,
+                      "FareFamily": "Deluxe",
+                      "CabinCode": "Deluxe",
+                      "CabinName": "Economy"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "OptionId": 2,
+              "FareClass": "V_SBoss",
+              "FareBasis": "V",
+              "FareFamily": "SkyBoss",
+              "CabinCode": "SkyBoss",
+              "CabinName": "Economy",
+              "Refundable": false,
+              "Availability": 12,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 3010000,
+              "BaseFareOrigin": 3010000,
+              "PriceAdt": 3834200,
+              "PriceAdtOrigin": 3834200,
+              "NetFare": 3834200,
+              "NetFareOrigin": 3834200,
+              "TotalFare": 3834200,
+              "TotalFareOrigin": 3834200,
+              "Currency": "VND",
+              "Airline": "VJ",
+              "System": "VJ",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 3010000,
+                  "BaseFareOrigin": 3010000,
+                  "NetFare": 3834200,
+                  "NetFareOrigin": 3834200,
+                  "TotalFare": 3834200,
+                  "TotalFareOrigin": 3834200,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 3010000,
+                      "Name": "V_SBoss - SkyBoss"
+                    },
+                    {
+                      "Code": "TICKET_VAT",
+                      "Amount": 240800,
+                      "Name": "VAT tax"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Management Fee Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 20000,
+                      "Name": "Airport Security"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 99000,
+                      "Name": "Airport Tax Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Admin Fee Domestic"
+                    }
+                  ],
+                  "ListTaxDetail": [
+                    {
+                      "Code": "UE",
+                      "Amount": 240800,
+                      "Name": "Base fares VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Management fee VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Admin fee VAT"
+                    }
+                  ],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "1",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "V_SBoss",
+                      "FareBasis": "V",
+                      "HandBaggage": "10kg",
+                      "FreeBaggage": null,
+                      "Availability": 12,
+                      "FareFamily": "SkyBoss",
+                      "CabinCode": "SkyBoss",
+                      "CabinName": "Economy"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "OptionId": 1,
+          "Leg": 0,
+          "Itinerary": 1,
+          "Airline": "VJ",
+          "System": "VJ",
+          "Source": "AGT",
+          "Remark": null,
+          "ListFlightOption": [
+            {
+              "OptionId": 0,
+              "ListFlight": [
+                {
+                  "Leg": 0,
+                  "FlightId": "1",
+                  "Airline": "VJ",
+                  "Operator": "VJ",
+                  "StartPoint": "SGN",
+                  "EndPoint": "HAN",
+                  "StartDate": "2025-05-20T09:40:00",
+                  "EndDate": "2025-05-20T11:50:00",
+                  "DepartDate": "20052025 0940",
+                  "ArriveDate": "20052025 1150",
+                  "FlightNumber": "1132",
+                  "StopNum": 0,
+                  "Duration": 130,
+                  "ListSegment": [
+                    {
+                      "Leg": 0,
+                      "SegmentId": "1",
+                      "Airline": "VJ",
+                      "Operator": "VJ",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "StartDate": "2025-05-20T09:40:00",
+                      "EndDate": "2025-05-20T11:50:00",
+                      "DepartDate": "20052025 0940",
+                      "ArriveDate": "20052025 1150",
+                      "StartTerminal": "",
+                      "EndTerminal": "",
+                      "FlightNumber": "1132",
+                      "Equipment": "320",
+                      "FareClass": null,
+                      "FareBasis": null,
+                      "Duration": 130,
+                      "HasStop": false,
+                      "StopPoint": null,
+                      "StopTime": 0,
+                      "TechnicalStop": null,
+                      "MarriageGrp": null,
+                      "FlightsMiles": 0,
+                      "Status": null
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "ListFareOption": [
+            {
+              "OptionId": 0,
+              "FareClass": "I1_ECO",
+              "FareBasis": "I",
+              "FareFamily": "Eco",
+              "CabinCode": "Eco",
+              "CabinName": "Economy",
+              "Refundable": false,
+              "Availability": 4,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 1440000,
+              "BaseFareOrigin": 1440000,
+              "PriceAdt": 2138600,
+              "PriceAdtOrigin": 2138600,
+              "NetFare": 2138600,
+              "NetFareOrigin": 2138600,
+              "TotalFare": 2138600,
+              "TotalFareOrigin": 2138600,
+              "Currency": "VND",
+              "Airline": "VJ",
+              "System": "VJ",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 1440000,
+                  "BaseFareOrigin": 1440000,
+                  "NetFare": 2138600,
+                  "NetFareOrigin": 2138600,
+                  "TotalFare": 2138600,
+                  "TotalFareOrigin": 2138600,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 1440000,
+                      "Name": "I1_ECO - Eco1"
+                    },
+                    {
+                      "Code": "TICKET_VAT",
+                      "Amount": 115200,
+                      "Name": "VAT tax"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Management Fee Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 20000,
+                      "Name": "Airport Security"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 99000,
+                      "Name": "Airport Tax Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Admin Fee Domestic"
+                    }
+                  ],
+                  "ListTaxDetail": [
+                    {
+                      "Code": "UE",
+                      "Amount": 115200,
+                      "Name": "Base fares VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Management fee VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Admin fee VAT"
+                    }
+                  ],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "1",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "I1_ECO",
+                      "FareBasis": "I",
+                      "HandBaggage": "7kg",
+                      "FreeBaggage": null,
+                      "Availability": 4,
+                      "FareFamily": "Eco",
+                      "CabinCode": "Eco",
+                      "CabinName": "Economy"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "OptionId": 1,
+              "FareClass": "I1_DLX",
+              "FareBasis": "I",
+              "FareFamily": "Deluxe",
+              "CabinCode": "Deluxe",
+              "CabinName": "Economy",
+              "Refundable": false,
+              "Availability": 4,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 1990000,
+              "BaseFareOrigin": 1990000,
+              "PriceAdt": 2732600,
+              "PriceAdtOrigin": 2732600,
+              "NetFare": 2732600,
+              "NetFareOrigin": 2732600,
+              "TotalFare": 2732600,
+              "TotalFareOrigin": 2732600,
+              "Currency": "VND",
+              "Airline": "VJ",
+              "System": "VJ",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 1990000,
+                  "BaseFareOrigin": 1990000,
+                  "NetFare": 2732600,
+                  "NetFareOrigin": 2732600,
+                  "TotalFare": 2732600,
+                  "TotalFareOrigin": 2732600,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 1990000,
+                      "Name": "I1_DLX - Deluxe1"
+                    },
+                    {
+                      "Code": "TICKET_VAT",
+                      "Amount": 159200,
+                      "Name": "VAT tax"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Management Fee Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 20000,
+                      "Name": "Airport Security"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 99000,
+                      "Name": "Airport Tax Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Admin Fee Domestic"
+                    }
+                  ],
+                  "ListTaxDetail": [
+                    {
+                      "Code": "UE",
+                      "Amount": 159200,
+                      "Name": "Base fares VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Management fee VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Admin fee VAT"
+                    }
+                  ],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "1",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "I1_DLX",
+                      "FareBasis": "I",
+                      "HandBaggage": "7kg",
+                      "FreeBaggage": null,
+                      "Availability": 4,
+                      "FareFamily": "Deluxe",
+                      "CabinCode": "Deluxe",
+                      "CabinName": "Economy"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "OptionId": 2,
+          "Leg": 0,
+          "Itinerary": 1,
+          "Airline": "VJ",
+          "System": "VJ",
+          "Source": "AGT",
+          "Remark": null,
+          "ListFlightOption": [
+            {
+              "OptionId": 0,
+              "ListFlight": [
+                {
+                  "Leg": 0,
+                  "FlightId": "1",
+                  "Airline": "VJ",
+                  "Operator": "VJ",
+                  "StartPoint": "SGN",
+                  "EndPoint": "HAN",
+                  "StartDate": "2025-05-20T10:25:00",
+                  "EndDate": "2025-05-20T12:35:00",
+                  "DepartDate": "20052025 1025",
+                  "ArriveDate": "20052025 1235",
+                  "FlightNumber": "1130",
+                  "StopNum": 0,
+                  "Duration": 130,
+                  "ListSegment": [
+                    {
+                      "Leg": 0,
+                      "SegmentId": "1",
+                      "Airline": "VJ",
+                      "Operator": "VJ",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "StartDate": "2025-05-20T10:25:00",
+                      "EndDate": "2025-05-20T12:35:00",
+                      "DepartDate": "20052025 1025",
+                      "ArriveDate": "20052025 1235",
+                      "StartTerminal": "",
+                      "EndTerminal": "",
+                      "FlightNumber": "1130",
+                      "Equipment": "321",
+                      "FareClass": null,
+                      "FareBasis": null,
+                      "Duration": 130,
+                      "HasStop": false,
+                      "StopPoint": null,
+                      "StopTime": 0,
+                      "TechnicalStop": null,
+                      "MarriageGrp": null,
+                      "FlightsMiles": 0,
+                      "Status": null
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "ListFareOption": [
+            {
+              "OptionId": 0,
+              "FareClass": "J1_ECO",
+              "FareBasis": "J",
+              "FareFamily": "Eco",
+              "CabinCode": "Eco",
+              "CabinName": "Economy",
+              "Refundable": false,
+              "Availability": 23,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 1290000,
+              "BaseFareOrigin": 1290000,
+              "PriceAdt": 1976600,
+              "PriceAdtOrigin": 1976600,
+              "NetFare": 1976600,
+              "NetFareOrigin": 1976600,
+              "TotalFare": 1976600,
+              "TotalFareOrigin": 1976600,
+              "Currency": "VND",
+              "Airline": "VJ",
+              "System": "VJ",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 1290000,
+                  "BaseFareOrigin": 1290000,
+                  "NetFare": 1976600,
+                  "NetFareOrigin": 1976600,
+                  "TotalFare": 1976600,
+                  "TotalFareOrigin": 1976600,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 1290000,
+                      "Name": "J1_ECO - Eco1"
+                    },
+                    {
+                      "Code": "TICKET_VAT",
+                      "Amount": 103200,
+                      "Name": "VAT tax"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Management Fee Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 20000,
+                      "Name": "Airport Security"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 99000,
+                      "Name": "Airport Tax Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Admin Fee Domestic"
+                    }
+                  ],
+                  "ListTaxDetail": [
+                    {
+                      "Code": "UE",
+                      "Amount": 103200,
+                      "Name": "Base fares VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Management fee VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Admin fee VAT"
+                    }
+                  ],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "1",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "J1_ECO",
+                      "FareBasis": "J",
+                      "HandBaggage": "7kg",
+                      "FreeBaggage": null,
+                      "Availability": 23,
+                      "FareFamily": "Eco",
+                      "CabinCode": "Eco",
+                      "CabinName": "Economy"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "OptionId": 1,
+              "FareClass": "J1_DLX",
+              "FareBasis": "J",
+              "FareFamily": "Deluxe",
+              "CabinCode": "Deluxe",
+              "CabinName": "Economy",
+              "Refundable": false,
+              "Availability": 23,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 1840000,
+              "BaseFareOrigin": 1840000,
+              "PriceAdt": 2570600,
+              "PriceAdtOrigin": 2570600,
+              "NetFare": 2570600,
+              "NetFareOrigin": 2570600,
+              "TotalFare": 2570600,
+              "TotalFareOrigin": 2570600,
+              "Currency": "VND",
+              "Airline": "VJ",
+              "System": "VJ",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 1840000,
+                  "BaseFareOrigin": 1840000,
+                  "NetFare": 2570600,
+                  "NetFareOrigin": 2570600,
+                  "TotalFare": 2570600,
+                  "TotalFareOrigin": 2570600,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 1840000,
+                      "Name": "J1_DLX - Deluxe1"
+                    },
+                    {
+                      "Code": "TICKET_VAT",
+                      "Amount": 147200,
+                      "Name": "VAT tax"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Management Fee Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 20000,
+                      "Name": "Airport Security"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 99000,
+                      "Name": "Airport Tax Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Admin Fee Domestic"
+                    }
+                  ],
+                  "ListTaxDetail": [
+                    {
+                      "Code": "UE",
+                      "Amount": 147200,
+                      "Name": "Base fares VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Management fee VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Admin fee VAT"
+                    }
+                  ],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "1",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "J1_DLX",
+                      "FareBasis": "J",
+                      "HandBaggage": "7kg",
+                      "FreeBaggage": null,
+                      "Availability": 23,
+                      "FareFamily": "Deluxe",
+                      "CabinCode": "Deluxe",
+                      "CabinName": "Economy"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "OptionId": 2,
+              "FareClass": "V_SBoss",
+              "FareBasis": "V",
+              "FareFamily": "SkyBoss",
+              "CabinCode": "SkyBoss",
+              "CabinName": "Economy",
+              "Refundable": false,
+              "Availability": 12,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 3010000,
+              "BaseFareOrigin": 3010000,
+              "PriceAdt": 3834200,
+              "PriceAdtOrigin": 3834200,
+              "NetFare": 3834200,
+              "NetFareOrigin": 3834200,
+              "TotalFare": 3834200,
+              "TotalFareOrigin": 3834200,
+              "Currency": "VND",
+              "Airline": "VJ",
+              "System": "VJ",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 3010000,
+                  "BaseFareOrigin": 3010000,
+                  "NetFare": 3834200,
+                  "NetFareOrigin": 3834200,
+                  "TotalFare": 3834200,
+                  "TotalFareOrigin": 3834200,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 3010000,
+                      "Name": "V_SBoss - SkyBoss"
+                    },
+                    {
+                      "Code": "TICKET_VAT",
+                      "Amount": 240800,
+                      "Name": "VAT tax"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Management Fee Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 20000,
+                      "Name": "Airport Security"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 99000,
+                      "Name": "Airport Tax Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Admin Fee Domestic"
+                    }
+                  ],
+                  "ListTaxDetail": [
+                    {
+                      "Code": "UE",
+                      "Amount": 240800,
+                      "Name": "Base fares VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Management fee VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Admin fee VAT"
+                    }
+                  ],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "1",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "V_SBoss",
+                      "FareBasis": "V",
+                      "HandBaggage": "10kg",
+                      "FreeBaggage": null,
+                      "Availability": 12,
+                      "FareFamily": "SkyBoss",
+                      "CabinCode": "SkyBoss",
+                      "CabinName": "Economy"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "OptionId": 3,
+          "Leg": 0,
+          "Itinerary": 1,
+          "Airline": "VJ",
+          "System": "VJ",
+          "Source": "AGT",
+          "Remark": null,
+          "ListFlightOption": [
+            {
+              "OptionId": 0,
+              "ListFlight": [
+                {
+                  "Leg": 0,
+                  "FlightId": "1",
+                  "Airline": "VJ",
+                  "Operator": "VJ",
+                  "StartPoint": "SGN",
+                  "EndPoint": "HAN",
+                  "StartDate": "2025-05-20T07:10:00",
+                  "EndDate": "2025-05-20T09:20:00",
+                  "DepartDate": "20052025 0710",
+                  "ArriveDate": "20052025 0920",
+                  "FlightNumber": "190",
+                  "StopNum": 0,
+                  "Duration": 130,
+                  "ListSegment": [
+                    {
+                      "Leg": 0,
+                      "SegmentId": "1",
+                      "Airline": "VJ",
+                      "Operator": "VJ",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "StartDate": "2025-05-20T07:10:00",
+                      "EndDate": "2025-05-20T09:20:00",
+                      "DepartDate": "20052025 0710",
+                      "ArriveDate": "20052025 0920",
+                      "StartTerminal": "",
+                      "EndTerminal": "",
+                      "FlightNumber": "190",
+                      "Equipment": "321",
+                      "FareClass": null,
+                      "FareBasis": null,
+                      "Duration": 130,
+                      "HasStop": false,
+                      "StopPoint": null,
+                      "StopTime": 0,
+                      "TechnicalStop": null,
+                      "MarriageGrp": null,
+                      "FlightsMiles": 0,
+                      "Status": null
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "ListFareOption": [
+            {
+              "OptionId": 0,
+              "FareClass": "U1_ECO",
+              "FareBasis": "U",
+              "FareFamily": "Eco",
+              "CabinCode": "Eco",
+              "CabinName": "Economy",
+              "Refundable": false,
+              "Availability": 17,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 1130000,
+              "BaseFareOrigin": 1130000,
+              "PriceAdt": 1803800,
+              "PriceAdtOrigin": 1803800,
+              "NetFare": 1803800,
+              "NetFareOrigin": 1803800,
+              "TotalFare": 1803800,
+              "TotalFareOrigin": 1803800,
+              "Currency": "VND",
+              "Airline": "VJ",
+              "System": "VJ",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 1130000,
+                  "BaseFareOrigin": 1130000,
+                  "NetFare": 1803800,
+                  "NetFareOrigin": 1803800,
+                  "TotalFare": 1803800,
+                  "TotalFareOrigin": 1803800,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 1130000,
+                      "Name": "U1_ECO - Eco1"
+                    },
+                    {
+                      "Code": "TICKET_VAT",
+                      "Amount": 90400,
+                      "Name": "VAT tax"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Management Fee Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 20000,
+                      "Name": "Airport Security"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 99000,
+                      "Name": "Airport Tax Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Admin Fee Domestic"
+                    }
+                  ],
+                  "ListTaxDetail": [
+                    {
+                      "Code": "UE",
+                      "Amount": 90400,
+                      "Name": "Base fares VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Management fee VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Admin fee VAT"
+                    }
+                  ],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "1",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "U1_ECO",
+                      "FareBasis": "U",
+                      "HandBaggage": "7kg",
+                      "FreeBaggage": null,
+                      "Availability": 17,
+                      "FareFamily": "Eco",
+                      "CabinCode": "Eco",
+                      "CabinName": "Economy"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "OptionId": 1,
+              "FareClass": "U1_DLX",
+              "FareBasis": "U",
+              "FareFamily": "Deluxe",
+              "CabinCode": "Deluxe",
+              "CabinName": "Economy",
+              "Refundable": false,
+              "Availability": 17,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 1680000,
+              "BaseFareOrigin": 1680000,
+              "PriceAdt": 2397800,
+              "PriceAdtOrigin": 2397800,
+              "NetFare": 2397800,
+              "NetFareOrigin": 2397800,
+              "TotalFare": 2397800,
+              "TotalFareOrigin": 2397800,
+              "Currency": "VND",
+              "Airline": "VJ",
+              "System": "VJ",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 1680000,
+                  "BaseFareOrigin": 1680000,
+                  "NetFare": 2397800,
+                  "NetFareOrigin": 2397800,
+                  "TotalFare": 2397800,
+                  "TotalFareOrigin": 2397800,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 1680000,
+                      "Name": "U1_DLX - Deluxe1"
+                    },
+                    {
+                      "Code": "TICKET_VAT",
+                      "Amount": 134400,
+                      "Name": "VAT tax"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Management Fee Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 20000,
+                      "Name": "Airport Security"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 99000,
+                      "Name": "Airport Tax Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Admin Fee Domestic"
+                    }
+                  ],
+                  "ListTaxDetail": [
+                    {
+                      "Code": "UE",
+                      "Amount": 134400,
+                      "Name": "Base fares VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Management fee VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Admin fee VAT"
+                    }
+                  ],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "1",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "U1_DLX",
+                      "FareBasis": "U",
+                      "HandBaggage": "7kg",
+                      "FreeBaggage": null,
+                      "Availability": 17,
+                      "FareFamily": "Deluxe",
+                      "CabinCode": "Deluxe",
+                      "CabinName": "Economy"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "OptionId": 2,
+              "FareClass": "V_SBoss",
+              "FareBasis": "V",
+              "FareFamily": "SkyBoss",
+              "CabinCode": "SkyBoss",
+              "CabinName": "Economy",
+              "Refundable": false,
+              "Availability": 12,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 3010000,
+              "BaseFareOrigin": 3010000,
+              "PriceAdt": 3834200,
+              "PriceAdtOrigin": 3834200,
+              "NetFare": 3834200,
+              "NetFareOrigin": 3834200,
+              "TotalFare": 3834200,
+              "TotalFareOrigin": 3834200,
+              "Currency": "VND",
+              "Airline": "VJ",
+              "System": "VJ",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 3010000,
+                  "BaseFareOrigin": 3010000,
+                  "NetFare": 3834200,
+                  "NetFareOrigin": 3834200,
+                  "TotalFare": 3834200,
+                  "TotalFareOrigin": 3834200,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 3010000,
+                      "Name": "V_SBoss - SkyBoss"
+                    },
+                    {
+                      "Code": "TICKET_VAT",
+                      "Amount": 240800,
+                      "Name": "VAT tax"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Management Fee Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 20000,
+                      "Name": "Airport Security"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 99000,
+                      "Name": "Airport Tax Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Admin Fee Domestic"
+                    }
+                  ],
+                  "ListTaxDetail": [
+                    {
+                      "Code": "UE",
+                      "Amount": 240800,
+                      "Name": "Base fares VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Management fee VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Admin fee VAT"
+                    }
+                  ],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "1",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "V_SBoss",
+                      "FareBasis": "V",
+                      "HandBaggage": "10kg",
+                      "FreeBaggage": null,
+                      "Availability": 12,
+                      "FareFamily": "SkyBoss",
+                      "CabinCode": "SkyBoss",
+                      "CabinName": "Economy"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "OptionId": 4,
+          "Leg": 0,
+          "Itinerary": 1,
+          "Airline": "VJ",
+          "System": "VJ",
+          "Source": "AGT",
+          "Remark": null,
+          "ListFlightOption": [
+            {
+              "OptionId": 0,
+              "ListFlight": [
+                {
+                  "Leg": 0,
+                  "FlightId": "1",
+                  "Airline": "VJ",
+                  "Operator": "VJ",
+                  "StartPoint": "SGN",
+                  "EndPoint": "HAN",
+                  "StartDate": "2025-05-20T07:30:00",
+                  "EndDate": "2025-05-20T09:40:00",
+                  "DepartDate": "20052025 0730",
+                  "ArriveDate": "20052025 0940",
+                  "FlightNumber": "120",
+                  "StopNum": 0,
+                  "Duration": 130,
+                  "ListSegment": [
+                    {
+                      "Leg": 0,
+                      "SegmentId": "1",
+                      "Airline": "VJ",
+                      "Operator": "VJ",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "StartDate": "2025-05-20T07:30:00",
+                      "EndDate": "2025-05-20T09:40:00",
+                      "DepartDate": "20052025 0730",
+                      "ArriveDate": "20052025 0940",
+                      "StartTerminal": "",
+                      "EndTerminal": "",
+                      "FlightNumber": "120",
+                      "Equipment": "321",
+                      "FareClass": null,
+                      "FareBasis": null,
+                      "Duration": 130,
+                      "HasStop": false,
+                      "StopPoint": null,
+                      "StopTime": 0,
+                      "TechnicalStop": null,
+                      "MarriageGrp": null,
+                      "FlightsMiles": 0,
+                      "Status": null
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "ListFareOption": [
+            {
+              "OptionId": 0,
+              "FareClass": "U1_ECO",
+              "FareBasis": "U",
+              "FareFamily": "Eco",
+              "CabinCode": "Eco",
+              "CabinName": "Economy",
+              "Refundable": false,
+              "Availability": 17,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 1130000,
+              "BaseFareOrigin": 1130000,
+              "PriceAdt": 1803800,
+              "PriceAdtOrigin": 1803800,
+              "NetFare": 1803800,
+              "NetFareOrigin": 1803800,
+              "TotalFare": 1803800,
+              "TotalFareOrigin": 1803800,
+              "Currency": "VND",
+              "Airline": "VJ",
+              "System": "VJ",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 1130000,
+                  "BaseFareOrigin": 1130000,
+                  "NetFare": 1803800,
+                  "NetFareOrigin": 1803800,
+                  "TotalFare": 1803800,
+                  "TotalFareOrigin": 1803800,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 1130000,
+                      "Name": "U1_ECO - Eco1"
+                    },
+                    {
+                      "Code": "TICKET_VAT",
+                      "Amount": 90400,
+                      "Name": "VAT tax"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Management Fee Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 20000,
+                      "Name": "Airport Security"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 99000,
+                      "Name": "Airport Tax Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Admin Fee Domestic"
+                    }
+                  ],
+                  "ListTaxDetail": [
+                    {
+                      "Code": "UE",
+                      "Amount": 90400,
+                      "Name": "Base fares VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Management fee VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Admin fee VAT"
+                    }
+                  ],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "1",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "U1_ECO",
+                      "FareBasis": "U",
+                      "HandBaggage": "7kg",
+                      "FreeBaggage": null,
+                      "Availability": 17,
+                      "FareFamily": "Eco",
+                      "CabinCode": "Eco",
+                      "CabinName": "Economy"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "OptionId": 1,
+              "FareClass": "U1_DLX",
+              "FareBasis": "U",
+              "FareFamily": "Deluxe",
+              "CabinCode": "Deluxe",
+              "CabinName": "Economy",
+              "Refundable": false,
+              "Availability": 17,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 1680000,
+              "BaseFareOrigin": 1680000,
+              "PriceAdt": 2397800,
+              "PriceAdtOrigin": 2397800,
+              "NetFare": 2397800,
+              "NetFareOrigin": 2397800,
+              "TotalFare": 2397800,
+              "TotalFareOrigin": 2397800,
+              "Currency": "VND",
+              "Airline": "VJ",
+              "System": "VJ",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 1680000,
+                  "BaseFareOrigin": 1680000,
+                  "NetFare": 2397800,
+                  "NetFareOrigin": 2397800,
+                  "TotalFare": 2397800,
+                  "TotalFareOrigin": 2397800,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 1680000,
+                      "Name": "U1_DLX - Deluxe1"
+                    },
+                    {
+                      "Code": "TICKET_VAT",
+                      "Amount": 134400,
+                      "Name": "VAT tax"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Management Fee Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 20000,
+                      "Name": "Airport Security"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 99000,
+                      "Name": "Airport Tax Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Admin Fee Domestic"
+                    }
+                  ],
+                  "ListTaxDetail": [
+                    {
+                      "Code": "UE",
+                      "Amount": 134400,
+                      "Name": "Base fares VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Management fee VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Admin fee VAT"
+                    }
+                  ],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "1",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "U1_DLX",
+                      "FareBasis": "U",
+                      "HandBaggage": "7kg",
+                      "FreeBaggage": null,
+                      "Availability": 17,
+                      "FareFamily": "Deluxe",
+                      "CabinCode": "Deluxe",
+                      "CabinName": "Economy"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "OptionId": 2,
+              "FareClass": "V_SBoss",
+              "FareBasis": "V",
+              "FareFamily": "SkyBoss",
+              "CabinCode": "SkyBoss",
+              "CabinName": "Economy",
+              "Refundable": false,
+              "Availability": 12,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 3010000,
+              "BaseFareOrigin": 3010000,
+              "PriceAdt": 3834200,
+              "PriceAdtOrigin": 3834200,
+              "NetFare": 3834200,
+              "NetFareOrigin": 3834200,
+              "TotalFare": 3834200,
+              "TotalFareOrigin": 3834200,
+              "Currency": "VND",
+              "Airline": "VJ",
+              "System": "VJ",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 3010000,
+                  "BaseFareOrigin": 3010000,
+                  "NetFare": 3834200,
+                  "NetFareOrigin": 3834200,
+                  "TotalFare": 3834200,
+                  "TotalFareOrigin": 3834200,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 3010000,
+                      "Name": "V_SBoss - SkyBoss"
+                    },
+                    {
+                      "Code": "TICKET_VAT",
+                      "Amount": 240800,
+                      "Name": "VAT tax"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Management Fee Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 20000,
+                      "Name": "Airport Security"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 99000,
+                      "Name": "Airport Tax Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Admin Fee Domestic"
+                    }
+                  ],
+                  "ListTaxDetail": [
+                    {
+                      "Code": "UE",
+                      "Amount": 240800,
+                      "Name": "Base fares VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Management fee VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Admin fee VAT"
+                    }
+                  ],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "1",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "V_SBoss",
+                      "FareBasis": "V",
+                      "HandBaggage": "10kg",
+                      "FreeBaggage": null,
+                      "Availability": 12,
+                      "FareFamily": "SkyBoss",
+                      "CabinCode": "SkyBoss",
+                      "CabinName": "Economy"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "OptionId": 5,
+          "Leg": 0,
+          "Itinerary": 1,
+          "Airline": "VJ",
+          "System": "VJ",
+          "Source": "AGT",
+          "Remark": null,
+          "ListFlightOption": [
+            {
+              "OptionId": 0,
+              "ListFlight": [
+                {
+                  "Leg": 0,
+                  "FlightId": "1",
+                  "Airline": "VJ",
+                  "Operator": "VJ",
+                  "StartPoint": "SGN",
+                  "EndPoint": "HAN",
+                  "StartDate": "2025-05-20T06:30:00",
+                  "EndDate": "2025-05-20T08:40:00",
+                  "DepartDate": "20052025 0630",
+                  "ArriveDate": "20052025 0840",
+                  "FlightNumber": "1180",
+                  "StopNum": 0,
+                  "Duration": 130,
+                  "ListSegment": [
+                    {
+                      "Leg": 0,
+                      "SegmentId": "1",
+                      "Airline": "VJ",
+                      "Operator": "VJ",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "StartDate": "2025-05-20T06:30:00",
+                      "EndDate": "2025-05-20T08:40:00",
+                      "DepartDate": "20052025 0630",
+                      "ArriveDate": "20052025 0840",
+                      "StartTerminal": "",
+                      "EndTerminal": "",
+                      "FlightNumber": "1180",
+                      "Equipment": "330",
+                      "FareClass": null,
+                      "FareBasis": null,
+                      "Duration": 130,
+                      "HasStop": false,
+                      "StopPoint": null,
+                      "StopTime": 0,
+                      "TechnicalStop": null,
+                      "MarriageGrp": null,
+                      "FlightsMiles": 0,
+                      "Status": null
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "ListFareOption": [
+            {
+              "OptionId": 0,
+              "FareClass": "W1_ECO",
+              "FareBasis": "W",
+              "FareFamily": "Eco",
+              "CabinCode": "Eco",
+              "CabinName": "Economy",
+              "Refundable": false,
+              "Availability": 14,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 1010000,
+              "BaseFareOrigin": 1010000,
+              "PriceAdt": 1674200,
+              "PriceAdtOrigin": 1674200,
+              "NetFare": 1674200,
+              "NetFareOrigin": 1674200,
+              "TotalFare": 1674200,
+              "TotalFareOrigin": 1674200,
+              "Currency": "VND",
+              "Airline": "VJ",
+              "System": "VJ",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 1010000,
+                  "BaseFareOrigin": 1010000,
+                  "NetFare": 1674200,
+                  "NetFareOrigin": 1674200,
+                  "TotalFare": 1674200,
+                  "TotalFareOrigin": 1674200,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 1010000,
+                      "Name": "W1_ECO - Eco1"
+                    },
+                    {
+                      "Code": "TICKET_VAT",
+                      "Amount": 80800,
+                      "Name": "VAT tax"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Management Fee Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 20000,
+                      "Name": "Airport Security"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 99000,
+                      "Name": "Airport Tax Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Admin Fee Domestic"
+                    }
+                  ],
+                  "ListTaxDetail": [
+                    {
+                      "Code": "UE",
+                      "Amount": 80800,
+                      "Name": "Base fares VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Management fee VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Admin fee VAT"
+                    }
+                  ],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "1",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "W1_ECO",
+                      "FareBasis": "W",
+                      "HandBaggage": "7kg",
+                      "FreeBaggage": null,
+                      "Availability": 14,
+                      "FareFamily": "Eco",
+                      "CabinCode": "Eco",
+                      "CabinName": "Economy"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "OptionId": 1,
+              "FareClass": "W1_DLX",
+              "FareBasis": "W",
+              "FareFamily": "Deluxe",
+              "CabinCode": "Deluxe",
+              "CabinName": "Economy",
+              "Refundable": false,
+              "Availability": 14,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 1560000,
+              "BaseFareOrigin": 1560000,
+              "PriceAdt": 2268200,
+              "PriceAdtOrigin": 2268200,
+              "NetFare": 2268200,
+              "NetFareOrigin": 2268200,
+              "TotalFare": 2268200,
+              "TotalFareOrigin": 2268200,
+              "Currency": "VND",
+              "Airline": "VJ",
+              "System": "VJ",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 1560000,
+                  "BaseFareOrigin": 1560000,
+                  "NetFare": 2268200,
+                  "NetFareOrigin": 2268200,
+                  "TotalFare": 2268200,
+                  "TotalFareOrigin": 2268200,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 1560000,
+                      "Name": "W1_DLX - Deluxe1"
+                    },
+                    {
+                      "Code": "TICKET_VAT",
+                      "Amount": 124800,
+                      "Name": "VAT tax"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Management Fee Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 20000,
+                      "Name": "Airport Security"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 99000,
+                      "Name": "Airport Tax Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Admin Fee Domestic"
+                    }
+                  ],
+                  "ListTaxDetail": [
+                    {
+                      "Code": "UE",
+                      "Amount": 124800,
+                      "Name": "Base fares VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Management fee VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Admin fee VAT"
+                    }
+                  ],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "1",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "W1_DLX",
+                      "FareBasis": "W",
+                      "HandBaggage": "7kg",
+                      "FreeBaggage": null,
+                      "Availability": 14,
+                      "FareFamily": "Deluxe",
+                      "CabinCode": "Deluxe",
+                      "CabinName": "Economy"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "OptionId": 2,
+              "FareClass": "C_Boss",
+              "FareBasis": "C",
+              "FareFamily": "SkybossBusiness",
+              "CabinCode": "SkybossBusiness",
+              "CabinName": "Business",
+              "Refundable": false,
+              "Availability": 10,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 5390000,
+              "BaseFareOrigin": 5390000,
+              "PriceAdt": 6404600,
+              "PriceAdtOrigin": 6404600,
+              "NetFare": 6404600,
+              "NetFareOrigin": 6404600,
+              "TotalFare": 6404600,
+              "TotalFareOrigin": 6404600,
+              "Currency": "VND",
+              "Airline": "VJ",
+              "System": "VJ",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 5390000,
+                  "BaseFareOrigin": 5390000,
+                  "NetFare": 6404600,
+                  "NetFareOrigin": 6404600,
+                  "TotalFare": 6404600,
+                  "TotalFareOrigin": 6404600,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 5390000,
+                      "Name": "C_Boss - Business"
+                    },
+                    {
+                      "Code": "TICKET_VAT",
+                      "Amount": 431200,
+                      "Name": "VAT tax"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Management Fee Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 20000,
+                      "Name": "Airport Security"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 99000,
+                      "Name": "Airport Tax Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Admin Fee Domestic"
+                    }
+                  ],
+                  "ListTaxDetail": [
+                    {
+                      "Code": "UE",
+                      "Amount": 431200,
+                      "Name": "Base fares VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Management fee VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Admin fee VAT"
+                    }
+                  ],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "1",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "C_Boss",
+                      "FareBasis": "C",
+                      "HandBaggage": "7kg",
+                      "FreeBaggage": null,
+                      "Availability": 10,
+                      "FareFamily": "SkybossBusiness",
+                      "CabinCode": "SkybossBusiness",
+                      "CabinName": "Business"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "OptionId": 6,
+          "Leg": 0,
+          "Itinerary": 1,
+          "Airline": "VJ",
+          "System": "VJ",
+          "Source": "AGT",
+          "Remark": null,
+          "ListFlightOption": [
+            {
+              "OptionId": 0,
+              "ListFlight": [
+                {
+                  "Leg": 0,
+                  "FlightId": "1",
+                  "Airline": "VJ",
+                  "Operator": "VJ",
+                  "StartPoint": "SGN",
+                  "EndPoint": "HAN",
+                  "StartDate": "2025-05-20T12:10:00",
+                  "EndDate": "2025-05-20T14:20:00",
+                  "DepartDate": "20052025 1210",
+                  "ArriveDate": "20052025 1420",
+                  "FlightNumber": "178",
+                  "StopNum": 0,
+                  "Duration": 130,
+                  "ListSegment": [
+                    {
+                      "Leg": 0,
+                      "SegmentId": "1",
+                      "Airline": "VJ",
+                      "Operator": "VJ",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "StartDate": "2025-05-20T12:10:00",
+                      "EndDate": "2025-05-20T14:20:00",
+                      "DepartDate": "20052025 1210",
+                      "ArriveDate": "20052025 1420",
+                      "StartTerminal": "",
+                      "EndTerminal": "",
+                      "FlightNumber": "178",
+                      "Equipment": "330",
+                      "FareClass": null,
+                      "FareBasis": null,
+                      "Duration": 130,
+                      "HasStop": false,
+                      "StopPoint": null,
+                      "StopTime": 0,
+                      "TechnicalStop": null,
+                      "MarriageGrp": null,
+                      "FlightsMiles": 0,
+                      "Status": null
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "ListFareOption": [
+            {
+              "OptionId": 0,
+              "FareClass": "U1_ECO",
+              "FareBasis": "U",
+              "FareFamily": "Eco",
+              "CabinCode": "Eco",
+              "CabinName": "Economy",
+              "Refundable": false,
+              "Availability": 12,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 1130000,
+              "BaseFareOrigin": 1130000,
+              "PriceAdt": 1803800,
+              "PriceAdtOrigin": 1803800,
+              "NetFare": 1803800,
+              "NetFareOrigin": 1803800,
+              "TotalFare": 1803800,
+              "TotalFareOrigin": 1803800,
+              "Currency": "VND",
+              "Airline": "VJ",
+              "System": "VJ",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 1130000,
+                  "BaseFareOrigin": 1130000,
+                  "NetFare": 1803800,
+                  "NetFareOrigin": 1803800,
+                  "TotalFare": 1803800,
+                  "TotalFareOrigin": 1803800,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 1130000,
+                      "Name": "U1_ECO - Eco1"
+                    },
+                    {
+                      "Code": "TICKET_VAT",
+                      "Amount": 90400,
+                      "Name": "VAT tax"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Management Fee Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 20000,
+                      "Name": "Airport Security"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 99000,
+                      "Name": "Airport Tax Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Admin Fee Domestic"
+                    }
+                  ],
+                  "ListTaxDetail": [
+                    {
+                      "Code": "UE",
+                      "Amount": 90400,
+                      "Name": "Base fares VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Management fee VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Admin fee VAT"
+                    }
+                  ],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "1",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "U1_ECO",
+                      "FareBasis": "U",
+                      "HandBaggage": "7kg",
+                      "FreeBaggage": null,
+                      "Availability": 12,
+                      "FareFamily": "Eco",
+                      "CabinCode": "Eco",
+                      "CabinName": "Economy"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "OptionId": 7,
+          "Leg": 0,
+          "Itinerary": 1,
+          "Airline": "VJ",
+          "System": "VJ",
+          "Source": "AGT",
+          "Remark": null,
+          "ListFlightOption": [
+            {
+              "OptionId": 0,
+              "ListFlight": [
+                {
+                  "Leg": 0,
+                  "FlightId": "1",
+                  "Airline": "VJ",
+                  "Operator": "VJ",
+                  "StartPoint": "SGN",
+                  "EndPoint": "HAN",
+                  "StartDate": "2025-05-20T08:10:00",
+                  "EndDate": "2025-05-20T10:20:00",
+                  "DepartDate": "20052025 0810",
+                  "ArriveDate": "20052025 1020",
+                  "FlightNumber": "1126",
+                  "StopNum": 0,
+                  "Duration": 130,
+                  "ListSegment": [
+                    {
+                      "Leg": 0,
+                      "SegmentId": "1",
+                      "Airline": "VJ",
+                      "Operator": "VJ",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "StartDate": "2025-05-20T08:10:00",
+                      "EndDate": "2025-05-20T10:20:00",
+                      "DepartDate": "20052025 0810",
+                      "ArriveDate": "20052025 1020",
+                      "StartTerminal": "",
+                      "EndTerminal": "",
+                      "FlightNumber": "1126",
+                      "Equipment": "321",
+                      "FareClass": null,
+                      "FareBasis": null,
+                      "Duration": 130,
+                      "HasStop": false,
+                      "StopPoint": null,
+                      "StopTime": 0,
+                      "TechnicalStop": null,
+                      "MarriageGrp": null,
+                      "FlightsMiles": 0,
+                      "Status": null
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "ListFareOption": [
+            {
+              "OptionId": 0,
+              "FareClass": "J1_ECO",
+              "FareBasis": "J",
+              "FareFamily": "Eco",
+              "CabinCode": "Eco",
+              "CabinName": "Economy",
+              "Refundable": false,
+              "Availability": 40,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 1290000,
+              "BaseFareOrigin": 1290000,
+              "PriceAdt": 1976600,
+              "PriceAdtOrigin": 1976600,
+              "NetFare": 1976600,
+              "NetFareOrigin": 1976600,
+              "TotalFare": 1976600,
+              "TotalFareOrigin": 1976600,
+              "Currency": "VND",
+              "Airline": "VJ",
+              "System": "VJ",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 1290000,
+                  "BaseFareOrigin": 1290000,
+                  "NetFare": 1976600,
+                  "NetFareOrigin": 1976600,
+                  "TotalFare": 1976600,
+                  "TotalFareOrigin": 1976600,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 1290000,
+                      "Name": "J1_ECO - Eco1"
+                    },
+                    {
+                      "Code": "TICKET_VAT",
+                      "Amount": 103200,
+                      "Name": "VAT tax"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Management Fee Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 20000,
+                      "Name": "Airport Security"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 99000,
+                      "Name": "Airport Tax Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Admin Fee Domestic"
+                    }
+                  ],
+                  "ListTaxDetail": [
+                    {
+                      "Code": "UE",
+                      "Amount": 103200,
+                      "Name": "Base fares VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Management fee VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Admin fee VAT"
+                    }
+                  ],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "1",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "J1_ECO",
+                      "FareBasis": "J",
+                      "HandBaggage": "7kg",
+                      "FreeBaggage": null,
+                      "Availability": 40,
+                      "FareFamily": "Eco",
+                      "CabinCode": "Eco",
+                      "CabinName": "Economy"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "OptionId": 1,
+              "FareClass": "J1_DLX",
+              "FareBasis": "J",
+              "FareFamily": "Deluxe",
+              "CabinCode": "Deluxe",
+              "CabinName": "Economy",
+              "Refundable": false,
+              "Availability": 40,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 1840000,
+              "BaseFareOrigin": 1840000,
+              "PriceAdt": 2570600,
+              "PriceAdtOrigin": 2570600,
+              "NetFare": 2570600,
+              "NetFareOrigin": 2570600,
+              "TotalFare": 2570600,
+              "TotalFareOrigin": 2570600,
+              "Currency": "VND",
+              "Airline": "VJ",
+              "System": "VJ",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 1840000,
+                  "BaseFareOrigin": 1840000,
+                  "NetFare": 2570600,
+                  "NetFareOrigin": 2570600,
+                  "TotalFare": 2570600,
+                  "TotalFareOrigin": 2570600,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 1840000,
+                      "Name": "J1_DLX - Deluxe1"
+                    },
+                    {
+                      "Code": "TICKET_VAT",
+                      "Amount": 147200,
+                      "Name": "VAT tax"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Management Fee Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 20000,
+                      "Name": "Airport Security"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 99000,
+                      "Name": "Airport Tax Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Admin Fee Domestic"
+                    }
+                  ],
+                  "ListTaxDetail": [
+                    {
+                      "Code": "UE",
+                      "Amount": 147200,
+                      "Name": "Base fares VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Management fee VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Admin fee VAT"
+                    }
+                  ],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "1",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "J1_DLX",
+                      "FareBasis": "J",
+                      "HandBaggage": "7kg",
+                      "FreeBaggage": null,
+                      "Availability": 40,
+                      "FareFamily": "Deluxe",
+                      "CabinCode": "Deluxe",
+                      "CabinName": "Economy"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "OptionId": 2,
+              "FareClass": "V_SBoss",
+              "FareBasis": "V",
+              "FareFamily": "SkyBoss",
+              "CabinCode": "SkyBoss",
+              "CabinName": "Economy",
+              "Refundable": false,
+              "Availability": 12,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 3010000,
+              "BaseFareOrigin": 3010000,
+              "PriceAdt": 3834200,
+              "PriceAdtOrigin": 3834200,
+              "NetFare": 3834200,
+              "NetFareOrigin": 3834200,
+              "TotalFare": 3834200,
+              "TotalFareOrigin": 3834200,
+              "Currency": "VND",
+              "Airline": "VJ",
+              "System": "VJ",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 3010000,
+                  "BaseFareOrigin": 3010000,
+                  "NetFare": 3834200,
+                  "NetFareOrigin": 3834200,
+                  "TotalFare": 3834200,
+                  "TotalFareOrigin": 3834200,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 3010000,
+                      "Name": "V_SBoss - SkyBoss"
+                    },
+                    {
+                      "Code": "TICKET_VAT",
+                      "Amount": 240800,
+                      "Name": "VAT tax"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Management Fee Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 20000,
+                      "Name": "Airport Security"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 99000,
+                      "Name": "Airport Tax Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Admin Fee Domestic"
+                    }
+                  ],
+                  "ListTaxDetail": [
+                    {
+                      "Code": "UE",
+                      "Amount": 240800,
+                      "Name": "Base fares VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Management fee VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Admin fee VAT"
+                    }
+                  ],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "1",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "V_SBoss",
+                      "FareBasis": "V",
+                      "HandBaggage": "10kg",
+                      "FreeBaggage": null,
+                      "Availability": 12,
+                      "FareFamily": "SkyBoss",
+                      "CabinCode": "SkyBoss",
+                      "CabinName": "Economy"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "OptionId": 8,
+          "Leg": 0,
+          "Itinerary": 1,
+          "Airline": "VJ",
+          "System": "VJ",
+          "Source": "AGT",
+          "Remark": null,
+          "ListFlightOption": [
+            {
+              "OptionId": 0,
+              "ListFlight": [
+                {
+                  "Leg": 0,
+                  "FlightId": "1",
+                  "Airline": "VJ",
+                  "Operator": "VJ",
+                  "StartPoint": "SGN",
+                  "EndPoint": "HAN",
+                  "StartDate": "2025-05-20T12:25:00",
+                  "EndDate": "2025-05-20T14:35:00",
+                  "DepartDate": "20052025 1225",
+                  "ArriveDate": "20052025 1435",
+                  "FlightNumber": "1138",
+                  "StopNum": 0,
+                  "Duration": 130,
+                  "ListSegment": [
+                    {
+                      "Leg": 0,
+                      "SegmentId": "1",
+                      "Airline": "VJ",
+                      "Operator": "VJ",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "StartDate": "2025-05-20T12:25:00",
+                      "EndDate": "2025-05-20T14:35:00",
+                      "DepartDate": "20052025 1225",
+                      "ArriveDate": "20052025 1435",
+                      "StartTerminal": "",
+                      "EndTerminal": "",
+                      "FlightNumber": "1138",
+                      "Equipment": "321",
+                      "FareClass": null,
+                      "FareBasis": null,
+                      "Duration": 130,
+                      "HasStop": false,
+                      "StopPoint": null,
+                      "StopTime": 0,
+                      "TechnicalStop": null,
+                      "MarriageGrp": null,
+                      "FlightsMiles": 0,
+                      "Status": null
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "ListFareOption": [
+            {
+              "OptionId": 0,
+              "FareClass": "J1_ECO",
+              "FareBasis": "J",
+              "FareFamily": "Eco",
+              "CabinCode": "Eco",
+              "CabinName": "Economy",
+              "Refundable": false,
+              "Availability": 41,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 1290000,
+              "BaseFareOrigin": 1290000,
+              "PriceAdt": 1976600,
+              "PriceAdtOrigin": 1976600,
+              "NetFare": 1976600,
+              "NetFareOrigin": 1976600,
+              "TotalFare": 1976600,
+              "TotalFareOrigin": 1976600,
+              "Currency": "VND",
+              "Airline": "VJ",
+              "System": "VJ",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 1290000,
+                  "BaseFareOrigin": 1290000,
+                  "NetFare": 1976600,
+                  "NetFareOrigin": 1976600,
+                  "TotalFare": 1976600,
+                  "TotalFareOrigin": 1976600,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 1290000,
+                      "Name": "J1_ECO - Eco1"
+                    },
+                    {
+                      "Code": "TICKET_VAT",
+                      "Amount": 103200,
+                      "Name": "VAT tax"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Management Fee Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 20000,
+                      "Name": "Airport Security"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 99000,
+                      "Name": "Airport Tax Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Admin Fee Domestic"
+                    }
+                  ],
+                  "ListTaxDetail": [
+                    {
+                      "Code": "UE",
+                      "Amount": 103200,
+                      "Name": "Base fares VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Management fee VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Admin fee VAT"
+                    }
+                  ],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "1",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "J1_ECO",
+                      "FareBasis": "J",
+                      "HandBaggage": "7kg",
+                      "FreeBaggage": null,
+                      "Availability": 41,
+                      "FareFamily": "Eco",
+                      "CabinCode": "Eco",
+                      "CabinName": "Economy"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "OptionId": 9,
+          "Leg": 0,
+          "Itinerary": 1,
+          "Airline": "VJ",
+          "System": "VJ",
+          "Source": "AGT",
+          "Remark": null,
+          "ListFlightOption": [
+            {
+              "OptionId": 0,
+              "ListFlight": [
+                {
+                  "Leg": 0,
+                  "FlightId": "1",
+                  "Airline": "VJ",
+                  "Operator": "VJ",
+                  "StartPoint": "SGN",
+                  "EndPoint": "HAN",
+                  "StartDate": "2025-05-20T05:00:00",
+                  "EndDate": "2025-05-20T07:10:00",
+                  "DepartDate": "20052025 0500",
+                  "ArriveDate": "20052025 0710",
+                  "FlightNumber": "1198",
+                  "StopNum": 0,
+                  "Duration": 130,
+                  "ListSegment": [
+                    {
+                      "Leg": 0,
+                      "SegmentId": "1",
+                      "Airline": "VJ",
+                      "Operator": "VJ",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "StartDate": "2025-05-20T05:00:00",
+                      "EndDate": "2025-05-20T07:10:00",
+                      "DepartDate": "20052025 0500",
+                      "ArriveDate": "20052025 0710",
+                      "StartTerminal": "",
+                      "EndTerminal": "",
+                      "FlightNumber": "1198",
+                      "Equipment": "321",
+                      "FareClass": null,
+                      "FareBasis": null,
+                      "Duration": 130,
+                      "HasStop": false,
+                      "StopPoint": null,
+                      "StopTime": 0,
+                      "TechnicalStop": null,
+                      "MarriageGrp": null,
+                      "FlightsMiles": 0,
+                      "Status": null
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "ListFareOption": [
+            {
+              "OptionId": 0,
+              "FareClass": "W1_ECO",
+              "FareBasis": "W",
+              "FareFamily": "Eco",
+              "CabinCode": "Eco",
+              "CabinName": "Economy",
+              "Refundable": false,
+              "Availability": 11,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 1010000,
+              "BaseFareOrigin": 1010000,
+              "PriceAdt": 1674200,
+              "PriceAdtOrigin": 1674200,
+              "NetFare": 1674200,
+              "NetFareOrigin": 1674200,
+              "TotalFare": 1674200,
+              "TotalFareOrigin": 1674200,
+              "Currency": "VND",
+              "Airline": "VJ",
+              "System": "VJ",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 1010000,
+                  "BaseFareOrigin": 1010000,
+                  "NetFare": 1674200,
+                  "NetFareOrigin": 1674200,
+                  "TotalFare": 1674200,
+                  "TotalFareOrigin": 1674200,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 1010000,
+                      "Name": "W1_ECO - Eco1"
+                    },
+                    {
+                      "Code": "TICKET_VAT",
+                      "Amount": 80800,
+                      "Name": "VAT tax"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Management Fee Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 20000,
+                      "Name": "Airport Security"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 99000,
+                      "Name": "Airport Tax Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Admin Fee Domestic"
+                    }
+                  ],
+                  "ListTaxDetail": [
+                    {
+                      "Code": "UE",
+                      "Amount": 80800,
+                      "Name": "Base fares VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Management fee VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Admin fee VAT"
+                    }
+                  ],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "1",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "W1_ECO",
+                      "FareBasis": "W",
+                      "HandBaggage": "7kg",
+                      "FreeBaggage": null,
+                      "Availability": 11,
+                      "FareFamily": "Eco",
+                      "CabinCode": "Eco",
+                      "CabinName": "Economy"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "OptionId": 1,
+              "FareClass": "W1_DLX",
+              "FareBasis": "W",
+              "FareFamily": "Deluxe",
+              "CabinCode": "Deluxe",
+              "CabinName": "Economy",
+              "Refundable": false,
+              "Availability": 11,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 1560000,
+              "BaseFareOrigin": 1560000,
+              "PriceAdt": 2268200,
+              "PriceAdtOrigin": 2268200,
+              "NetFare": 2268200,
+              "NetFareOrigin": 2268200,
+              "TotalFare": 2268200,
+              "TotalFareOrigin": 2268200,
+              "Currency": "VND",
+              "Airline": "VJ",
+              "System": "VJ",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 1560000,
+                  "BaseFareOrigin": 1560000,
+                  "NetFare": 2268200,
+                  "NetFareOrigin": 2268200,
+                  "TotalFare": 2268200,
+                  "TotalFareOrigin": 2268200,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 1560000,
+                      "Name": "W1_DLX - Deluxe1"
+                    },
+                    {
+                      "Code": "TICKET_VAT",
+                      "Amount": 124800,
+                      "Name": "VAT tax"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Management Fee Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 20000,
+                      "Name": "Airport Security"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 99000,
+                      "Name": "Airport Tax Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Admin Fee Domestic"
+                    }
+                  ],
+                  "ListTaxDetail": [
+                    {
+                      "Code": "UE",
+                      "Amount": 124800,
+                      "Name": "Base fares VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Management fee VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Admin fee VAT"
+                    }
+                  ],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "1",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "W1_DLX",
+                      "FareBasis": "W",
+                      "HandBaggage": "7kg",
+                      "FreeBaggage": null,
+                      "Availability": 11,
+                      "FareFamily": "Deluxe",
+                      "CabinCode": "Deluxe",
+                      "CabinName": "Economy"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "OptionId": 2,
+              "FareClass": "V_SBoss",
+              "FareBasis": "V",
+              "FareFamily": "SkyBoss",
+              "CabinCode": "SkyBoss",
+              "CabinName": "Economy",
+              "Refundable": false,
+              "Availability": 12,
+              "Unavailable": false,
+              "ExpiryDate": "16052025 1020",
+              "BaseFare": 3010000,
+              "BaseFareOrigin": 3010000,
+              "PriceAdt": 3834200,
+              "PriceAdtOrigin": 3834200,
+              "NetFare": 3834200,
+              "NetFareOrigin": 3834200,
+              "TotalFare": 3834200,
+              "TotalFareOrigin": 3834200,
+              "Currency": "VND",
+              "Airline": "VJ",
+              "System": "VJ",
+              "Source": "AGT",
+              "Tourcode": null,
+              "ListFarePax": [
+                {
+                  "PaxType": "ADT",
+                  "PaxNumb": 1,
+                  "BaseFare": 3010000,
+                  "BaseFareOrigin": 3010000,
+                  "NetFare": 3834200,
+                  "NetFareOrigin": 3834200,
+                  "TotalFare": 3834200,
+                  "TotalFareOrigin": 3834200,
+                  "ListFareItem": [
+                    {
+                      "Code": "TICKET_FARE",
+                      "Amount": 3010000,
+                      "Name": "V_SBoss - SkyBoss"
+                    },
+                    {
+                      "Code": "TICKET_VAT",
+                      "Amount": 240800,
+                      "Name": "VAT tax"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Management Fee Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 20000,
+                      "Name": "Airport Security"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 99000,
+                      "Name": "Airport Tax Domestic"
+                    },
+                    {
+                      "Code": "TICKET_TAX",
+                      "Amount": 232200,
+                      "Name": "Admin Fee Domestic"
+                    }
+                  ],
+                  "ListTaxDetail": [
+                    {
+                      "Code": "UE",
+                      "Amount": 240800,
+                      "Name": "Base fares VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Management fee VAT"
+                    },
+                    {
+                      "Code": "UE",
+                      "Amount": 17200,
+                      "Name": "Admin fee VAT"
+                    }
+                  ],
+                  "ListFareInfo": [
+                    {
+                      "SegmentId": "1",
+                      "StartPoint": "SGN",
+                      "EndPoint": "HAN",
+                      "FareClass": "V_SBoss",
+                      "FareBasis": "V",
+                      "HandBaggage": "10kg",
+                      "FreeBaggage": null,
+                      "Availability": 12,
+                      "FareFamily": "SkyBoss",
+                      "CabinCode": "SkyBoss",
+                      "CabinName": "Economy"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

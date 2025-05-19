@@ -63,6 +63,42 @@ public class DatacomProvider implements FlightProviderStrategy {
         }
     }
 
+    @Override
+    public Object changPassengerForOrder(BookingChangedReqData changedReqData) {
+        try {
+            changedReqData.setRequestInfo(buildRequestInfo());
+            String apiUrl = properties.getDcEndpoint().concat(DatacomEndpoint.PASSENGER.getPath());
+
+            return restTemplate.postForEntity(
+                    apiUrl,
+                    changedReqData,
+                    BookingChangedResData.class
+            ).getBody();
+
+        } catch (Exception e) {
+            log.error("Error calling Datacom flight provider for request: {}", changedReqData, e);
+            return null;
+        }
+    }
+
+    @Override
+    public Object cancelFlights(CancelBookingReqData cancelBookingReqData) {
+        try {
+            cancelBookingReqData.setRequestInfo(buildRequestInfo());
+            String apiUrl = properties.getDcEndpoint().concat(DatacomEndpoint.CANCEL.getPath());
+
+            return restTemplate.postForEntity(
+                    apiUrl,
+                    cancelBookingReqData,
+                    CancelBookingResData.class
+            ).getBody();
+
+        } catch (Exception e) {
+            log.error("Error calling Datacom flight provider for request: {}", cancelBookingReqData, e);
+            return null;
+        }
+    }
+
     private RequestInfo buildRequestInfo() {
         return RequestInfo.builder()
                 .privateKey(properties.getDcPrivateKey())

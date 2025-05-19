@@ -29,4 +29,12 @@ public class Helper {
             default -> Title.MR.name();
         };
     }
+
+    public String ConvertGenderToString(int gender) {
+        return gender == 0 ? "Male" : "Female";
+    }
+
+    public int ConvertGenderToInt(String gender) {
+        return gender.equals("Male") ? 1 : 0;
+    }
 }

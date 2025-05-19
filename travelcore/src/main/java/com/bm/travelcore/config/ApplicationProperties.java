@@ -11,8 +11,6 @@ import org.springframework.stereotype.Component;
 public class ApplicationProperties {
 
     // JWT
-    @Value("${application.mailing.frontend.activation_url}")
-    private String activationUrl;
     @Value("${application.security.jwt.expiration}")
     private long jwtExpiration;
     @Value("${application.security.jwt.secret-key}")
@@ -35,9 +33,6 @@ public class ApplicationProperties {
     private String twilioAuthToken;
     @Value("${application.provider.sms.outgoing_number}")
     private String twilioOutgoingNumber;
-
-    @Value("${application.frontend.oauth-redirect-url}")
-    private String oauthRedirectUrl;
 
     @Value("${application.frontend.url}")
     private String frontendUrl;
@@ -66,4 +61,18 @@ public class ApplicationProperties {
     private String dcLanguage;
     @Value( "${application.provider.flight-api.datacom.ip-address}")
     private String dcIpAddress;
+
+    // google
+    @Value("${spring.security.oauth2.client.registration.google.client-id}")
+    private String googleClientId;
+    @Value("${spring.security.oauth2.client.registration.google.redirect-uri}")
+    private String redirectUri;
+    @Value("${spring.security.oauth2.client.registration.google.client-secret}")
+    private String googleClientSecret;
+    @Value("${spring.security.oauth2.client.provider.google.user-info-uri}")
+    private String googleUserinfo;
+    @Value("${spring.security.oauth2.client.provider.google.authorization-uri}")
+    private String googleAuthorization;
+    @Value("${spring.security.oauth2.client.provider.google.token-uri}")
+    private String googleTokenUri;
 }
