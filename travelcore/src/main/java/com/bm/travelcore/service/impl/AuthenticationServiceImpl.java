@@ -3,8 +3,8 @@ package com.bm.travelcore.service.impl;
 import com.bm.travelcore.config.ApplicationProperties;
 import com.bm.travelcore.dto.*;
 import com.bm.travelcore.model.enums.LoginProvider;
-import com.bm.travelcore.utils.constant.AppConstant;
-import com.bm.travelcore.utils.constant.ExceptionMessages;
+import com.bm.travelcore.utils.constants.AppConstants;
+import com.bm.travelcore.utils.constants.ExceptionMessages;
 import com.bm.travelcore.config.RedisKeyConfig;
 import com.bm.travelcore.model.enums.IdentifyType;
 import com.bm.travelcore.model.enums.Roles;
@@ -294,7 +294,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                     EmailTemplateName.ACTIVATE_ACCOUNT,
                     properties.getRedirectUri() + "?otp=" + newToken,
                     newToken,
-                    AppConstant.SUBJECT_MAIL
+                    AppConstants.SUBJECT_MAIL
             );
         }
     }
@@ -327,7 +327,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             redisService.save(userActivationKey, existingOtp, RedisKeyConfig.OTP_EXPIRED_TIME);
             return existingOtp;
         } else {
-            String generatedOtp = generateActivationCode(AppConstant.ACTIVATION_CODE_LENGTH);
+            String generatedOtp = generateActivationCode(AppConstants.ACTIVATION_CODE_LENGTH);
             String otp = RedisKeyConfig.getActivationOtpKey(generatedOtp); // bugs
             redisService.save(otp, userId, RedisKeyConfig.OTP_EXPIRED_TIME);
             redisService.save(userActivationKey, otp, RedisKeyConfig.OTP_EXPIRED_TIME);

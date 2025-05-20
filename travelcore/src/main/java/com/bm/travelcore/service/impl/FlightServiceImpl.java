@@ -10,7 +10,7 @@ import com.bm.travelcore.service.*;
 import com.bm.travelcore.strategy.datacom.data.*;
 import com.bm.travelcore.strategy.datacom.data.Passport;
 import com.bm.travelcore.utils.Helper;
-import com.bm.travelcore.utils.constant.AppConstant;
+import com.bm.travelcore.utils.constants.AppConstants;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.mail.MessagingException;
@@ -108,7 +108,7 @@ public class FlightServiceImpl implements FlightService {
             if (!bookingResData.isSuccess()) {
                 return BookFlightResDTO.builder()
                         .success(false)
-                        .message(AppConstant.HOLD_FLIGHT_FAILED + ": " + bookingResData.getMessage())
+                        .message(AppConstants.HOLD_FLIGHT_FAILED + ": " + bookingResData.getMessage())
                         .build();
             }
 
@@ -118,14 +118,14 @@ public class FlightServiceImpl implements FlightService {
 
             return BookFlightResDTO.builder()
                     .success(Boolean.TRUE)
-                    .message(AppConstant.HOLD_FLIGHT_SUCCESS)
+                    .message(AppConstants.HOLD_FLIGHT_SUCCESS)
                     .orderId(orderId)
                     .build();
         }
 
         return BookFlightResDTO.builder()
                 .success(false)
-                .message(AppConstant.HOLD_FLIGHT_INVALID_RESPONSE)
+                .message(AppConstants.HOLD_FLIGHT_INVALID_RESPONSE)
                 .build();
     }
 

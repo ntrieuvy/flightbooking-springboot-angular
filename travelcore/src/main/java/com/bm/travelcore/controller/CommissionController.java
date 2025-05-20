@@ -7,6 +7,7 @@ import com.bm.travelcore.service.CommissionService;
 import com.bm.travelcore.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class CommissionController {
     private final CommissionResPopulator commissionResPopulator;
     private final UserService userService;
 
+    @Secured({"ROLE_SYS", "ROLE_ADMIN", "ROLE_AGENCY"})
     @GetMapping
     public ResponseEntity<List<CommissionDTO>> getAllByUser() {
         User user = userService.getCurrentAccount();

@@ -5,7 +5,7 @@ import com.bm.travelcore.model.enums.LoginProvider;
 import com.bm.travelcore.model.enums.Roles;
 import com.bm.travelcore.repository.UserRepository;
 import com.bm.travelcore.service.UserService;
-import com.bm.travelcore.utils.constant.ExceptionMessages;
+import com.bm.travelcore.utils.constants.ExceptionMessages;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,8 +13,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor

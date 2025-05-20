@@ -1,6 +1,6 @@
 package com.bm.travelcore.config;
 
-import com.bm.travelcore.utils.constant.AppConstant;
+import com.bm.travelcore.utils.constants.AppConstants;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
@@ -13,8 +13,8 @@ public class CacheConfig {
     @Bean
     public CacheManager cacheManager() {
         return new ConcurrentMapCacheManager(
-                AppConstant.COMMISSION_CACHE,
-                AppConstant.AIRPORT_GROUP_CACHE
+                AppConstants.COMMISSION_CACHE,
+                AppConstants.AIRPORT_GROUP_CACHE
         );
     }
 }

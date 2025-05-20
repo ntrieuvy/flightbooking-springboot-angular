@@ -1,7 +1,7 @@
 package com.bm.travelcore.service.impl;
 
 import com.bm.travelcore.model.enums.LoginProvider;
-import com.bm.travelcore.utils.constant.ExceptionMessages;
+import com.bm.travelcore.utils.constants.ExceptionMessages;
 import com.bm.travelcore.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

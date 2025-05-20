@@ -2,7 +2,7 @@ package com.bm.travelcore.service.impl;
 
 import com.bm.travelcore.config.ApplicationProperties;
 import com.bm.travelcore.model.*;
-import com.bm.travelcore.utils.constant.AppConstant;
+import com.bm.travelcore.utils.constants.AppConstants;
 import com.bm.travelcore.model.enums.EmailTemplateName;
 import com.bm.travelcore.service.EmailService;
 import jakarta.mail.MessagingException;
@@ -45,7 +45,7 @@ public class EmailServiceImpl implements EmailService {
     ) throws MessagingException {
         String templateName;
         if (emailTemplate == null) {
-            templateName = AppConstant.TEMPLATE_CONFIRM_ACCOUNT;
+            templateName = AppConstants.TEMPLATE_CONFIRM_ACCOUNT;
         } else {
             templateName = emailTemplate.getName();
         }
@@ -57,9 +57,9 @@ public class EmailServiceImpl implements EmailService {
                 StandardCharsets.UTF_8.name()
         );
         Map<String, Object> propertiesTemplate = new HashMap<>();
-        propertiesTemplate.put(AppConstant.TEMPLATE_PROP_USERNAME, username);
-        propertiesTemplate.put(AppConstant.TEMPLATE_PROP_CONFIRMATION_URL, confirmationUrl);
-        propertiesTemplate.put(AppConstant.TEMPLATE_PROP_ACTIVATION_CODE, activationCode);
+        propertiesTemplate.put(AppConstants.TEMPLATE_PROP_USERNAME, username);
+        propertiesTemplate.put(AppConstants.TEMPLATE_PROP_CONFIRMATION_URL, confirmationUrl);
+        propertiesTemplate.put(AppConstants.TEMPLATE_PROP_ACTIVATION_CODE, activationCode);
 
         Context context = new Context();
 
@@ -102,10 +102,10 @@ public class EmailServiceImpl implements EmailService {
                 order.getInvoices().get(0) : new Invoice();
 
         Map<String, Object> propertiesTemplate = new HashMap<>();
-        propertiesTemplate.put(AppConstant.TEMPLATE_PROP_ORDER_DETAILS, orderDetails);
-        propertiesTemplate.put(AppConstant.TEMPLATE_PROP_PASSENGERS, passengers);
-        propertiesTemplate.put(AppConstant.TEMPLATE_PROP_CUSTOMER, customer);
-        propertiesTemplate.put(AppConstant.TEMPLATE_PROP_INVOICE, invoice);
+        propertiesTemplate.put(AppConstants.TEMPLATE_PROP_ORDER_DETAILS, orderDetails);
+        propertiesTemplate.put(AppConstants.TEMPLATE_PROP_PASSENGERS, passengers);
+        propertiesTemplate.put(AppConstants.TEMPLATE_PROP_CUSTOMER, customer);
+        propertiesTemplate.put(AppConstants.TEMPLATE_PROP_INVOICE, invoice);
 
         Context context = new Context();
         context.setVariables(propertiesTemplate);
@@ -113,7 +113,7 @@ public class EmailServiceImpl implements EmailService {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = getMimeMessageHelper(mimeMessage, customer, orderDetails);
 
-        String template = templateEngine.process(AppConstant.TEMPLATE_BOOKING_SUCCESS, context);
+        String template = templateEngine.process(AppConstants.TEMPLATE_BOOKING_SUCCESS, context);
         mimeMessageHelper.setText(template, true);
 
         mailSender.send(mimeMessage);
@@ -130,7 +130,7 @@ public class EmailServiceImpl implements EmailService {
         String bookingCodes = orderDetails.stream().map(OrderDetail::getBookingCode).collect(Collectors.joining(", "));
         mimeMessageHelper.setSubject(
                 String.format("%s - %s",
-                        AppConstant.EMAIL_SUBJECT_BOOKING_SUCCESS,
+                        AppConstants.EMAIL_SUBJECT_BOOKING_SUCCESS,
                         bookingCodes)
         );
         return mimeMessageHelper;

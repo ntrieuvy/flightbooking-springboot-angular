@@ -1,7 +1,6 @@
 package com.bm.travelcore.service.impl;
 
 import com.bm.travelcore.dto.CommissionDTO;
-import com.bm.travelcore.model.enums.Roles;
 import com.bm.travelcore.populator.impl.CommissionModelPopulator;
 import com.bm.travelcore.populator.impl.CommissionResPopulator;
 import com.bm.travelcore.repository.AirlineRepository;
@@ -14,7 +13,6 @@ import com.bm.travelcore.service.CommissionService;
 import com.bm.travelcore.service.UserService;
 import com.bm.travelcore.strategy.datacom.data.*;
 import com.bm.travelcore.strategy.datacom.data.FlightData;
-import com.bm.travelcore.utils.constant.ExceptionMessages;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

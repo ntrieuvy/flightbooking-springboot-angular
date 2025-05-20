@@ -6,7 +6,7 @@ import com.bm.travelcore.model.Commission;
 import com.bm.travelcore.repository.AirportRepository;
 import com.bm.travelcore.repository.CommissionRepository;
 import com.bm.travelcore.service.FlightCacheService;
-import com.bm.travelcore.utils.constant.AppConstant;
+import com.bm.travelcore.utils.constants.AppConstants;
 import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ public class FlightCacheServiceImpl implements FlightCacheService {
     private final CommissionRepository commissionRepository;
 
     @Override
-    @Cacheable(value = AppConstant.AIRPORT_GROUP_CACHE, key = "#startPointCode + '-' + #endPointCode", unless = "#result == null")
+    @Cacheable(value = AppConstants.AIRPORT_GROUP_CACHE, key = "#startPointCode + '-' + #endPointCode", unless = "#result == null")
     public AirportGroup findAirportGroupForFlight(String startPointCode, String endPointCode) {
         Airport startAirport = airportRepository.findByCode(startPointCode);
         Airport endAirport = airportRepository.findByCode(endPointCode);
@@ -36,7 +36,7 @@ public class FlightCacheServiceImpl implements FlightCacheService {
     }
 
     @Override
-    @Cacheable(value = AppConstant.COMMISSION_CACHE, key = "#userId + '-' + #airlineCode + '-' + #airportGroupId", unless = "#result == null")
+    @Cacheable(value = AppConstants.COMMISSION_CACHE, key = "#userId + '-' + #airlineCode + '-' + #airportGroupId", unless = "#result == null")
     public Commission getCommission(Long userId, String airlineCode, Long airportGroupId) {
         return commissionRepository.findByUserIdAndAirlineCodeAndAirportGroupId(
                 userId, airlineCode, airportGroupId);

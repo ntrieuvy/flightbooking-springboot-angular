@@ -1,10 +1,6 @@
-package com.bm.travelcore.utils.constant;
+package com.bm.travelcore.utils.constants;
 
-import org.springframework.beans.factory.annotation.Value;
-
-import java.util.Map;
-
-public class AppConstant {
+public class AppConstants {
     public static final Integer ACTIVATION_CODE_LENGTH = 6;
 
     // email activation account
@@ -32,4 +28,7 @@ public class AppConstant {
     public static final String HOLD_FLIGHT_SUCCESS = "Hold flight successful";
     public static final String HOLD_FLIGHT_FAILED = "Hold flight failed";
     public static final String HOLD_FLIGHT_INVALID_RESPONSE = "Hold flight failed: Invalid response from provider";
+
+    // Stripe
+    public static final String STRIPE_TOTAL_RETRIEVE_TIME = "5";
 }

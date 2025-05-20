@@ -1,4 +1,4 @@
-package com.bm.travelcore.utils.constant;
+package com.bm.travelcore.utils.constants;
 
 public class ExceptionMessages {
 

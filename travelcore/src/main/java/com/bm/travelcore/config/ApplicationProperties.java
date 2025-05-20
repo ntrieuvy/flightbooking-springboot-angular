@@ -75,4 +75,11 @@ public class ApplicationProperties {
     private String googleAuthorization;
     @Value("${spring.security.oauth2.client.provider.google.token-uri}")
     private String googleTokenUri;
+
+    // stripe
+    @Value("${application.provider.payment.stripe.secret-key}")
+    private String stripeSecretKey;
+    @Value("${application.provider.payment.stripe.publishable-key}")
+    private String stripePublishableKey;
+
 }

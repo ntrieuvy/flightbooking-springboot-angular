@@ -1,5 +1,7 @@
 package com.bm.travelcore.model;
 
+import com.bm.travelcore.model.abstracts.AbstractOrderModel;
+import com.bm.travelcore.model.enums.PaymentStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -18,7 +20,7 @@ import java.util.List;
 @Entity
 @Table(name = "T_ORDER")
 @EntityListeners(AuditingEntityListener.class)
-public class Order {
+public class Order extends AbstractOrderModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_seq_gen")
@@ -27,6 +29,9 @@ public class Order {
 
     @Column(name = "provider_booking_id")
     private String providerBookingId;
+
+    @Column(name = "payment_intent_id")
+    private String paymentIntentId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", nullable = false)
@@ -42,6 +47,21 @@ public class Order {
     @Column(nullable = false)
     @Builder.Default
     private Integer status = 1;
+
+    @Column(name = "payment_status")
+    private PaymentStatus paymentStatus;
+
+    @Column(name = "payment_service_fees")
+    private String paymentServiceFees;
+
+    @Column(name = "total_price_less_fees")
+    private String totalPriceLessFees;
+
+    @Column(name = "total_price")
+    private Double totalPrice;
+
+    @Column(name = "currency")
+    private String currency;
 
     @Lob
     private String note;
