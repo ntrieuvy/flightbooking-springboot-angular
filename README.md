@@ -3,10 +3,10 @@
 ## 📖 Description
 
 A comprehensive travel management system that integrates tour booking, customer management, and online payment processing into one unified platform.
-mini demo:
-https://github.com/user-attachments/assets/52d5526d-bd0e-4531-a3ee-3d3ccf45020f
 
 ---
+## mimi demo
+https://github.com/user-attachments/assets/52d5526d-bd0e-4531-a3ee-3d3ccf45020f
 
 ## ✨ Key Features
 
